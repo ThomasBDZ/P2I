@@ -1,0 +1,260 @@
+CREATE TABLE `Candidat` (
+  `Can_cod` integer PRIMARY KEY,
+  `Civ_lib` varchar(255),
+  `Nom` varchar(255),
+  `Prenom` varchar(255),
+  `autres_prenoms` varchar(255),
+  `date_naissance` text,
+  `ville_naissance` varchar(255),
+  `code_pays_naiss` integer,
+  `Code_pays_adr` integer,
+  `Can_ad1` varchar(255),
+  `Can_ad2` varchar(255),
+  `Can_cod_pos` integer,
+  `Can_mel` varchar(255),
+  `Can_tel` varchar(255),
+  `Can_por` varchar(255),
+  `francais` integer,
+  `code_pays_nationalite` integer,
+  `classe` varchar(255),
+  `puissance` varchar(255),
+  `code_etablissement` varchar(255),
+  `numero_ine` text,
+  `csp_mere` integer,
+  `csp_pere` integer,
+  `arrondissement_naissance` integer,
+  `qualite` varchar(255)
+);
+
+CREATE TABLE `ville` (
+  `code_postal` integer PRIMARY KEY,
+  `nom_ville` varchar(255)
+);
+
+CREATE TABLE `admissions` (
+  `Can_cod` integer PRIMARY KEY,
+  `admissible` integer,
+  `admis` integer
+);
+
+CREATE TABLE `CMT_Oraux` (
+  `Numerodinscription` integer PRIMARY KEY,
+  `Centre` varchar(255),
+  `Jury` varchar(255),
+  `Phys` integer,
+  `Maths` integer,
+  `Entretien` integer,
+  `Anglais` integer
+);
+
+CREATE TABLE `CMT_Oraux_Spe` (
+  `Numerodinscription` integer PRIMARY KEY,
+  `QCM_info_phy` integer,
+  `Maths` integer,
+  `Entretien_MT` integer,
+  `QCM_Anglais` integer
+);
+
+CREATE TABLE `Oraux_CCS` (
+  `Numerodinscription` integer PRIMARY KEY,
+  `mathematiques_1` double,
+  `mathematiques_2` double,
+  `phy_chi_1` double,
+  `phy_chi_2` double,
+  `phy_TP` double,
+  `Langue` double,
+  `S2I` double
+);
+
+CREATE TABLE `Oraux_CCMP` (
+  `Numerodinscription` integer PRIMARY KEY,
+  `mathematiques` integer,
+  `physique` integer,
+  `francais` integer,
+  `anglais` integer
+);
+
+CREATE TABLE `Classes_CMT_spe_XXX` (
+  `scei` integer PRIMARY KEY,
+  `etat` integer,
+  `moyenne_generale` double,
+  `rang_classe` integer
+);
+
+CREATE TABLE `inscription` (
+  `Code_Candidat` integer PRIMARY KEY,
+  `option1` varchar(255),
+  `option2` varchar(255),
+  `option3` varchar(255),
+  `option4` varchar(255),
+  `epreuve1` varchar(255),
+  `epreuve2` varchar(255),
+  `epreuve3` varchar(255),
+  `epreuve4` varchar(255),
+  `libelle_ville_ecrit` varchar(255),
+  `code_concours` integer,
+  `code_etat_dosssier` integer,
+  `declaration_handicap` varchar(255),
+  `sujet_tipe` varchar(255)
+);
+
+CREATE TABLE `Civilite` (
+  `civilite` integer PRIMARY KEY,
+  `Civ_lib` varchar(255)
+);
+
+CREATE TABLE `pays` (
+  `code_pays` integer PRIMARY KEY,
+  `libele_pays` varchar(255),
+  `nationalite` varchar(255)
+);
+
+CREATE TABLE `Concours` (
+  `code_concours` integer PRIMARY KEY,
+  `libelle_concours` varchar(255),
+  `voie` varchar(255)
+);
+
+CREATE TABLE `bac` (
+  `numero_ine` varchar(255) PRIMARY KEY,
+  `annee_bac` integer,
+  `mois_bac` integer,
+  `code_serie` integer,
+  `mention` varchar(255),
+  `can_dep_bac` integer
+);
+
+CREATE TABLE `serie_bac` (
+  `code_serie` integer PRIMARY KEY,
+  `serie` varchar(255)
+);
+
+CREATE TABLE `csp` (
+  `cod_csp` integer PRIMARY KEY,
+  `lib_csp` varchar(255)
+);
+
+CREATE TABLE `Oral_autres` (
+  `Can_cod` integer PRIMARY KEY,
+  `rang` integer,
+  `maths_harmonisees` double[null],
+  `maths_affichees` double,
+  `max_physique` double,
+  `max_anglais` double,
+  `total_oral` double,
+  `total` double,
+  `bonus_interclassement` double,
+  `total_interclassement` double,
+  `entretien_exaequo` double,
+  `anglais_exaequo` double
+);
+
+CREATE TABLE `Resultat_ecrit` (
+  `Numerodinscription` integer PRIMARY KEY,
+  `rang_admissible` integer,
+  `total` double,
+  `moyenne` double,
+  `mathematiques_1` double,
+  `mathematiques_2` double,
+  `physique_1` double,
+  `physique_2` double,
+  `chimie` double,
+  `Francais` double,
+  `Informatique_SI` double,
+  `Langue` double,
+  `Informatique_pour_tous` double
+);
+
+CREATE TABLE `bonification` (
+  `bonification_ecrit` integer,
+  `bonification_oral` integer,
+  `puissance` varchar(255) PRIMARY KEY
+);
+
+CREATE TABLE `ListeEcoles` (
+  `NumeroEcole` integer PRIMARY KEY,
+  `Nom_ecole` varchar(255)
+);
+
+CREATE TABLE `ListeEtablissements` (
+  `Rne` varchar(255) PRIMARY KEY,
+  `type_etab` varchar(255),
+  `nom_etabEtab` varchar(255),
+  `Code_postal_etab` integer,
+  `Pays_etablissement` varchar(255)
+);
+
+CREATE TABLE `listeVoeux` (
+  `Can_cod` integer PRIMARY KEY,
+  `Voe_rang` integer,
+  `voe_ordre` integer,
+  `Eco_code` integer
+);
+
+CREATE TABLE `voie_classe` (
+  `classe` varchar(255) PRIMARY KEY,
+  `voie` varchar(255)
+);
+
+CREATE TABLE `listeEtasRe` (
+  `Ata_cod` integer PRIMARY KEY,
+  `Ata_lib` varchar(255)
+);
+
+ALTER TABLE `admissions` ADD FOREIGN KEY (`Can_cod`) REFERENCES `Candidat` (`Can_cod`);
+
+ALTER TABLE `Candidat` ADD FOREIGN KEY (`Can_cod`) REFERENCES `CMT_Oraux` (`Numerodinscription`);
+
+ALTER TABLE `Oral_autres` ADD FOREIGN KEY (`Can_cod`) REFERENCES `Candidat` (`Can_cod`);
+
+ALTER TABLE `ville` ADD FOREIGN KEY (`code_postal`) REFERENCES `Candidat` (`Can_cod_pos`);
+
+ALTER TABLE `listeVoeux` ADD FOREIGN KEY (`Can_cod`) REFERENCES `Candidat` (`Can_cod`);
+
+ALTER TABLE `ville` ADD FOREIGN KEY (`code_postal`) REFERENCES `ListeEtablissements` (`Code_postal_etab`);
+
+ALTER TABLE `Concours` ADD FOREIGN KEY (`code_concours`) REFERENCES `inscription` (`code_concours`);
+
+ALTER TABLE `serie_bac` ADD FOREIGN KEY (`code_serie`) REFERENCES `bac` (`code_serie`);
+
+ALTER TABLE `Candidat` ADD FOREIGN KEY (`Can_cod`) REFERENCES `Resultat_ecrit` (`Numerodinscription`);
+
+ALTER TABLE `Candidat` ADD FOREIGN KEY (`Can_cod`) REFERENCES `Classes_CMT_spe_XXX` (`scei`);
+
+ALTER TABLE `Candidat` ADD FOREIGN KEY (`Can_cod`) REFERENCES `inscription` (`Code_Candidat`);
+
+ALTER TABLE `pays` ADD FOREIGN KEY (`code_pays`) REFERENCES `Candidat` (`code_pays_nationalite`);
+
+ALTER TABLE `voie_classe` ADD FOREIGN KEY (`voie`) REFERENCES `Concours` (`voie`);
+
+ALTER TABLE `voie_classe` ADD FOREIGN KEY (`classe`) REFERENCES `Candidat` (`classe`);
+
+ALTER TABLE `bonification` ADD FOREIGN KEY (`puissance`) REFERENCES `Candidat` (`puissance`);
+
+ALTER TABLE `csp` ADD FOREIGN KEY (`cod_csp`) REFERENCES `Candidat` (`csp_mere`);
+
+ALTER TABLE `csp` ADD FOREIGN KEY (`cod_csp`) REFERENCES `Candidat` (`csp_pere`);
+
+ALTER TABLE `ville` ADD FOREIGN KEY (`nom_ville`) REFERENCES `inscription` (`libelle_ville_ecrit`);
+
+ALTER TABLE `Civilite` ADD FOREIGN KEY (`Civ_lib`) REFERENCES `Candidat` (`Civ_lib`);
+
+ALTER TABLE `pays` ADD FOREIGN KEY (`code_pays`) REFERENCES `Candidat` (`Code_pays_adr`);
+
+ALTER TABLE `bac` ADD FOREIGN KEY (`numero_ine`) REFERENCES `Candidat` (`numero_ine`);
+
+ALTER TABLE `ListeEcoles` ADD FOREIGN KEY (`NumeroEcole`) REFERENCES `listeVoeux` (`Eco_code`);
+
+ALTER TABLE `pays` ADD FOREIGN KEY (`libele_pays`) REFERENCES `ListeEtablissements` (`Pays_etablissement`);
+
+ALTER TABLE `ListeEtablissements` ADD FOREIGN KEY (`Rne`) REFERENCES `Candidat` (`code_etablissement`);
+
+ALTER TABLE `listeEtasRe` ADD FOREIGN KEY (`Ata_cod`) REFERENCES `inscription` (`code_etat_dosssier`);
+
+ALTER TABLE `Candidat` ADD FOREIGN KEY (`Can_cod`) REFERENCES `CMT_Oraux_Spe` (`Numerodinscription`);
+
+ALTER TABLE `Candidat` ADD FOREIGN KEY (`Can_cod`) REFERENCES `Oraux_CCS` (`Numerodinscription`);
+
+ALTER TABLE `Candidat` ADD FOREIGN KEY (`Can_cod`) REFERENCES `Oraux_CCMP` (`Numerodinscription`);
+
+ALTER TABLE `Candidat` ADD FOREIGN KEY (`code_pays_naiss`) REFERENCES `pays` (`code_pays`);
