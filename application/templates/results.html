@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='./results.css') }}">
+        <script>
+            function results() {
+                var loc = window.location.href
+                var param = new URL(loc).searchParams.get("id")
+                var name = new URL(loc).searchParams.get("name")
+                var first_name = new URL(loc).searchParams.get("first_name")
+                if (param != 0) {
+                    alert("code = " + param)
+                } else { 
+                    alert("nom = " + name + ", prénom = " + first_name)
+                }
+            }
+        </script>
+    </head>
+
+    <body onload = "results()">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eveniet molestias aliquid eligendi eius, minus doloribus saepe assumenda cupiditate! Fuga veniam eveniet harum corrupti magnam vero sint eaque id incidunt!</p>
+    </body>
+</html>

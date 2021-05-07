@@ -33,6 +33,14 @@ def student_info():
     page = template[:270] + table + template[270:]
     return page
 
+@app.route('/search_forms')
+def search_forms():
+    return render_template('search_forms.html')
+
+# @app.route("/results.html?id:<int:id>", methods = ['GET'])
+# def results():
+#     return render_template('results.html')
+
 # def get_db():
 #     db = getattr(g, '_database', None)
 #     if db is None:
