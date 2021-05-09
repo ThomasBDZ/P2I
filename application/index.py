@@ -10,42 +10,31 @@ def index():
 
 @app.route('/students_info')
 def student_info():
-    # squelette de la page
-    template = render_template('students_info.html')
+    return render_template('students_info.html')
 
-    # génération de la première ligne du tableau
-    table = "<table>"
-    table += "<tr>"
-    table += "<th>identifiant</th>"
-    table += "<th>nom</th>"
-    table += "<th>prénom</th>"
-    table += "</tr>"
-
-    # génération du tableau, à modifier pour y isérer les données de la DB
-    for i in range(5):
-        table += "<tr>"
-        for j in range(3):
-            table += f"<td>[{i}, {j}]</td>"
-        table += "</tr>"
-    table += "</table>"
-
-    # création de ce qui est retourné. template[270] est là ou doit être inséré le tableau dans le squelette, la méthode n'est pas élégante/propre, j'aimerais trouver une alternative pas trop complexe.
-    page = template[:270] + table + template[270:]
-    return page
-
-@app.route('/search_forms')
+@app.route('/search_forms', methods = ['GET', 'POST'])
 def search_forms():
-    return render_template('search_forms.html')
+    if not request.method == 'POST' and not request.form.get("id") and not (request.form.get("name") and request.form.get("first_name")):
+        return render_template('search_forms.html')
+    elif request.form.get("id"):
+        return render_template('results.html', id=request.form.get("id"))
+    else:
+        return render_template('results.html', name=request.form.get("name"), fname = request.form.get("first_name"))
 
-# @app.route("/results.html?id:<int:id>", methods = ['GET'])
-# def results():
-#     return render_template('results.html')
+@app.route("/results.html?id:<int:id>", )
+def results():
+    return render_template('results.html')
 
-# def get_db():
-#     db = getattr(g, '_database', None)
-#     if db is None:
-#         db = g._database = sqlite3.connect(DATABASE)
-#     return db
+
+
+
+
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
 
 @app.teardown_appcontext
 def close_connection(exeption):

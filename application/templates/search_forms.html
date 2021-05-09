@@ -11,16 +11,16 @@
         <br>
         <h3>Rechercher un étudiant</h3>
         <b>Par l'identifiant</b><br>
-        <form id = "form_id" method = "get" action = "results">
+        <form id = "form_id" method = "post">
             <p>
                 <label for = "id">Identifiant : </label>
-                <input type = "number" name = "id" id = "id" required/>
+                <input type = "text" name = "id" id = "id" required/>
                 <button type = "submit" form = "form_id" value = "Submit">Rechercher</button>
             </p>
         </form>
         <br>
         <b>Par le nom et le prénom</b><br>
-        <form id = "form_name" method = "get" action = "results">
+        <form id = "form_name" method = "post">
             <p>
                 <label for = "name">Nom : </label>
                 <input type = "text" name = "name" id = "name" required/>
