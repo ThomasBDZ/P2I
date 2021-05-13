@@ -16,10 +16,10 @@
                 <th>nom</th>
                 <th>prénom</th>
             </tr>
-            {% for i in range(5): %}
+            {% for item in tab: %}
                 <tr>
                 {% for j in range(3): %}
-                    <td>[{{i}}, {{j}}]</td>
+                    <td>{{item[j]}}</td>
                 {% endfor %}
                 </tr>
             {% endfor %}

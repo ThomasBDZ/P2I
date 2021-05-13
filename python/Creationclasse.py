@@ -3,7 +3,7 @@ import os
 
 #Création de la table VILLE
 
-Inscription = pd.read_excel("C:\P2I\Inscription.xlsx")
+Inscription = pd.read_excel("..\..\dow-master\data\public\Inscription.xlsx")
 Ville = pd.DataFrame()
 Ville['CP']=Inscription['Unnamed: 14']
 Ville['nom_ville'] = Inscription['Unnamed: 15']
@@ -12,7 +12,7 @@ Ville.to_excel('Ville.xlsx',index=False)
 
 #Création de la table CANDIDAT
 
-Admis_MP_SPE = pd.read_excel("C:\P2I\ADMIS_MP-SPE.xlsx")
+Admis_MP_SPE = pd.read_excel("..\..\dow-master\data\public\Inscription.xlsx")
 Candidat = Admis_MP_SPE.copy(True)
 del Candidat["rang"]
 Candidat["autre_prenoms"] = Inscription['Unnamed: 3']
