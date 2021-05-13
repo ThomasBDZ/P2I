@@ -12,9 +12,10 @@
         {% if not id:%}
             <p>{{fname}} {{name}}</p>
         {% else %}
-            <p>{{id}}</p>
+            {% for i in range(5): %}
+                <p>{{tab[i]}}</p>
+            {%endfor%}
         {% endif %}
         <br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eveniet molestias aliquid eligendi eius, minus doloribus saepe assumenda cupiditate! Fuga veniam eveniet harum corrupti magnam vero sint eaque id incidunt!</p>
     </body>
 </html>

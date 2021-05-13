@@ -18,6 +18,7 @@ print(dico)
           
 
 
+Inscription = pd.read_excel("..\..\dow-master\data\public\Inscription.xlsx")
 #Création de la table VILLE
 """
 Inscription = pd.read_excel("C:\P2I\Inscription.xlsx")
@@ -32,7 +33,7 @@ print(L[1])
 
 #Création de la table CANDIDAT
 
-Admis_MP_SPE = pd.read_excel("C:\P2I\ADMIS_MP-SPE.xlsx")
+Admis_MP_SPE = pd.read_excel("..\..\dow-master\data\public\Inscription.xlsx")
 Candidat = Admis_MP_SPE.copy(True)
 del Candidat["rang"]
 Candidat["autre_prenoms"] = Inscription['Unnamed: 3']
