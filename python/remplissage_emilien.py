@@ -177,32 +177,70 @@ app = Flask(__name__)
 #     c.execute("COMMIT;")
 
 #CMT_Oraux
+# with app.app_context():
+    
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM CMT_Oraux;")
+#     req = "INSERT INTO CMT_Oraux (Numerodinscription, Centre, Jury, Phys_SI, Maths, Entretien, Anglais) VALUES "
+
+#     df = pd.read_excel(folder_path + "\\CMT_Oraux_YYYY_MP.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", \"{row[5]}\", \"{row[6]}\"), "
+    
+#     df = pd.read_excel(folder_path + "\\CMT_Oraux_YYYY_PC.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", \"{row[5]}\", \"{row[6]}\"), "
+    
+#     df = pd.read_excel(folder_path + "\\CMT_Oraux_YYYY_PSI.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", \"{row[5]}\", \"{row[6]}\"), "
+    
+#     df = pd.read_excel(folder_path + "\\CMT_Oraux_YYYY_PT.xlsx", header=1)
+#     tab = df.to_numpy()
+#     i = len(tab)
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", \"{row[5]}\", \"{row[6]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+#CMT_Oraux
 with app.app_context():
     
     c = get_db().cursor()
-    c.execute("DELETE FROM CMT_Oraux;")
-    req = "INSERT INTO CMT_Oraux (Numerodinscription, Centre, Jury, Phys_SI, Maths, Entretien, Anglais) VALUES "
+    c.execute("DELETE FROM CMT_Oraux_Spe;")
+    req = "INSERT INTO CMT_Oraux_Spe (Numerodinscription, QCM_info_phy, Maths, Entretien_MT, QCM_Anglais) VALUES "
 
-    df = pd.read_excel(folder_path + "\\CMT_Oraux_YYYY_MP.xlsx")
+    df = pd.read_excel(folder_path + "\\Classes_MP_CMT_spe_XXXX.xlsx", header=1)
     tab = df.to_numpy()
     for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", \"{row[5]}\", \"{row[6]}\"), "
+        req += f"(\"{row[0]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[28]}\"), "
     
-    df = pd.read_excel(folder_path + "\\CMT_Oraux_YYYY_PC.xlsx")
+    df = pd.read_excel(folder_path + "\\Classes_PC_CMT_spe_XXXX.xlsx", header=1)
     tab = df.to_numpy()
     for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", \"{row[5]}\", \"{row[6]}\"), "
+        req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\"), "    
     
-    df = pd.read_excel(folder_path + "\\CMT_Oraux_YYYY_PSI.xlsx")
+    df = pd.read_excel(folder_path + "\\Classes_PSI_CMT_spe_XXXX.xlsx", header=1)
     tab = df.to_numpy()
     for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", \"{row[5]}\", \"{row[6]}\"), "
+        req += f"(\"{row[0]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[28]}\"), "    
     
-    df = pd.read_excel(folder_path + "\\CMT_Oraux_YYYY_PT.xlsx")
+    df = pd.read_excel(folder_path + "\\Classes_PT_CMT_spe_XXXX.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\"), "    
+   
+    df = pd.read_excel(folder_path + "\\Classes_TSI_CMT_spe_XXXX.xlsx", header=1)
     tab = df.to_numpy()
     i = len(tab)
     for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", \"{row[5]}\", \"{row[6]}\")"
+        req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\")"
         i -= 1
         if i > 0: req += ", " 
     req += ";"
