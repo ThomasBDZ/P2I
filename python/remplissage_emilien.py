@@ -102,49 +102,6 @@ app = Flask(__name__)
 
 
 
-# bac
-# with app.app_context():
-#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
-#     tab = df.to_numpy()
-#     c = get_db().cursor()
-#     c.execute("DELETE FROM bac;") 
-
-#     req = "INSERT INTO bac (Can_cod, numero_ine, annee_bac, mois_bac, code_serie, mention, can_dep_bac) VALUES "
-#     i = len(tab)
-#     for row in tab:
-#         req += f"(\"{row[0]}\", \"{row[44]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[42]}\", \"{row[54]}\")"
-#         i -= 1
-#         if i > 0: req += ", " 
-#     req += ";"
-#     c.execute(req)
-#     c.execute("COMMIT;")
-
-
-
-# pays
-# with app.app_context():
-#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
-#     tab = df.to_numpy()
-#     c = get_db().cursor()
-#     c.execute("DELETE FROM pays;") 
-
-#     dic = {}
-#     for row in tab:
-#         dic[row[10]] = [row[8], row[11]]
-#     for row in tab:
-#         dic[row[16]][0] = row[17]
-#     req = "INSERT INTO pays (code_pays, libele_pays, nationalite) VALUES "
-#     i = len(dic)
-#     for x in dic:
-#         req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\")"
-#         i -= 1
-#         if i > 0: req += ", " 
-#     req  += ";"
-#     c.execute(req)
-#     c.execute("COMMIT;")
-
-
-
 # Candidat   
 # with app.app_context():
 #     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
@@ -347,20 +304,280 @@ app = Flask(__name__)
 
 
 # inscription
-with app.app_context():
-    df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
-    tab = df.to_numpy()
-    c = get_db().cursor()
-    c.execute("DELETE FROM inscription;") 
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM inscription;") 
 
-    req = "INSERT INTO inscription (Code_Candidat, option1, option2, option3, option4, epreuve1, epreuve2, epreuve3, epreuve4, libelle_ville_ecrit, code_concours, code_etat_dosssier, declaration_handicap, sujet_tipe) VALUES "
-    i = len(tab)
+#     req = "INSERT INTO inscription (Code_Candidat, option1, option2, option3, option4, epreuve1, epreuve2, epreuve3, epreuve4, libelle_ville_ecrit, code_concours, code_etat_dosssier, declaration_handicap, sujet_tipe) VALUES "
+#     i = len(tab)
+#     for row in tab:
+#         tipe = row[43]
+#         if row[43][0] == '"': tipe = tipe[1:len(tipe)-2]
+#         req += f"(\"{row[0]}\", \"{row[27]}\", \"{row[29]}\", \"{row[31]}\", \"{row[33]}\", \"{row[26]}\", \"{row[28]}\", \"{row[30]}\", \"{row[32]}\", \"{row[34]}\", \"{row[35]}\", \"{row[49]}\", \"{row[52]}\", \"{tipe}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+# pays
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM pays;") 
+
+#     dic = {}
+#     for row in tab:
+#         dic[row[7]] = row[8]
+#         dic[row[16]] = row[17]
+#     req = "INSERT INTO pays (code_pays, libele_pays) VALUES "
+#     i = len(dic)
+#     for x in dic:
+#         req += f"(\"{x}\", \"{dic[x]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req  += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+# nation
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM nation;") 
+
+#     dic = {}
+#     for row in tab:
+#         dic[row[10]] = row[11]
+#     req = "INSERT INTO nation (code_pays, nationalite) VALUES "
+#     i = len(dic)
+#     for x in dic:
+#         req += f"(\"{x}\", \"{dic[x]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req  += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# concours
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM concours;") 
+
+#     dic = {}
+#     for row in tab:
+#         dic[row[35]] = [row[36], row[37]]
+#     req = "INSERT INTO concours (code_concours, libelle_concours, voie) VALUES "
+#     i = len(dic)
+#     for x in dic:
+#         req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req  += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# bac
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM bac;") 
+
+#     req = "INSERT INTO bac (Can_cod, numero_ine, annee_bac, mois_bac, code_serie, mention, can_dep_bac) VALUES "
+#     i = len(tab)
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[44]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[42]}\", \"{row[54]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# serie_bac
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM serie_bac;") 
+
+#     dic = {}
+#     for row in tab:
+#         dic[row[40]] = row[41]
+#     req = "INSERT INTO serie_bac (code_serie, serie) VALUES "
+#     i = len(dic)
+#     for x in dic:
+#         req += f"(\"{x}\", \"{dic[x]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req  += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# csp
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM csp;") 
+
+#     dic = {}
+#     for row in tab:
+#         dic[row[45]] = row[46]
+#         dic[row[47]] = row[48]
+#     req = "INSERT INTO csp (cod_csp, lib_csp) VALUES "
+#     i = len(dic)
+#     for x in dic:
+#         req += f"(\"{x}\", \"{dic[x]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req  += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# Oral_autres
+# with app.app_context():  
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM Oral_autres;")
+#     req = "INSERT INTO Oral_autres (Can_cod, rang, maths_harmonisees, maths_affichees, max_physique, max_anglais, total_oral, total, bonus_interclassement, total_interclassement, entretien_exaequo, anglais_exaequo) VALUES "
+
+#     df = pd.read_excel(folder_path + "\\Classes_MP_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[49]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[41]}\", \"{row[42]}\", \"{row[43]}\", \"{row[44]}\", \"{row[45]}\", \"{row[46]}\", \"{row[47]}\"), "
+    
+#     df = pd.read_excel(folder_path + "\\Classes_PC_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[48]}\", \"{row[37]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[41]}\", \"{row[42]}\", \"{row[43]}\", \"{row[44]}\", \"{row[45]}\", \"{row[46]}\"), "
+    
+#     df = pd.read_excel(folder_path + "\\Classes_PSI_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[49]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[41]}\", \"{row[42]}\", \"{row[43]}\", \"{row[44]}\", \"{row[45]}\", \"{row[46]}\", \"{row[47]}\"), "
+    
+#     df = pd.read_excel(folder_path + "\\Classes_PT_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[44]}\", \"{row[33]}\", \"{row[34]}\", \"{row[35]}\", \"{row[36]}\", \"{row[37]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[41]}\", \"{row[42]}\"), "
+   
+#     df = pd.read_excel(folder_path + "\\Classes_TSI_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     i = len(tab)
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[44]}\", \"{row[33]}\", \"{row[34]}\", \"{row[35]}\", \"{row[36]}\", \"{row[37]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[41]}\", \"{row[42]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# Resultat_ecrit
+with app.app_context():  
+    c = get_db().cursor()
+    c.execute("DELETE FROM Resultat_ecrit;")
+
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
+    dic = {}
+    df = pd.read_excel(folder_path + "\\Classes_MP_CMT_spe_XXXX.xlsx", header=1)
+    tab = df.to_numpy()
     for row in tab:
-        tipe = row[43]
-        if row[43][0] == '"': tipe = tipe[1:len(tipe)-2]
-        req += f"(\"{row[0]}\", \"{row[27]}\", \"{row[29]}\", \"{row[31]}\", \"{row[33]}\", \"{row[26]}\", \"{row[28]}\", \"{row[30]}\", \"{row[32]}\", \"{row[34]}\", \"{row[35]}\", \"{row[49]}\", \"{row[52]}\", \"{tipe}\")"
+        dic[row[0]] = [row[24], row[23], row[15], row[16], row[17], row[18], row[19], row[20], row[14], row[13], row[21]]
+    i = len(dic)
+    for x in dic:
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
         i -= 1
         if i > 0: req += ", " 
-    req += ";"
+    req  += ";"
     c.execute(req)
+
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Langue, Informatique_pour_tous) VALUES "
+    dic = {}
+    df = pd.read_excel(folder_path + "\\Classes_PC_CMT_spe_XXXX.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        dic[row[0]] = [row[23], row[22], row[14], row[15], row[16], row[17], row[18], row[19], row[13], row[20]]
+    i = len(dic)
+    for x in dic:
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
+        i -= 1
+        if i > 0: req += ", " 
+    req  += ";"
+    c.execute(req)
+
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
+    dic = {}
+    df = pd.read_excel(folder_path + "\\Classes_PSI_CMT_spe_XXXX.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        dic[row[0]] = [row[24], row[23], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[13], row[21]]
+    i = len(dic)
+    for x in dic:
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
+        i -= 1
+        if i > 0: req += ", " 
+    req  += ";"
+    c.execute(req)
+
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
+    dic = {}
+    df = pd.read_excel(folder_path + "\\Classes_PT_CMT_spe_XXXX.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        dic[row[0]] = [row[23], row[22], row[13], row[14], row[15], row[16], row[19], row[18], row[20], row[17]]
+        i = len(dic)
+    for x in dic:
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
+        i -= 1
+        if i > 0: req += ", " 
+    req  += ";"
+    c.execute(req)
+
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
+    dic = {}
+    df = pd.read_excel(folder_path + "\\Classes_TSI_CMT_spe_XXXX.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        dic[row[0]] = [row[23], row[22], row[13], row[14], row[15], row[16], row[17], row[19], row[18], row[20]]
+    i = len(dic)
+    for x in dic:
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
+        i -= 1
+        if i > 0: req += ", " 
+    req  += ";"
+    c.execute(req)
+
+    # ids = c.execute("SELECT Numerodinscription FROM Resultat_ecrit").fetchall()
+    # print(id)
+    # df = pd.read_excel(folder_path + "\\ResultatEcrit_DD_MM_YYYY_ATS.xlsx", header=1)
+    # req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, physique_1, Francais, Informatique_SI, Langue) VALUES "
+    # i = len(tab)
+    # for row in tab:
+    #     if not (row[0],) in id:
+    #         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[5]}\", \"{row[6]}\", \"{row[7]}\", \"{row[8]}\", \"{row[9]}\")"
+    #     i -= 1
+    #     if i > 0: req += ", " 
+    # req += ";"
+    # c.execute(req)
+
     c.execute("COMMIT;")
+    
+    
