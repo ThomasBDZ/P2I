@@ -53,3 +53,6 @@ def close_connection(exeption):
 
 # c.execute(requete)
 # c.fetchall()
+
+if __name__ == "__main__":
+    app.run(debug=True)

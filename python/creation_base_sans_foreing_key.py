@@ -143,7 +143,8 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS concours
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS bac
   (
- numero_ine text PRIMARY KEY,
+  Can_cod integer PRIMARY KEY,
+ numero_ine text,
   annee_bac integer,
   mois_bac integer,
   code_serie integer,
