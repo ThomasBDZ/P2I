@@ -100,6 +100,7 @@ app = Flask(__name__)
 ###########################################################################################################################
 
 
+
 # bac
 # with app.app_context():
 #     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
@@ -116,6 +117,8 @@ app = Flask(__name__)
 #     req += ";"
 #     c.execute(req)
 #     c.execute("COMMIT;")
+
+
 
 # pays
 # with app.app_context():
@@ -139,6 +142,8 @@ app = Flask(__name__)
 #     c.execute(req)
 #     c.execute("COMMIT;")
 
+
+
 # Candidat   
 # with app.app_context():
 #     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
@@ -155,6 +160,8 @@ app = Flask(__name__)
 #     req += ";"
 #     c.execute(req)
 #     c.execute("COMMIT;")
+
+
 
 # ville
 # with app.app_context():
@@ -176,9 +183,10 @@ app = Flask(__name__)
 #     c.execute(req)
 #     c.execute("COMMIT;")
 
+
+
 #CMT_Oraux
 # with app.app_context():
-    
 #     c = get_db().cursor()
 #     c.execute("DELETE FROM CMT_Oraux;")
 #     req = "INSERT INTO CMT_Oraux (Numerodinscription, Centre, Jury, Phys_SI, Maths, Entretien, Anglais) VALUES "
@@ -209,38 +217,145 @@ app = Flask(__name__)
 #     c.execute(req)
 #     c.execute("COMMIT;")
 
-#CMT_Oraux
-with app.app_context():
-    
-    c = get_db().cursor()
-    c.execute("DELETE FROM CMT_Oraux_Spe;")
-    req = "INSERT INTO CMT_Oraux_Spe (Numerodinscription, QCM_info_phy, Maths, Entretien_MT, QCM_Anglais) VALUES "
 
-    df = pd.read_excel(folder_path + "\\Classes_MP_CMT_spe_XXXX.xlsx", header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[28]}\"), "
+
+#CMT_Oraux
+# with app.app_context():  
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM CMT_Oraux_Spe;")
+#     req = "INSERT INTO CMT_Oraux_Spe (Numerodinscription, QCM_info_phy, Maths, Entretien_MT, QCM_Anglais) VALUES "
+
+#     df = pd.read_excel(folder_path + "\\Classes_MP_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[28]}\"), "
     
-    df = pd.read_excel(folder_path + "\\Classes_PC_CMT_spe_XXXX.xlsx", header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\"), "    
+#     df = pd.read_excel(folder_path + "\\Classes_PC_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\"), "    
     
-    df = pd.read_excel(folder_path + "\\Classes_PSI_CMT_spe_XXXX.xlsx", header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[28]}\"), "    
+#     df = pd.read_excel(folder_path + "\\Classes_PSI_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[28]}\"), "    
     
-    df = pd.read_excel(folder_path + "\\Classes_PT_CMT_spe_XXXX.xlsx", header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\"), "    
+#     df = pd.read_excel(folder_path + "\\Classes_PT_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\"), "    
    
-    df = pd.read_excel(folder_path + "\\Classes_TSI_CMT_spe_XXXX.xlsx", header=1)
+#     df = pd.read_excel(folder_path + "\\Classes_TSI_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     i = len(tab)
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# Oraux_CCS
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Classes_TSI_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM Oraux_CCS;") 
+
+#     req = "INSERT INTO Oraux_CCS (Numerodinscription, mathematiques_1, mathematiques_2, phy_chi_1, phy_chi_2, phy_TP, Langue, S2I) VALUES "
+#     i = len(tab)
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[28]}\", \"{row[29]}\", \"{row[30]}\", \"{row[31]}\", \"{row[32]}\", \"{row[33]}\", \"{row[34]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# Oraux_CCMP
+# with app.app_context():  
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM Oraux_CCMP;")
+#     req = "INSERT INTO Oraux_CCMP (Numerodinscription, mathematiques, physique, francais, anglais) VALUES "
+
+#     df = pd.read_excel(folder_path + "\\Classes_MP_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[33]}\", \"{row[34]}\", \"{row[35]}\", \"{row[36]}\"), "
+    
+#     df = pd.read_excel(folder_path + "\\Classes_PC_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[32]}\", \"{row[33]}\", \"{row[34]}\", \"{row[35]}\"), "
+    
+#     df = pd.read_excel(folder_path + "\\Classes_PSI_CMT_spe_XXXX.xlsx", header=1)
+#     tab = df.to_numpy()
+#     i = len(tab)
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[33]}\", \"{row[34]}\", \"{row[35]}\", \"{row[36]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# CMT_Oraux
+# with app.app_context():  
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM Classes_CMT_spe_XXX;")
+#     req = "INSERT INTO Classes_CMT_spe_XXX (scei, etat, moyenne_generale, rang_classe) VALUES "
+
+#     df = pd.read_csv(folder_path + "\\Classes_MP_CMT_spe_XXXX_SCEI.csv", sep=";")
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[2]}\", \"{row[5]}\", \"{row[6]}\"), "
+    
+#     df = pd.read_csv(folder_path + "\\Classes_PC_CMT_spe_XXXX_SCEI.csv", sep=";")
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[2]}\", \"{row[5]}\", \"{row[6]}\"), "
+    
+#     df = pd.read_csv(folder_path + "\\Classes_PSI_CMT_spe_XXXX_SCEI.csv", sep=";")
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[2]}\", \"{row[5]}\", \"{row[6]}\"), "
+    
+#     df = pd.read_csv(folder_path + "\\Classes_PT_CMT_spe_XXXX_SCEI.csv", sep=";")
+#     tab = df.to_numpy()
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[2]}\", \"{row[5]}\", \"{row[6]}\"), "
+   
+#     df = pd.read_csv(folder_path + "\\Classes_TSI_CMT_spe_XXXX_SCEI.csv", sep=";")
+#     tab = df.to_numpy()
+#     i = len(tab)
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[2]}\", \"{row[5]}\", \"{row[6]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+
+
+# inscription
+with app.app_context():
+    df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
+    c = get_db().cursor()
+    c.execute("DELETE FROM inscription;") 
+
+    req = "INSERT INTO inscription (Code_Candidat, option1, option2, option3, option4, epreuve1, epreuve2, epreuve3, epreuve4, libelle_ville_ecrit, code_concours, code_etat_dosssier, declaration_handicap, sujet_tipe) VALUES "
     i = len(tab)
     for row in tab:
-        req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\")"
+        req += f"(\"{row[0]}\", \"{row[44]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[42]}\", \"{row[54]}\")"
         i -= 1
         if i > 0: req += ", " 
     req += ";"
