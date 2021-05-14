@@ -23,7 +23,7 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-database= "p2i.db"
+database = "p2i.db"
 
 ###########################################################################################################################
 ### TEMPLATE POUR REMPLIR ###
@@ -98,6 +98,7 @@ with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
     c = get_db().cursor()
+    c.execute("DELETE FROM bac;") 
 
     req = "INSERT INTO bac (Can_cod, numero_ine, annee_bac, mois_bac, code_serie, mention, can_dep_bac) VALUES "
     i = len(tab)
@@ -154,3 +155,7 @@ with app.app_context():
 #     req += ";"
 #     c.execute(req)
 #     c.execute("COMMIT;")
+
+
+
+c.execute("VACUUM;")
