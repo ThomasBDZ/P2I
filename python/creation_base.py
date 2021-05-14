@@ -26,7 +26,6 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS Candidat
   classe text,
   puissance text,
   code_etablissement text,
-  numero_ine text,
   csp_mere integer,
   csp_pere integer,
   arrondissement_naissance integer,
