@@ -32,6 +32,7 @@ def close_connection(exception):
 
 database = "p2i.db"
 app = Flask(__name__)
+
 ###########################################################################################################################
 ### TEMPLATE POUR REMPLIR ###
 ###########################################################################################################################
@@ -355,7 +356,9 @@ with app.app_context():
     req = "INSERT INTO inscription (Code_Candidat, option1, option2, option3, option4, epreuve1, epreuve2, epreuve3, epreuve4, libelle_ville_ecrit, code_concours, code_etat_dosssier, declaration_handicap, sujet_tipe) VALUES "
     i = len(tab)
     for row in tab:
-        req += f"(\"{row[0]}\", \"{row[44]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[42]}\", \"{row[54]}\")"
+        tipe = row[43]
+        if row[43][0] == '"': tipe = tipe[1:len(tipe)-2]
+        req += f"(\"{row[0]}\", \"{row[27]}\", \"{row[29]}\", \"{row[31]}\", \"{row[33]}\", \"{row[26]}\", \"{row[28]}\", \"{row[30]}\", \"{row[32]}\", \"{row[34]}\", \"{row[35]}\", \"{row[49]}\", \"{row[52]}\", \"{tipe}\")"
         i -= 1
         if i > 0: req += ", " 
     req += ";"
