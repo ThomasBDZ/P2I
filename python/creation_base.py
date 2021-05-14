@@ -2,6 +2,9 @@ import sqlite3
 
 connection = sqlite3.connect('p2i.db')
 cursor = connection.cursor()
+
+
+
 cursor.execute('''CREATE TABLE IF NOT EXISTS Candidat
   (Can_cod integer PRIMARY KEY,
   Civ_lib text,
@@ -27,21 +30,35 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS Candidat
   csp_mere integer,
   csp_pere integer,
   arrondissement_naissance integer,
-  qualite text
+  qualite text,
+  FOREIGN KEY(Can_cod) REFERENCES CMT_Oraux(Numerodinscription),
+  FOREIGN KEY (Can_cod) REFERENCES Resultat_ecrit (Numerodinscription),
+  FOREIGN KEY (Can_cod) REFERENCES Classes_CMT_spe_XXX (scei),
+  FOREIGN KEY (Can_cod) REFERENCES inscription (Code_Candidat),
+  FOREIGN KEY (Can_cod) REFERENCES CMT_Oraux_Spe (Numerodinscription),
+  FOREIGN KEY (Can_cod) REFERENCES Oraux_CCS (Numerodinscription),
+  FOREIGN KEY (Can_cod) REFERENCES Oraux_CCMP (Numerodinscription),
+  FOREIGN KEY (code_pays_naiss) REFERENCES pays (code_pays)
+  
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS ville
   (
 code_postal integer PRIMARY KEY,
-nom_ville text
-
+nom_ville text,
+FOREIGN KEY(code_postal) REFERENCES Candidat (Can_cod_pos),
+FOREIGN KEY(code_postal) REFERENCES ListeEtablissements (Code_postal_etab),
+FOREIGN KEY (nom_ville) REFERENCES inscription (libelle_ville_ecrit)
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS admissions
   (
 Can_cod integer PRIMARY KEY,
 admissible integer,
-admis integer
+admis integer,
+
+FOREIGN KEY(Can_cod) REFERENCES Candidat(Can_cod)
+
 
 )''')
 
@@ -118,18 +135,25 @@ sujet_tipe text
 
 )''')
 
-cursor.execute('''CREATE TABLE IF NOT EXISTS Civilite
-  (
-civilite integer PRIMARY KEY,
-  Civ_lib text
-
-)''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS pays
   (
  code_pays integer PRIMARY KEY,
   libele_pays text,
-  nationalite text
+
+  FOREIGN KEY (code_pays) REFERENCES Candidat (code_pays_nationalite),
+  FOREIGN KEY (code_pays) REFERENCES Candidat (Code_pays_adr),
+  FOREIGN KEY (libele_pays) REFERENCES ListeEtablissements (Pays_etablissement)
+
+)''')
+
+cursor.execute('''CREATE TABLE IF NOT EXISTS nation
+  (
+ code_pays integer PRIMARY KEY,
+  nationalite text,
+  FOREIGN KEY (code_pays) REFERENCES Candidat (code_pays_nationalite),
+  FOREIGN KEY (code_pays) REFERENCES Candidat (Code_pays_adr)
+  FOREIGN KEY (code_pays) REFERENCES pays (Code_pays)
 
 )''')
 
@@ -137,7 +161,8 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS concours
   (
  code_concours integer PRIMARY KEY,
   libelle_concours text,
-  voie text
+  voie text,
+  FOREIGN KEY (code_concours) REFERENCES inscription (code_concours)
 
 )''')
 
@@ -149,21 +174,25 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS bac
   mois_bac integer,
   code_serie integer,
   mention text,
-  can_dep_bac integer
+  can_dep_bac integer,
+  FOREIGN KEY (numero_ine) REFERENCES Candidat (numero_ine)
 
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS serie_bac
   (
  code_serie integer PRIMARY KEY,
-  serie text
+  serie text,
+  FOREIGN KEY (code_serie) REFERENCES bac (code_serie)
 
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS csp
   (
  cod_csp integer PRIMARY KEY,
-  lib_csp text
+  lib_csp text,
+  FOREIGN KEY (cod_csp) REFERENCES Candidat (csp_mere),
+  FOREIGN KEY (cod_csp) REFERENCES Candidat (csp_pere)
 
 )''')
 
@@ -180,7 +209,9 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS Oral_autres
   bonus_interclassement double,
   total_interclassement double,
   entretien_exaequo double,
-  anglais_exaequo double
+  anglais_exaequo double,
+  FOREIGN KEY(Can_cod) REFERENCES Candidat (Can_cod)
+
 
 )''')
 
@@ -205,13 +236,15 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS bonification
   (
 bonification_ecrit integer,
   bonification_oral integer,
-  puissance text PRIMARY KEY
+  puissance text PRIMARY KEY,
+  FOREIGN KEY (puissance) REFERENCES Candidat (puissance)
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS ListeEcoles
   (
 NumeroEcole integer PRIMARY KEY,
-  Nom_ecole text
+  Nom_ecole text,
+  FOREIGN KEY (NumeroEcole) REFERENCES listeVoeux (Eco_code)
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS ListeEtablissements
@@ -220,7 +253,8 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS ListeEtablissements
   type_etab text,
   nom_etabEtab text,
   Code_postal_etab integer,
-  Pays_etablissement text
+  Pays_etablissement text,
+  FOREIGN KEY (Rne) REFERENCES Candidat (code_etablissement)
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS listeVoeux
@@ -228,19 +262,23 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS listeVoeux
   Can_cod integer PRIMARY KEY,
   Voe_rang integer,
   voe_ordre integer,
-  Eco_code integer
+  Eco_code integer,
+  FOREIGN KEY(Can_cod) REFERENCES Candidat (Can_cod)
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS voie_classe
   (
  classe text PRIMARY KEY,
-  voie text
+  voie text,
+  FOREIGN KEY (voie) REFERENCES Concours (voie),
+  FOREIGN KEY (classe) REFERENCES Candidat (classe)
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS listeEtasRe
   (
   Ata_cod integer PRIMARY KEY,
-  Ata_lib text
+  Ata_lib text,
+  FOREIGN KEY (Ata_cod) REFERENCES inscription (code_etat_dosssier)
 )''')
 
 connection.commit()
