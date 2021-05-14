@@ -35,7 +35,7 @@ def charts():
     tab = c.fetchall()
     return render_template('charts.html', tab=tab)
 
-DATABASE = 'temp.db'
+DATABASE = '../python/p2i.db'
 
 def get_db():
     db = getattr(g, '_database', None)
