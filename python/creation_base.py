@@ -66,20 +66,20 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS CMT_Oraux
 Numerodinscription integer PRIMARY KEY,
 Centre text,
 Jury text,
-Phys integer,
-Maths integer,
-Entretie integer,
-Anglais integer
+Phys_SI double,
+Maths double,
+Entretien double,
+Anglais double
 
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS CMT_Oraux_Spe
   (
 Numerodinscription integer PRIMARY KEY,
-QCM_info_phy integer,
-Maths integer,
-Entretien_MT integer,
-QCM_Anglais integer
+QCM_info_phy double,
+Maths double,
+Entretien_MT double,
+QCM_Anglais double
 
 )''')
 
@@ -99,10 +99,10 @@ S2I double
 cursor.execute('''CREATE TABLE IF NOT EXISTS Oraux_CCMP
   (
 Numerodinscription integer PRIMARY KEY,
-mathematiques integer,
-physique integer,
-francais integer,
-anglais integer
+mathematiques double,
+physique double,
+francais double,
+anglais double
 
 )''')
 
