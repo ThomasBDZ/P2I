@@ -78,50 +78,43 @@ with app.app_context():
     
     dic = {}
     for row in tab:
-        dic[row[0]] = [row[0]]
+        dic[row[0]] = []
         dic[row[0]].append(nan)
         dic[row[0]].append(nan)
-    
-    df = dico["ADMISSIBLE_MP-SPE"]
-    tab = df.to_numpy()
-    for row in tab:
-        dic[row[0]][1]=row[0]
-    df = dico["ADMIS_MP-SPE"]
-    tab = df.to_numpy()
-    for row in tab:
-        dic[row[0]][2]=row[12]
 
+    for dirpath, dirnames, filenames in os.walk(folder_path):
+        for filename in filenames:
+            FilePrefix, FileExtension = os.path.splitext(filename)
+            if ("ADMISSIBLE" in FilePrefix) and ("SPE" in FilePrefix) and ("ADMISSIBLE_ATS" not in FilePrefix): 
+                df = dico['ADMISSIBLE_'+select_filiere(FilePrefix)]
+                tab = df.to_numpy()
+                for row in tab:
+                    dic[row[0]][0]=row[0]
+
+            if ("ADMIS_" in FilePrefix) and ("SPE" in FilePrefix) and ("ADMIS_ATS" not in FilePrefix):
+                df = dico['ADMIS_'+select_filiere(FilePrefix)]
+                tab = df.to_numpy()
+                for row in tab:
+                    dic[row[0]][1]=row[12]
+     # 1 pb : Can_cod 44232 introuvable dans Inscription mais présent dans ADMIS_PC
+    
     i = len(dic)
+    print(dic)
     print(i)
     for x in dic:
-        req += f"(\"{x}\",  \"{dic[x][1]}\", \"{dic[x][2]})\""
+        req += f"(\"{x}\",  \"{dic[x][0]}\", \"{dic[x][1]}\")"
         i -= 1
         if i > 0: req += ", "
     req += ";"
-
-    # for dirpath, dirnames, filenames in os.walk(folder_path):
-    #     for filename in filenames:
-    #         FilePrefix, FileExtension = os.path.splitext(filename)
-    #         if ("ADMISSIBLE" in FilePrefix) and ("SPE" in FilePrefix) and ("ADMISSIBLE_ATS" not in FilePrefix) and ("ADMISSIBLE_PC" not in FilePrefix): 
-    #             df = dico['ADMISSIBLE_'+select_filiere(FilePrefix)]
-    #             tab = df.to_numpy()
-    #             for row in tab:
-    #                 dic[row[0]][1]=row[0]
-
-            # if ("ADMIS_" in FilePrefix) and ("SPE" in FilePrefix) and ("ADMIS_ATS" not in FilePrefix) and ("ADMIS_PC" not in FilePrefix):
-            #     df = dico['ADMIS_'+select_filiere(FilePrefix)]
-            #     tab = df.to_numpy()
-            #     for row in tab:
-            #         dic[row[0]][2]=row[12]
-                    #dic[row[0]].append(row[12])
-     # 3 pb : le premier dans filiere PC,un can_cod introuvable dans Inscription (44232 je crois) +2e pb : longueur de liste variante dans dic + sqlite3.OperationalError: parser stack overflow
-    
-
-    #c.executemany("INSERT OR IGNORE INTO admissions (Can_cod, admissible, admis) VALUES (?, ?, ?)", dic)
     c.execute(req)
     c.execute("COMMIT;")
 
     print('Table remplie')
+
+    print(i)
+    
+
+   
 
 
 
