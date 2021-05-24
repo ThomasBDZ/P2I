@@ -1,10 +1,45 @@
 from flask import Flask, render_template, url_for, redirect, request
+import sqlite3
+from flask import g
+from flask import Flask, render_template, url_for
+from markupsafe import escape
+import json
 
 app = Flask(__name__)
 
+DATABASE = '/home/michael/p2i_test/project-grp12/p2i.db'
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
+
+@app.teardown_appcontext   #teardown permet de le faire à chaque fois à la fin
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
+def tables(conn):
+    cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    tables = [
+        v[0] for v in cursor.fetchall()
+        if v[0] != "sqlite_sequence"
+    ]
+    cursor.close()
+    return tables
+
+
 @app.route("/")
 def home():
-    return render_template("index.html")
+    c = get_db().cursor()
+    db = get_db()
+    t = tables(db)
+    c.execute("select * from ListeEtablissements")
+
+    return render_template('base.html', title="mon titre", results=c.fetchall(), tabl= t)
+
 
 
 @app.route("/admin")
@@ -15,10 +50,6 @@ def admin():
 def forr():
     return render_template("for.html")
 
-
-@app.route("/base")
-def base():
-    return render_template("base.html")
 
 @app.route("/inherit")
 def inherit():
@@ -33,9 +64,6 @@ def login():
     else:
         return render_template("login.html")
 
-@app.route("/<usr>")
-def user(usr):
-    return f"<h1>{usr}</h1>"
 
 @app.route("/table")
 def table():
@@ -44,6 +72,23 @@ def table():
 @app.route("/list")
 def liste():
     return render_template("list.html")
+
+@app.route("/Candidat")
+def Candidat():
+    return "Hello"
+
+@app.route("/ListeEtablissements")
+def listeEtablissements():
+    c = get_db().cursor()
+    c.execute("select * from ListeEtablissements")
+    return render_template("ListeEtablissements.html", results= c.fetchall())
+
+@app.route("/ListeEcoles")
+def listeEcole():
+    c = get_db().cursor()
+    c.execute("select * from ListeEcoles")
+    return render_template("ListeEcoles.html", results= c.fetchall())
+
 
 if __name__ == "__main__":
 	app.run(debug=True)

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Liste_Etablissements{% endblock %}
+
+{% block content %}
+<table style="width:100%">
+  <tr>
+    <th>Rne</th>
+    <th>Type d'etablissement</th>
+    <th>Nom Etablissement</th>
+    <th>Code Postal Etablissement</th>
+    <th>Pays Etablissement</th>
+  </tr>
+  {% for r in results %}
+  <tr>
+   <td>{{ r[0] }}</td>
+   <td>{{ r[1] }}</td>
+   <td>{{ r[2] }}</td>
+   <td>{{ r[3] }}</td>
+   <td>{{ r[4] }}</td>
+  </tr>
+  {% endfor %}
+  
+</table>
+
+{% endblock %}
+
