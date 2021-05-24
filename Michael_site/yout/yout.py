@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request
 import sqlite3
 from flask import g
 from flask import Flask, render_template, url_for
@@ -118,11 +118,12 @@ def liste_voeux():
     return render_template("liste_voeux.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/recherche", methods=["POST", "GET"])
-def request():
+def requestt():
     if request.method == "POST":
         c = get_db().cursor()
         requ= request.form["Req"]
-        c.execute("select * from ListeEcoles")
+        c.execute(requ)
+        return render_template("resultat_recherche.html", results= c.fetchall())
     else:
         return render_template("recherche.html")
 
