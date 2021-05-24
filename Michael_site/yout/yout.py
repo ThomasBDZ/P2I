@@ -80,37 +80,42 @@ def Candidat():
 @app.route("/ListeEtablissements")
 def listeEtablissements():
     c = get_db().cursor()
-    c.execute("PRAGMA table_info(tablename)")
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(ListeEtablissements)")
     c.execute("select * from ListeEtablissements")
-    return render_template("ListeEtablissements.html", results= c.fetchall())
+    return render_template("ListeEtablissements.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/ListeEcoles")
 def listeEcole():
     c = get_db().cursor()
-    c.execute("PRAGMA table_info(tablename)")
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(ListeEcoles)")
     c.execute("select * from ListeEcoles")
-    return render_template("ListeEcoles.html", results= c.fetchall())
+    return render_template("ListeEcoles.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/listeEtasRe")
 def listeEtasRe():
     c = get_db().cursor()
-    c.execute("PRAGMA table_info(tablename)")
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(listeEtasRe)")
     c.execute("select * from listeEtasRe")
-    return render_template("listeEtasRe.html", results= c.fetchall())
+    return render_template("listeEtasRe.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/voie_classe")
 def voie_classe():
     c = get_db().cursor()
-    c.execute("PRAGMA table_info(tablename)")
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(voie_classe)")
     c.execute("select * from voie_classe")
-    return render_template("voie_classe.html", results= c.fetchall())
+    return render_template("voie_classe.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/listeVoeux")
 def liste_voeux():
     c = get_db().cursor()
-    c.execute("PRAGMA table_info(tablename)")
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(listeVoeux)")
     c.execute("select * from listeVoeux")
-    return render_template("liste_voeux.html", results= c.fetchall())
+    return render_template("liste_voeux.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/recherche", methods=["POST", "GET"])
 def request():

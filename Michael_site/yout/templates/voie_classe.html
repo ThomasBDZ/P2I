@@ -4,9 +4,10 @@
 {% block content %}
 <table style="width:100%">
   <tr>
-    <th>Classe</th>
-    <th>Voie</th>
-  </tr>
+    {% for h in results2 %}
+         <th>{{ h[1] }}</th>
+    {% endfor %}
+    </tr>
   {% for r in results %}
   <tr>
    <td>{{ r[0] }}</td>
