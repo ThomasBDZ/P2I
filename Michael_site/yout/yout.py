@@ -89,6 +89,19 @@ def listeEcole():
     c.execute("select * from ListeEcoles")
     return render_template("ListeEcoles.html", results= c.fetchall())
 
+@app.route("/listeEtasRe")
+def listeEtasRe():
+    c = get_db().cursor()
+    c.execute("select * from listeEtasRe")
+    return render_template("listeEtasRe.html", results= c.fetchall())
+
+@app.route("/voie_classe")
+def voie_classe():
+    c = get_db().cursor()
+    c.execute("select * from voie_classe")
+    return render_template("voie_classe.html", results= c.fetchall())
+
+
 
 if __name__ == "__main__":
 	app.run(debug=True)
