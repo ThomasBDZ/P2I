@@ -101,6 +101,11 @@ def voie_classe():
     c.execute("select * from voie_classe")
     return render_template("voie_classe.html", results= c.fetchall())
 
+@app.route("/listeVoeux")
+def liste_voeux():
+    c = get_db().cursor()
+    c.execute("select * from listeVoeux")
+    return render_template("liste_voeux.html", results= c.fetchall())
 
 
 if __name__ == "__main__":

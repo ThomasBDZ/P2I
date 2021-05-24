@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Voie_classe{% endblock %}
+
+{% block content %}
+<table style="width:100%">
+  <tr>
+    <th>Code Candidat</th>
+    <th>Rang voeu</th>
+    <th>ordre voeu</th>
+    <th>code ecole</th>
+  </tr>
+  {% for r in results %}
+  <tr>
+   <td>{{ r[0] }}</td>
+   <td>{{ r[1] }}</td>
+   <td>{{ r[2] }}</td>
+   <td>{{ r[3] }}</td>
+  </tr>
+  {% endfor %}
+  
+</table>
+
+{% endblock %}
