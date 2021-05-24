@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, request, render_template, url_for, redirect, request
 import sqlite3
 from flask import g
 from flask import Flask, render_template, url_for
@@ -80,33 +80,46 @@ def Candidat():
 @app.route("/ListeEtablissements")
 def listeEtablissements():
     c = get_db().cursor()
+    c.execute("PRAGMA table_info(tablename)")
     c.execute("select * from ListeEtablissements")
     return render_template("ListeEtablissements.html", results= c.fetchall())
 
 @app.route("/ListeEcoles")
 def listeEcole():
     c = get_db().cursor()
+    c.execute("PRAGMA table_info(tablename)")
     c.execute("select * from ListeEcoles")
     return render_template("ListeEcoles.html", results= c.fetchall())
 
 @app.route("/listeEtasRe")
 def listeEtasRe():
     c = get_db().cursor()
+    c.execute("PRAGMA table_info(tablename)")
     c.execute("select * from listeEtasRe")
     return render_template("listeEtasRe.html", results= c.fetchall())
 
 @app.route("/voie_classe")
 def voie_classe():
     c = get_db().cursor()
+    c.execute("PRAGMA table_info(tablename)")
     c.execute("select * from voie_classe")
     return render_template("voie_classe.html", results= c.fetchall())
 
 @app.route("/listeVoeux")
 def liste_voeux():
     c = get_db().cursor()
+    c.execute("PRAGMA table_info(tablename)")
     c.execute("select * from listeVoeux")
     return render_template("liste_voeux.html", results= c.fetchall())
 
+@app.route("/recherche", methods=["POST", "GET"])
+def request():
+    if request.method == "POST":
+        c = get_db().cursor()
+        requ= request.form["Req"]
+        c.execute("select * from ListeEcoles")
+    else:
+        return render_template("recherche.html")
 
 if __name__ == "__main__":
 	app.run(debug=True)
