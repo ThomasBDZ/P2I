@@ -233,7 +233,7 @@ Numerodinscription integer PRIMARY KEY,
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS bonification
   (
-bonification_ecrit integer,
+  bonification_ecrit integer,
   bonification_oral integer,
   puissance text PRIMARY KEY,
   FOREIGN KEY (puissance) REFERENCES Candidat (puissance)
@@ -248,21 +248,23 @@ NumeroEcole integer PRIMARY KEY,
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS ListeEtablissements
   (
-  Rne text PRIMARY KEY,
+  Rne text,
   type_etab text,
   nom_etabEtab text,
   Code_postal_etab integer,
   Pays_etablissement text,
-  FOREIGN KEY (Rne) REFERENCES Candidat (code_etablissement)
+  FOREIGN KEY (Rne) REFERENCES Candidat (code_etablissement),
+  PRIMARY KEY(Rne, nom_etabEtab)
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS listeVoeux
   (
-  Can_cod integer PRIMARY KEY,
+  Can_cod integer,
   Voe_rang integer,
   voe_ordre integer,
   Eco_code integer,
-  FOREIGN KEY(Can_cod) REFERENCES Candidat (Can_cod)
+  FOREIGN KEY(Can_cod) REFERENCES Candidat (Can_cod),
+  PRIMARY KEY(Can_cod, voe_ordre)
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS voie_classe

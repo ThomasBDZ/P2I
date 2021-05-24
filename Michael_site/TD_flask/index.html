@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Users</title>
+    </head>
+    <body>
+        <h1>Users</h1>
+        <ul>
+            {% for row in rows %}
+                <li>{{row["name"]}}, {{row["email"]}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
+
