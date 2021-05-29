@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect('p2i.db')
+connection = sqlite3.connect('..\\p2i.db')
 cursor = connection.cursor()
 
 
@@ -158,7 +158,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS nation
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS concours
   (
- code_concours integer PRIMARY KEY,
+  code_concours integer PRIMARY KEY,
   libelle_concours text,
   voie text,
   FOREIGN KEY (code_concours) REFERENCES inscription (code_concours)
@@ -168,7 +168,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS concours
 cursor.execute('''CREATE TABLE IF NOT EXISTS bac
   (
   Can_cod integer PRIMARY KEY,
- numero_ine text,
+  numero_ine text,
   annee_bac integer,
   mois_bac integer,
   code_serie integer,
@@ -233,15 +233,14 @@ Numerodinscription integer PRIMARY KEY,
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS bonification
   (
-  bonification_ecrit integer,
-  bonification_oral integer,
   puissance text PRIMARY KEY,
+  bonification integer,
   FOREIGN KEY (puissance) REFERENCES Candidat (puissance)
 )''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS ListeEcoles
   (
-NumeroEcole integer PRIMARY KEY,
+  NumeroEcole integer PRIMARY KEY,
   Nom_ecole text,
   FOREIGN KEY (NumeroEcole) REFERENCES listeVoeux (Eco_code)
 )''')

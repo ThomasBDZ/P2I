@@ -24,78 +24,16 @@ def close_connection(exception):
 database = "..\\p2i.db"
 app = Flask(__name__)
 
-###########################################################################################################################
-### TEMPLATE POUR REMPLIR ###
-###########################################################################################################################
-
-# with app.app_context():
-#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
-#     tab = df.to_numpy()
-#     c = get_db().cursor()
-
-#     req = "INSERT INTO bac (numero_ine, annee_bac, mois_bac, code_serie, mention, can_dep_bac) VALUES "
-#     i = len(tab)
-#     for row in tab:
-#         req += f"(\"{row[0]}\", \"{row[44]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[42]}\", \"{row[54]}\")"
-#         i -= 1
-#         if i > 0: req += ", " 
-#     req += ";"
-#     c.execute(req)
-#     c.execute("COMMIT;")
-
-###############
-
-# with app.app_context():
-#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
-#     tab = df.to_numpy()
-#     c = get_db().cursor()
-#     c.execute("DELETE FROM pays;") 
-
-#     dic = {}
-#     for row in tab:
-#         dic[row[10]] = [row[8], row[11]]
-#     req = "INSERT INTO pays (code_pays, libele_pays, nationalite) VALUES "
-#     i = len(dic)
-#     for x in dic:
-#         req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\")"
-#         i -= 1
-#         if i > 0: req += ", " 
-#     req  += ";"
-#     c.execute(req)
-#     c.execute("COMMIT;")
-
-###############
-
-# with app.app_context():
-#     df1 = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
-#     df2 = pd.read_excel(folder_path + "\\ADMISSIBLE_MP.xlsx") 
-#     tab1 = df1.to_numpy()
-#     tab2 = df2.to_numpy()
-#     c = get_db().cursor()
-
-#     dic = {}
-#     for row in tab1:
-#         dic[row[pk]] = [row[y], row[z]]
-#     for row in tab2:
-#         dic[row[pk]].append(row[v]) #il faudra peut être changer le pk, car on est dans un tab différent
-#         dic[row[pk]].append(row[w])
-#     req = "INSERT INTO table (col1, col2, col3, col4, col5) VALUES "
-#     i = len(dic)
-#     for pk in dic:
-#             req += f"(\"{pk}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]})\""
-#             i -= 1
-#             if i > 0: req += ", "
-#     req += ";"
-#     c.execute(req)
-#     c.execute("COMMIT;")
-
-###########################################################################################################################
 
 
 ###################### Emilien ###################
 
 
-# Candidat   
+
+print("##### REMPLISSAGE COMMENCE #####")
+
+
+print("Remplissage table : Candidat")   
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -111,10 +49,11 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# ville
+print("Remplissage table : ville")
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -133,14 +72,15 @@ with app.app_context():
     req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# CMT_Oraux
+print("Remplissage table : CMT_Oraux")
 with app.app_context():
     c = get_db().cursor()
     c.execute("DELETE FROM CMT_Oraux;")
-    req = "INSERT INTO CMT_Oraux (Numerodinscription, Centre, Jury, Phys, Maths, Entretie, Anglais) VALUES "
+    req = "INSERT INTO CMT_Oraux (Numerodinscription, Centre, Jury, Phys_SI, Maths, Entretien, Anglais) VALUES "
 
     df = pd.read_excel(folder_path + "\\CMT_Oraux_YYYY_MP.xlsx", header=1)
     tab = df.to_numpy()
@@ -167,10 +107,11 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# CMT_Oraux_spe
+print("Remplissage table : CMT_Oraux_Spe")
 with app.app_context():  
     c = get_db().cursor()
     c.execute("DELETE FROM CMT_Oraux_Spe;")
@@ -206,10 +147,11 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# Oraux_CCS
+print("Remplissage table : Oraux_CCS")
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Classes_TSI_CMT_spe_XXXX.xlsx", header=1)
     tab = df.to_numpy()
@@ -225,10 +167,11 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# Oraux_CCMP
+print("Remplissage table : Oraux_CCMP")
 with app.app_context():  
     c = get_db().cursor()
     c.execute("DELETE FROM Oraux_CCMP;")
@@ -238,7 +181,7 @@ with app.app_context():
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[33]}\", \"{row[34]}\", \"{row[35]}\", \"{row[36]}\"), "
-    
+ 
     df = pd.read_excel(folder_path + "\\Classes_PC_CMT_spe_XXXX.xlsx", header=1)
     tab = df.to_numpy()
     for row in tab:
@@ -254,10 +197,12 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# CMT_Oraux
+
+print("Remplissage table : CMT_Oraux")
 with app.app_context():  
     c = get_db().cursor()
     c.execute("DELETE FROM Classes_CMT_spe_XXX;")
@@ -293,10 +238,12 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# inscription
+
+print("Remplissage table : inscription")
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -314,8 +261,11 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
-# pays
+
+
+print("Remplissage table : pays")
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -335,8 +285,11 @@ with app.app_context():
     req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
-# nation
+
+
+print("Remplissage table : nation")
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -355,10 +308,12 @@ with app.app_context():
     req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# concours
+
+print("Remplissage table : concours")
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -377,10 +332,11 @@ with app.app_context():
     req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# bac
+print("Remplissage table : bac")
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -396,10 +352,12 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# serie_bac
+
+print("Remplissage table : serie_bac")
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -418,10 +376,32 @@ with app.app_context():
     req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
+print("Remplissage table : ListeEcoles")
+with app.app_context():
+    df = pd.read_excel(folder_path + "\\ListeEcoles.xlsx")
+    tab = df.to_numpy()
+    c = get_db().cursor()
+    c.execute("DELETE FROM ListeEcoles;") 
 
-# csp
+    dic = {}
+    for row in tab:
+        dic[row[0]] = row[1]
+    req = "INSERT INTO ListeEcoles (NumeroEcole, Nom_ecole) VALUES "
+    i = len(dic)
+    for x in dic:
+        req += f"(\"{x}\", \"{dic[x]}\")"
+        i -= 1
+        if i > 0: req += ", " 
+    req  += ";"
+    c.execute(req)
+    c.execute("COMMIT;")
+print("Table remplie")   
+
+
+print("Remplissage table : csp")
 with app.app_context():
     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -441,10 +421,12 @@ with app.app_context():
     req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# Oral_autres
+
+print("Remplissage table : Oral_Autres")
 with app.app_context():  
     c = get_db().cursor()
     c.execute("DELETE FROM Oral_autres;")
@@ -480,10 +462,11 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")   
 
 
 
-# Resultat_ecrit
+print("Remplissage table : ResultatEcrit")
 with app.app_context():  
     c = get_db().cursor()
     c.execute("DELETE FROM Resultat_ecrit;")
@@ -574,8 +557,30 @@ with app.app_context():
     # print(req[len(req)-50:])
     # c.execute(req)
 
+c.execute("COMMIT;")
+print("Table remplie")   
+
+
+print("Remplissage table : bonification")
+with app.app_context():
+    df = pd.read_excel(folder_path + "\\Classes_MP_CMT_spe_XXXX.xlsx", header=1)
+    tab = df.to_numpy()
+    c = get_db().cursor()
+    c.execute("DELETE FROM bonification;") 
+
+    dic = {}
+    for row in tab:
+        dic[row[12]] = row[41]
+    req = "INSERT INTO bonification (puissance, bonification) VALUES "
+    i = len(dic)
+    for x in dic:
+        req += f"(\"{x}\", \"{dic[x]}\")"
+        i -= 1
+        if i > 0: req += ", " 
+    req  += ";"
+    c.execute(req)
     c.execute("COMMIT;")
-    
+print("Table remplie")
 
 
 
@@ -583,7 +588,7 @@ with app.app_context():
 
 
 
-# listeEtasRe   
+print("Remplissage table : listeEtatRe")
 with app.app_context():
     df = pd.read_excel(folder_path + "/listeEtatsReponsesAppel.xlsx", header=1)
     tab = df.to_numpy()
@@ -599,10 +604,10 @@ with app.app_context():
     req += ";"
     c.execute(req)
     c.execute("COMMIT;")
-    
+print("Table remplie")   
 
 
-# voie_classe
+print("Remplissage table : voie_classe")
 with app.app_context():
     df = pd.read_excel(folder_path + "/Inscription.xlsx", header=1)
     tab = df.to_numpy()
@@ -621,72 +626,76 @@ with app.app_context():
     req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
+print("Table remplie")
 
 
+print("Remplissage table : listeVoeux")  
+with app.app_context():
+    c = get_db().cursor()
+    c.execute("DELETE FROM listeVoeux;") 
+    req = "INSERT INTO listeVoeux (Can_cod, Voe_rang, voe_ordre, Eco_code) VALUES "
 
-#listeVoeux   
-# with app.app_context():
-#     c = get_db().cursor()
-#     c.execute("DELETE FROM listeVoeux;") 
-#     req = "INSERT INTO listeVoeux (Can_cod, Voe_rang, voe_ordre, Eco_code) VALUES "
-
-#     df = pd.read_excel(folder_path + "/listeVoeux_ATS.xlsx", header=1)
-#     tab = df.to_numpy()
-#     for row in tab:
-#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
+    df = pd.read_excel(folder_path + "/listeVoeux_ATS.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
     
-#     df = pd.read_excel(folder_path + "/listeVoeux_MP.xlsx", header=1)
-#     tab = df.to_numpy()
-#     for row in tab:
-#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
+    df = pd.read_excel(folder_path + "/listeVoeux_MP.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
     
-#     df = pd.read_excel(folder_path + "/listeVoeux_PC.xlsx", header=1)
-#     tab = df.to_numpy()
-#     for row in tab:
-#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
+    df = pd.read_excel(folder_path + "/listeVoeux_PC.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
     
-#     df = pd.read_excel(folder_path + "/listeVoeux_PSI.xlsx", header=1)
-#     tab = df.to_numpy()
-#     for row in tab:
-#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
+    df = pd.read_excel(folder_path + "/listeVoeux_PSI.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
     
-#     df = pd.read_excel(folder_path + "/listeVoeux_PT.xlsx", header=1)
-#     tab = df.to_numpy()
-#     for row in tab:
-#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
+    df = pd.read_excel(folder_path + "/listeVoeux_PT.xlsx", header=1)
+    tab = df.to_numpy()
+    for row in tab:
+        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
         
-#     df = pd.read_excel(folder_path + "/listeVoeux_TSI.xlsx", header=1)
-#     tab = df.to_numpy()
-#     i = len(tab)
-#     for row in tab:
-#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\")"
-#         i -= 1
-#         if i > 0: req += ", " 
-#     req += ";"
-#     c.execute(req)
-#     c.execute("COMMIT;")
+    df = pd.read_excel(folder_path + "/listeVoeux_TSI.xlsx", header=1)
+    tab = df.to_numpy()
+    i = len(tab)
+    for row in tab:
+        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\")"
+        i -= 1
+        if i > 0: req += ", " 
+    req += ";"
+    c.execute(req)
+    c.execute("COMMIT;")
+print("Table remplie")
 
 
+print("Remplissage table : ListeEtablissements")  
+with app.app_context():
+    df = pd.read_excel(folder_path + "/listeEtablissements.xlsx", header=1)
+    tab = df.to_numpy()
+    c = get_db().cursor()
+    c.execute("DELETE FROM ListeEtablissements;") 
 
-# ListeEtablissements   
-# with app.app_context():
-#     df = pd.read_excel(folder_path + "/listeEtablissements.xlsx", header=1)
-#     tab = df.to_numpy()
-#     c = get_db().cursor()
-#     c.execute("DELETE FROM ListeEtablissements;") 
+    i = len(tab)
+    req = "INSERT INTO ListeEtablissements (Rne, type_etab, nom_etabEtab, Code_postal_etab, Pays_etablissement) VALUES "
+    for row in tab:
+        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\")"
+        i -= 1
+        if i > 0: req += ", "
+    req += ";"
+    c.execute(req)
+    c.execute("COMMIT;")
+print("Table remplie")
 
-#     i = len(tab)
-#     req = "INSERT INTO ListeEtablissements (Rne, type_etab, nom_etabEtab, Code_postal_etab, Pays_etablissement) VALUES "
-#     for row in tab:
-#         req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\")"
-#         i -= 1
-#         if i > 0: req += ", "
-#     req += ";"
-#     c.execute(req)
-#     c.execute("COMMIT;")
 
 
 ################ Thomas ##################
+
+
 
 filepath_inscription = "..\dow-master\data\public\Inscription.xlsx"
 app = Flask(__name__)
@@ -707,35 +716,35 @@ def select_filiere(st): #selectionne la filière dans le nom d'un fichier
 
 dico = {}
 for dirpath, dirnames, filenames in os.walk(folder_path):
-  for filename in filenames:
-      FilePrefix, FileExtension = os.path.splitext(filename)
-      if (FileExtension == ".xlsx"):
-          dico["{0}".format(FilePrefix)] = pd.read_excel(folder_path+"\\"+basename(filename))
+    for filename in filenames:
+        FilePrefix, FileExtension = os.path.splitext(filename)
+        if (FileExtension == ".xlsx"):
+            dico["{0}".format(FilePrefix)] = pd.read_excel(folder_path+"\\"+basename(filename))
 
 
 
 with app.app_context():
 
-    #TABLE SERIE BAC
-    print("Remplissage table : Serie bac")
+    # TABLE SERIE BAC
+    print("Remplissage table : Serie_bac")
 
     c = get_db().cursor()
-    # df = pd.read_excel(filepath_inscription,header=1)
-    # rows_code_bac = []
-    # for index,rows in df.iterrows():
-    #     rows_code_bac.append([rows['CODE_SERIE'],rows['SERIE']])
-    # c.executemany("INSERT OR IGNORE INTO serie_bac (code_serie,serie) VALUES (?, ?)", (rows_code_bac))
-    # c.execute("COMMIT;")
+    df = pd.read_excel(filepath_inscription,header=1)
+    rows_code_bac = []
+    for index,rows in df.iterrows():
+        rows_code_bac.append([rows['CODE_SERIE'],rows['SERIE']])
+    c.executemany("INSERT OR IGNORE INTO serie_bac (code_serie,serie) VALUES (?, ?)", (rows_code_bac))
+    c.execute("COMMIT;")
 
     print("Table remplie")
 
-    #TABLE ADMISSION
+    # TABLE ADMISSION
 
     print('Remplissage table : Admission')
 
     c.execute("DELETE FROM admissions;") 
     df = pd.read_excel(filepath_inscription,header=1)
-    req = "INSERT INTO admissions (Can_cod, admissible, admis) VALUES "
+    
     tab = df.to_numpy()
     
     dic = {}
@@ -751,26 +760,114 @@ with app.app_context():
                 df = dico['ADMISSIBLE_'+select_filiere(FilePrefix)]
                 tab = df.to_numpy()
                 for row in tab:
-                    dic[row[0]][0]=row[0]
+                    if row[0] not in dic:
+                        print(f"ERREUR : Le candidat {row[0]} n'est pas inscrit")
+                    else:
+                        dic[row[0]][0]=row[0]
+
 
             if ("ADMIS_" in FilePrefix) and ("SPE" in FilePrefix) and ("ADMIS_ATS" not in FilePrefix):
                 df = dico['ADMIS_'+select_filiere(FilePrefix)]
                 tab = df.to_numpy()
                 for row in tab:
-                    dic[row[0]][1]=row[12]
+                    if row[0] not in dic:
+                        print(f"ERREUR : Le candidat {row[0]} n'est pas inscrit")
+                    else:
+                        dic[row[0]][1]=row[12]
      # 1 pb : Can_cod 44232 introuvable dans Inscription mais présent dans ADMIS_PC
     
+
+    code_tab = c.execute("SELECT Code_Candidat FROM inscription")
+    req = "INSERT INTO admissions (Can_cod, admissible, admis) VALUES "
     i = len(dic)
-    print(dic)
-    print(i)
     for x in dic:
         req += f"(\"{x}\",  \"{dic[x][0]}\", \"{dic[x][1]}\")"
         i -= 1
-        if i > 0: req += ", "
-    req += ";"
+        if i > 0: req += ", " 
+    req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
 
     print('Table remplie')
 
-    print(i)
+print("##### REMPLISSAGE TERMINE #####")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###########################################################################################################################
+### TEMPLATE POUR REMPLIR ###
+###########################################################################################################################
+
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+
+#     req = "INSERT INTO bac (numero_ine, annee_bac, mois_bac, code_serie, mention, can_dep_bac) VALUES "
+#     i = len(tab)
+#     for row in tab:
+#         req += f"(\"{row[0]}\", \"{row[44]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[42]}\", \"{row[54]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+###############
+
+# with app.app_context():
+#     df = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     tab = df.to_numpy()
+#     c = get_db().cursor()
+#     c.execute("DELETE FROM pays;") 
+
+#     dic = {}
+#     for row in tab:
+#         dic[row[10]] = [row[8], row[11]]
+#     req = "INSERT INTO pays (code_pays, libele_pays, nationalite) VALUES "
+#     i = len(dic)
+#     for x in dic:
+#         req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\")"
+#         i -= 1
+#         if i > 0: req += ", " 
+#     req  += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+###############
+
+# with app.app_context():
+#     df1 = pd.read_excel(folder_path + "\\Inscription.xlsx", header=1)
+#     df2 = pd.read_excel(folder_path + "\\ADMISSIBLE_MP.xlsx") 
+#     tab1 = df1.to_numpy()
+#     tab2 = df2.to_numpy()
+#     c = get_db().cursor()
+
+#     dic = {}
+#     for row in tab1:
+#         dic[row[pk]] = [row[y], row[z]]
+#     for row in tab2:
+#         dic[row[pk]].append(row[v]) #il faudra peut être changer le pk, car on est dans un tab différent
+#         dic[row[pk]].append(row[w])
+#     req = "INSERT INTO table (col1, col2, col3, col4, col5) VALUES "
+#     i = len(dic)
+#     for pk in dic:
+#             req += f"(\"{pk}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]})\""
+#             i -= 1
+#             if i > 0: req += ", "
+#     req += ";"
+#     c.execute(req)
+#     c.execute("COMMIT;")
+
+###########################################################################################################################
