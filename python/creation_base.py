@@ -216,7 +216,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS Oral_autres
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS Resultat_ecrit
   (
-Numerodinscription integer PRIMARY KEY,
+  Numerodinscription integer PRIMARY KEY,
   rang_admissible integer,
   total double,
   moyenne double,
