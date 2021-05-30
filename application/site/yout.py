@@ -80,9 +80,6 @@ def table():
 def liste():
     return render_template("list.html")
 
-@app.route("/Candidat")
-def Candidat():
-    return "Hello"
 
 @app.route("/ListeEtablissements")
 def listeEtablissements():
@@ -115,6 +112,154 @@ def voie_classe():
     h.execute("PRAGMA table_info(voie_classe)")
     c.execute("select * from voie_classe")
     return render_template("voie_classe.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/Candidat")
+def Candidat():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Candidat)")
+    c.execute("select * from Candidat")
+    return render_template("Candidat.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/admissions")
+def admissions():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(admissions)")
+    c.execute("select * from admissions")
+    return render_template("admissions.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/CMT_Oraux")
+def CMT_Oraux():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(CMT_Oraux)")
+    c.execute("select * from CMT_Oraux")
+    return render_template("CMT_Oraux.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/CMT_Oraux_Spe")
+def CMT_Oraux_Spe():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(CMT_Oraux_Spe)")
+    c.execute("select * from CMT_Oraux_Spe")
+    return render_template("CMT_Oraux_Spe.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/Oraux_CCS")
+def Oraux_CCS():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Oraux_CCS)")
+    c.execute("select * from Oraux_CCS")
+    return render_template("Oraux_CCS.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/Oraux_CCMP")
+def Oraux_CCMP():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Oraux_CCMP)")
+    c.execute("select * from Oraux_CCMP")
+    return render_template("Oraux_CCMP.html", results= c.fetchall(), results2= h.fetchall())
+
+
+@app.route("/Classes_CMT_spe_XXX")
+def Classes_CMT_spe_XXX():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Classes_CMT_spe_XXX)")
+    c.execute("select * from Classes_CMT_spe_XXX")
+    return render_template("Classes_CMT_spe_XXX.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/inscription")
+def inscription():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(inscription)")
+    c.execute("select * from inscription")
+    return render_template("inscription.html", results= c.fetchall(), results2= h.fetchall())
+
+
+@app.route("/pays")
+def pays():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(pays)")
+    c.execute("select * from pays")
+    return render_template("pays.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/nation")
+def nation():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(nation)")
+    c.execute("select * from nation")
+    return render_template("nation.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/concours")
+def concours():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(concours)")
+    c.execute("select * from concours")
+    return render_template("concours.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/bac")
+def bac():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(bac)")
+    c.execute("select * from bac")
+    return render_template("bac.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/serie_bac")
+def serie_bac():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(serie_bac)")
+    c.execute("select * from serie_bac")
+    return render_template("serie_bac.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/csp")
+def csp():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(csp)")
+    c.execute("select * from csp")
+    return render_template("csp.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/Oral_autres")
+def Oral_autres():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Oral_autres)")
+    c.execute("select * from Oral_autres")
+    return render_template("Oral_autres.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/Resultat_ecrit")
+def Resultat_ecrit():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Resultat_ecrit)")
+    c.execute("select * from Resultat_ecrit")
+    return render_template("Resultat_ecrit.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/bonification")
+def bonification():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(bonification)")
+    c.execute("select * from bonification")
+    return render_template("bonification.html", results= c.fetchall(), results2= h.fetchall())
+
+
+@app.route("/ville")
+def ville():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(ville)")
+    c.execute("select * from ville")
+    return render_template("ville.html", results= c.fetchall(), results2= h.fetchall())
+
 
 @app.route("/listeVoeux")
 def liste_voeux():

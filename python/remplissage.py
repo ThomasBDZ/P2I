@@ -381,7 +381,7 @@ print("Table remplie")
 
 print("Remplissage table : ListeEcoles")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "ListeEcoles.xlsx"))
+    df = pd.read_excel(os.path.join(folder_path, "listeEcoles.xlsx"))
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM ListeEcoles;") 

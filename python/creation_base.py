@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect('..\\p2i.db')
+connection = sqlite3.connect('p2i.db')
 cursor = connection.cursor()
 
 
