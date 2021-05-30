@@ -4,10 +4,13 @@ from flask import g
 from flask import Flask, render_template, url_for
 from markupsafe import escape
 import json
+import os
 
 app = Flask(__name__)
 
-DATABASE = '/home/michael/p2i_test/project-grp12/p2i.db'
+folder_path = os.path.join("p2i.db")
+
+DATABASE = folder_path
 
 def get_db():
     db = getattr(g, '_database', None)
