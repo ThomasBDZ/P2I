@@ -8,7 +8,7 @@ import os
 
 app = Flask(__name__)
 
-folder_path = os.path.join("p2i.db")
+folder_path = os.path.join("..", "..", "p2i.db")
 
 DATABASE = folder_path
 
