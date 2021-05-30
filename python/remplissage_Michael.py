@@ -22,7 +22,7 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-database = "p2i.db"
+database = os.path.join("p2i.db")
 app = Flask(__name__)
 
 # listeEtasRe   
