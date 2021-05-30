@@ -8,7 +8,7 @@ import sqlite3
 from flask import Flask, Blueprint, render_template, abort, request, redirect
 from flask import g
 
-folder_path = os.path.join("dow-master/data/public")
+folder_path = os.path.join("dow-master", "data", "public")
 
 
 def get_db():
