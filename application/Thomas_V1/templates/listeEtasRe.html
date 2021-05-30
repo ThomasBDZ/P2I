@@ -2,11 +2,14 @@
 {% block title %}Liste_EtasRe{% endblock %}
 
 {% block content %}
-<table style="width:100%">
-  <tr>
-    <th>Ata_code</th>
-    <th>ata_Libele</th>
-  </tr>
+<table class="table table-striped">
+  <thead>
+    <tr class="table-secondary">
+      {% for h in results2 %}
+         <th scope="col">{{ h[1] }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
   {% for r in results %}
   <tr>
    <td>{{ r[0] }}</td>

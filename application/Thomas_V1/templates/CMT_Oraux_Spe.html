@@ -2,20 +2,22 @@
 {% block title %}CMT_Oraux_spe{% endblock %}
 
 {% block content %}
-<table style="width:100%">
-  <tr>
-    {% for h in results2 %}
-         <th>{{ h[1] }}</th>
-    {% endfor %}
+<table class="table table-striped">
+  <thead>
+    <tr class="table-secondary">
+      {% for h in results2 %}
+         <th scope="col">{{ h[1] }}</th>
+      {% endfor %}
     </tr>
-  {% for r in results %}
-  <tr>
-    {% for x in r %}
-         <td>{{ x }}</td>
-    {% endfor %}
+  </thead>
+  <tbody>
+    {% for r in results %}
+    <tr>
+      {% for x in r %}
+      <td scope="row">{{ x }}</td>
+      {% endfor %}
   </tr>
   {% endfor %}
-  
+  </tbody>
 </table>
-
 {% endblock %}

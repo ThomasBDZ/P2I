@@ -39,9 +39,8 @@ def home():
     c = get_db().cursor()
     db = get_db()
     t = tables(db)
-    c.execute("select * from ListeEtablissements")
 
-    return render_template('base.html', title="mon titre", results=c.fetchall(), tabl= t)
+    return render_template('index.html', title="mon titre", tabl= t)
 
 
 @app.route("/index")

@@ -37,27 +37,49 @@
     <!--A propos-->
     <section class="container-fluid about">
         <div class="container">
-          <h2 id="about"> TIPE</h2>
+          <h2 id="about"> Accès aux tables</h2>
           <hr class="separator">
           <div class="row">
+            
+            {% for x in tabl %}
+                
               <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
                   <h2>Filières</h2>
+                  {% for x in tabl %}
+              
+                  {% if tabl[loop.index],2 is divisibleby %}
                   <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam vitae rerum et a veritatis esse iure reiciendis earum, repellat incidunt libero nesciunt ab labore alias! Impedit eaque numquam repudiandae iure?
+                    <a href="/{{x}}"> {{x}}</a>
                   </p>
+                  {% endif %}
+                  {% endfor %}   
+                
               </article>
               <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
                   <h2>Sujets</h2>
+
+                  {% for x in tabl %}
+              
+                  {% if tabl[loop.index],3 is divisibleby %}
                   <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam vitae rerum et a veritatis esse iure reiciendis earum, repellat incidunt libero nesciunt ab labore alias! Impedit eaque numquam repudiandae iure?
+                    <a href="/{{x}}"> {{x}}</a>
                   </p>
+                  {% endif %}
+                  {% endfor %} 
               </article>
                 <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
                   <h2>Notes</h2>
-                  <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam vitae rerum et a veritatis esse iure reiciendis earum, repellat incidunt libero nesciunt ab labore alias! Impedit eaque numquam repudiandae iure?
-                  </p>
-              </article>
+
+                  {% for x in tabl %}
+              
+                    {% if tabl[loop.index],2 is divisibleby %}
+                    <p>
+                      <a href="/{{x}}"> {{x}}</a>
+                    </p>
+                    {% endif %}
+
+                  {% endfor %} 
+              </article>              
           </div>
         </div>
         
@@ -92,7 +114,7 @@
               <img src="static/img/isma.jpg" alt="isma"/>
             </article>
             <article class="col-md-3 col-lg-3 col-xs-3 col-sm-3 item-folio">
-              <img src="static/img/sigma.png" alt="sigma"/>
+              <img src="static/img/sigma.jpg" alt="sigma"/>
             </article>
           </div>
         </div>
