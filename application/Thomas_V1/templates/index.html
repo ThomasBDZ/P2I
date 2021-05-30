@@ -5,33 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Training V1</title>
+    <!--Import header-->
+    <script src="static/js/Header.js" type="text/javascript" defer></script>
+    <script src="static/js/Footer.js" type="text/javascript" defer></script>
     <!-- Font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet"> 
     <!--Import css-->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
 
     <!-- header-->
-    <header class="container-fluid header">
-        <div class="container">
-            <a href='#' class="logo">SCEI</a>
-            <nav class="menu">
-                <a href='#'> Accueil</a>
-                <a href='#about'>TIPE</a>
-                <a href='#ecole'> Ecoles</a>
-                <a href='#Contact'> Contact</a>
-            </nav>
-        </div>
-    </header>
+    <header-component></header-component>
     <!--end header-->
 
     <!--Bannière-->
     <section class="container-fluid banner">
         <div class="ban">
-            <img src="img/ban.jpg" alt="Bannière du site"/>
+            <img src="static/img/ban.jpg" alt="Bannière du site"/>
         </div>
         <div class="inner-banner">
             <h1>Bienvenue sur le site des concours</h1>
@@ -78,28 +71,28 @@
           <hr class="separator">
           <div class="row">
             <article class="col-md-3 col-lg-3 col-xs-3 col-sm-3 item-folio">
-              <img src="img/agrosup.jpg" alt="agrosup"/>
+              <img src="static/img/agrosup.jpg" alt="agrosup"/>
             </article>
             <article class="col-md-3 col-lg-3 col-xs-3 col-sm-3 item-folio">
-              <img src="img/centrale.png" alt="centrale"/>
+              <img src="static/img/centrale.png" alt="centrale"/>
             </article>
             <article class="col-md-3 col-lg-3 col-xs-3 col-sm-3 item-folio">
-              <img src="img/IMT.webp" alt="imt"/>
+              <img src="static/img/IMT.webp" alt="imt"/>
             </article>
             <article class="col-md-3 col-lg-3 col-xs-3 col-sm-3 item-folio">
-              <img src="img/inp.png" alt="inp"/>
+              <img src="static/img/inp.png" alt="inp"/>
             </article>
             <article class="col-md-3 col-lg-3 col-xs-3 col-sm-3 item-folio">
-              <img src="img/insa.jpg" alt="insa"/>
+              <img src="static/img/insa.jpg" alt="insa"/>
             </article>
             <article class="col-md-3 col-lg-3 col-xs-3 col-sm-3 item-folio">
-              <img src="img/ens.jpg" alt="ens"/>
+              <img src="static/img/ens.jpg" alt="ens"/>
             </article>
             <article class="col-md-3 col-lg-3 col-xs-3 col-sm-3 item-folio">
-              <img src="img/isma.jpg" alt="isma"/>
+              <img src="static/img/isma.jpg" alt="isma"/>
             </article>
             <article class="col-md-3 col-lg-3 col-xs-3 col-sm-3 item-folio">
-              <img src="img/sigma.png" alt="sigma"/>
+              <img src="static/img/sigma.png" alt="sigma"/>
             </article>
           </div>
         </div>
@@ -107,55 +100,9 @@
     <!--end Ecoles-->
 
     <!--Footer / contact-->
-    <footer class="container-fluid footer">
-        <div class="container">
-          <h2 id="Contact">Contactez-moi !</h2>
-          <hr class ="separator">
-          <div class="row">
-              <div class="col-md-6 col-md-offset-3 formulaire">
-                <div class="well well-sm">
-                  <form class="form-horizontal" action="" method="post">
-                  <fieldset>
-            
-                    <!-- Name input-->
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="name">Nom</label>
-                      <div class="col-md-12">
-                        <input id="name" name="name" type="text" placeholder="Ton nom" class="form-control">
-                      </div>
-                    </div>
-            
-                    <!-- Email input-->
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="email">E-mail</label>
-                      <div class="col-md-12">
-                        <input id="email" name="email" type="text" placeholder="Ton email" class="form-control">
-                      </div>
-                    </div>
-            
-                    <!-- Message body -->
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="message">Ton message</label>
-                      <div class="col-md-12">
-                        <textarea class="form-control" id="message" name="message" placeholder="Tu veux quoi ?" rows="5"></textarea>
-                      </div>
-                    </div>
-            
-                    <!-- Form actions -->
-                    <div class="form-group">
-                      <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
-                      </div>
-                    </div>
-                  </fieldset>
-                  </form>
-                </div>
-              </div>
-            </div>
-        </div>
-    </footer>
+    <footer-component></footer-component>
     <!--end Footer / contact-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- On ajoute des lib js hébergées par google-->
-    <script src="js/javascript.js"></script><!-- On importe notre fichier js-->
+    <script src="static/js/javascript.js"></script><!-- On importe notre fichier js-->
 </body>
 </html>

@@ -30,36 +30,7 @@ a,a:hover {
 
 /* header */
 
-.header {
-    background-color: #88BACF;
-    height: 70px;
-    line-height: 70px;
-}
 
-.logo {
-    color:#ffffff;
-    text-transform: uppercase;
-    font-weight:  bold;
-    letter-spacing: 1px;
-    float: left;
-}
-
-.menu {
-    float: right;
-}
-
-.menu a {
-    color: #ffffff;
-    margin-right: 20px;
-}
-
-.menu a:hover {
-    color: #547280;
-}
-
-.container-fluid {
-    padding: 0;
-}
 
 /* bannière */
 .banner {
@@ -136,20 +107,5 @@ a,a:hover {
     height: 100%;
 }
 
-/* contact */
 
-.footer {
-    background-color: #547280;
-
-}
-
-#Contact {
-    color: #ffffff;
-    text-align: center;
-    padding-top: 5%;
-}
-.formulaire {
-    display: block;
-    margin: 0 auto;
-}
 
