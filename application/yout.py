@@ -5,10 +5,11 @@ from flask import Flask, render_template, url_for
 from markupsafe import escape
 import json
 import os
+from jinja2 import Template
 
 app = Flask(__name__)
 
-folder_path = os.path.join("..", "..", "p2i.db")
+folder_path = os.path.join("..", "p2i.db")
 
 DATABASE = folder_path
 
@@ -39,46 +40,12 @@ def home():
     c = get_db().cursor()
     db = get_db()
     t = tables(db)
-    c.execute("select * from ListeEtablissements")
 
-    return render_template('base.html', title="mon titre", results=c.fetchall(), tabl= t)
-
-
-@app.route("/index")
-def index():
-    return render_template("index.html")
+    return render_template('index.html', title="mon titre", tabl= t)
 
 
-@app.route("/admin")
-def admin():
-	return redirect(url_for("user", name="Admin!"))  # Now we when we go to /admin we will redirect to user with the argument "Admin!"
-
-@app.route("/for")
-def forr():
-    return render_template("for.html")
 
 
-@app.route("/inherit")
-def inherit():
-    return render_template("inherit.html")
-
-
-@app.route("/login", methods=["POST", "GET"])
-def login():
-    if request.method == "POST":
-        user = request.form["nm"]
-        return redirect(url_for("user", usr=user))
-    else:
-        return render_template("login.html")
-
-
-@app.route("/table")
-def table():
-    return render_template("table.html")
-
-@app.route("/list")
-def liste():
-    return render_template("list.html")
 
 
 @app.route("/ListeEtablissements")
@@ -281,3 +248,35 @@ def requestt():
 
 if __name__ == "__main__":
 	app.run(debug=True)
+
+
+# @app.route("/admin")
+# def admin():
+# 	return redirect(url_for("user", name="Admin!"))  # Now we when we go to /admin we will redirect to user with the argument "Admin!"
+
+# @app.route("/for")
+# def forr():
+#     return render_template("for.html")
+
+
+# @app.route("/inherit")
+# def inherit():
+#     return render_template("inherit.html")
+
+
+# @app.route("/login", methods=["POST", "GET"])
+# def login():
+#     if request.method == "POST":
+#         user = request.form["nm"]
+#         return redirect(url_for("user", usr=user))
+#     else:
+#         return render_template("login.html")
+
+
+# @app.route("/table")
+# def table():
+#     return render_template("table.html")
+
+# @app.route("/list")
+# def liste():
+#     return render_template("list.html")
