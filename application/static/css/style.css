@@ -20,6 +20,14 @@ a,a:hover {
     text-decoration: none;
 }
 
+canvas {
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
 .separator {
     height: 3px;
     width: 5%;

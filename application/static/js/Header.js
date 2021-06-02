@@ -47,7 +47,7 @@ class Header extends HTMLElement {
             <div class="container">
                 <a href='/' class="logo"><img src="static/img/logo_tn.png" alt="logo"/></a>
                 <nav class="menu">
-                    <a href='#'>Stats</a>
+                    <a href='charts'>Statistiques</a>
                     <a href='#about'>TIPE</a>
                     <a href='ListeEcoles'>Ecoles</a>
                     <a href='#contact'>Contact</a>

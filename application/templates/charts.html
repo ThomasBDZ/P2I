@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Site web</title>
+    <script src="static/js/Header.js" type="text/javascript" defer></script>
+    <script src="static/js/Footer.js" type="text/javascript" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+    
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet"> 
+    <!--Import css-->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+    <header-component></header-component>
+    {% block content %}
+        {% for x in tabl %}
+         <p><a href="/{{x}}"> {{x}}</a></p>
+        {% endfor %}    
+    {% endblock %}
+
+
+    <div class="container">
+        <h1 id = "about">Statistiques des concours</h1>
+        <hr class="separator">
+        <br><br><br>
+    </div>
+
+    <div>
+        <canvas id="chart1" width="400" height="400"></canvas>
+    </div>
+
+    
+    
+
+
+    <br><br><br>
+    <footer-component id = "contact"></footer-component>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- On ajoute des lib js hébergées par google-->
+    <script src="static/js/javascript.js"></script><!-- On importe notre fichier js-->
+    <script src="static/js/charts/chart1.js"></script>
+</body>
+</html>
