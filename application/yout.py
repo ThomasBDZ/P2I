@@ -54,7 +54,7 @@ def listeEtablissements():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(ListeEtablissements)")
     c.execute("select * from ListeEtablissements")
-    return render_template("ListeEtablissements.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/ListeEtablissements.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/ListeEcoles")
 def listeEcole():
@@ -62,7 +62,7 @@ def listeEcole():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(ListeEcoles)")
     c.execute("select * from ListeEcoles")
-    return render_template("ListeEcoles.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/ListeEcoles.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/listeEtasRe")
 def listeEtasRe():
@@ -70,7 +70,7 @@ def listeEtasRe():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(listeEtasRe)")
     c.execute("select * from listeEtasRe")
-    return render_template("listeEtasRe.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/listeEtasRe.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/voie_classe")
 def voie_classe():
@@ -78,7 +78,7 @@ def voie_classe():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(voie_classe)")
     c.execute("select * from voie_classe")
-    return render_template("voie_classe.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/voie_classe.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/Candidat")
 def Candidat():
@@ -86,7 +86,7 @@ def Candidat():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(Candidat)")
     c.execute("select * from Candidat")
-    return render_template("Candidat.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/Candidat.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/admissions")
 def admissions():
@@ -94,7 +94,7 @@ def admissions():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(admissions)")
     c.execute("select * from admissions")
-    return render_template("admissions.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/admissions.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/CMT_Oraux")
 def CMT_Oraux():
@@ -102,7 +102,7 @@ def CMT_Oraux():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(CMT_Oraux)")
     c.execute("select * from CMT_Oraux")
-    return render_template("CMT_Oraux.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/CMT_Oraux.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/CMT_Oraux_Spe")
 def CMT_Oraux_Spe():
@@ -110,7 +110,7 @@ def CMT_Oraux_Spe():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(CMT_Oraux_Spe)")
     c.execute("select * from CMT_Oraux_Spe")
-    return render_template("CMT_Oraux_Spe.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/CMT_Oraux_Spe.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/Oraux_CCS")
 def Oraux_CCS():
@@ -118,7 +118,7 @@ def Oraux_CCS():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(Oraux_CCS)")
     c.execute("select * from Oraux_CCS")
-    return render_template("Oraux_CCS.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/Oraux_CCS.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/Oraux_CCMP")
 def Oraux_CCMP():
@@ -126,7 +126,7 @@ def Oraux_CCMP():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(Oraux_CCMP)")
     c.execute("select * from Oraux_CCMP")
-    return render_template("Oraux_CCMP.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/Oraux_CCMP.html", results= c.fetchall(), results2= h.fetchall())
 
 
 @app.route("/Classes_CMT_spe_XXX")
@@ -135,7 +135,7 @@ def Classes_CMT_spe_XXX():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(Classes_CMT_spe_XXX)")
     c.execute("select * from Classes_CMT_spe_XXX")
-    return render_template("Classes_CMT_spe_XXX.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/Classes_CMT_spe_XXX.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/inscription")
 def inscription():
@@ -143,7 +143,7 @@ def inscription():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(inscription)")
     c.execute("select * from inscription")
-    return render_template("inscription.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/inscription.html", results= c.fetchall(), results2= h.fetchall())
 
 
 @app.route("/pays")
@@ -152,7 +152,7 @@ def pays():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(pays)")
     c.execute("select * from pays")
-    return render_template("pays.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/pays.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/nation")
 def nation():
@@ -160,7 +160,7 @@ def nation():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(nation)")
     c.execute("select * from nation")
-    return render_template("nation.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/nation.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/concours")
 def concours():
@@ -168,7 +168,7 @@ def concours():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(concours)")
     c.execute("select * from concours")
-    return render_template("concours.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/concours.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/bac")
 def bac():
@@ -176,7 +176,7 @@ def bac():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(bac)")
     c.execute("select * from bac")
-    return render_template("bac.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/bac.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/serie_bac")
 def serie_bac():
@@ -184,7 +184,7 @@ def serie_bac():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(serie_bac)")
     c.execute("select * from serie_bac")
-    return render_template("serie_bac.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/serie_bac.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/csp")
 def csp():
@@ -192,7 +192,7 @@ def csp():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(csp)")
     c.execute("select * from csp")
-    return render_template("csp.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/csp.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/Oral_autres")
 def Oral_autres():
@@ -200,7 +200,7 @@ def Oral_autres():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(Oral_autres)")
     c.execute("select * from Oral_autres")
-    return render_template("Oral_autres.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/Oral_autres.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/Resultat_ecrit")
 def Resultat_ecrit():
@@ -208,7 +208,7 @@ def Resultat_ecrit():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(Resultat_ecrit)")
     c.execute("select * from Resultat_ecrit")
-    return render_template("Resultat_ecrit.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/Resultat_ecrit.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/bonification")
 def bonification():
@@ -216,7 +216,7 @@ def bonification():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(bonification)")
     c.execute("select * from bonification")
-    return render_template("bonification.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/bonification.html", results= c.fetchall(), results2= h.fetchall())
 
 
 @app.route("/ville")
@@ -225,7 +225,7 @@ def ville():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(ville)")
     c.execute("select * from ville")
-    return render_template("ville.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/ville.html", results= c.fetchall(), results2= h.fetchall())
 
 
 @app.route("/listeVoeux")
@@ -234,7 +234,7 @@ def liste_voeux():
     h = get_db().cursor()
     h.execute("PRAGMA table_info(listeVoeux)")
     c.execute("select * from listeVoeux")
-    return render_template("liste_voeux.html", results= c.fetchall(), results2= h.fetchall())
+    return render_template("/tables/liste_voeux.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/recherche", methods=["POST", "GET"])
 def requestt():
