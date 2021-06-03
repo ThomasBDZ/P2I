@@ -290,7 +290,7 @@ def charts():
         sum += x
     
     for i in range(10):
-        chartInfo2["data"][i] = chartInfo2["data"][i]/sum
+        chartInfo2["data"][i] = round(chartInfo2["data"][i]/sum * 100, 1)
 
 
     return render_template("charts.html", chart1 = chartInfo1, chart2 = chartInfo2, tab=tab)

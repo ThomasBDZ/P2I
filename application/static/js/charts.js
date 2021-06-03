@@ -31,8 +31,13 @@ function charts(chartInfo1, chartInfo2) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Nombre de candidats par filière'
-                    
+                    text: 'Nombre de candidats par filière',
+                    font: {
+                        size: 25
+                    }
+                },
+                legend: {
+                    display: false
                 }
             }
         }
@@ -72,8 +77,13 @@ function charts(chartInfo1, chartInfo2) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Professions des parents'
-                    
+                    text: 'Professions des parents',
+                    font: {
+                        size: 25
+                    } 
+                },
+                legend: {
+                    display: false
                 }
             }
         }
