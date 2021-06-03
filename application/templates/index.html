@@ -44,10 +44,10 @@
             
                 
               <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                  <h2>Filières</h2>
+                  <h2></h2>
                   {% for x in tabl %}
               
-                  {% if loop.index %2 == 0 %}
+                  {% if loop.index %3 == 0 %}
                   <p>
                     <a href="/{{x}}"> {{x}}</a>
                   </p>
@@ -56,11 +56,11 @@
                 
               </article>
               <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                  <h2>Sujets</h2>
+                  <h2></h2>
 
                   {% for x in tabl %}
               
-                  {% if loop.index %3 == 0 %}
+                  {% if loop.index %3 == 1 %}
                   <p>
                     <a href="/{{x}}"> {{x}}</a>
                   </p>
@@ -68,11 +68,11 @@
                   {% endfor %} 
               </article>
                 <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                  <h2>Notes</h2>
+                  <h2></h2>
 
                   {% for x in tabl %}
               
-                  {% if loop.index %1 == 0 %}
+                  {% if loop.index %3 == 2 %}
                     <p>
                       <a href="/{{x}}"> {{x}}</a>
                     </p>
