@@ -15,7 +15,7 @@
     <link href="static/css/style.css" rel="stylesheet">
 
 </head>
-<body onload = "charts({{chart1}}, {{chart2}})">
+<body onload = "charts({{chart1}}, {{chart2}}, {{chart3}}, {{chart4}})">
     <header-component></header-component>
     {% block content %}
         {% for x in tabl %}
@@ -24,23 +24,28 @@
     {% endblock %}
 
     <div class="container">
-        <h1 id = "about">Statistiques des concours</h1>
+        <h1 id = "about">Statistiques sur les étudiants</h1>
         <hr class="separator">
         <br><br><br>
     </div>
 
     <canvas id="chart1" width="400" height="400"></canvas>
+    
+    <br><br><br>
+    <hr class="separator">
+    <br><br><br>
+
+    <canvas id="chart2" width="400" height="400"></canvas>
 
     <br><br><br>
     <hr class="separator">
     <br><br><br>
 
-    <div>
-        <canvas id="chart2" width="400" height="400"></canvas>
+    <div class = "row">
+        <canvas id="chart3" width="400" height="400"></canvas>
+        <canvas id="chart4" width="400" height="400"></canvas>
     </div>
 
-    
-    
 
 
     <br><br><br>
