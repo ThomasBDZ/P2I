@@ -44,7 +44,13 @@ def home():
     return render_template('index.html', title="mon titre", tabl= t)
 
 
+@app.route("/parcours")
+def parcours():
+    c = get_db().cursor()
+    db = get_db()
+    t = tables(db)
 
+    return render_template('/tables/parcours.html', title="mon titre", tabl= t)
 
 
 
