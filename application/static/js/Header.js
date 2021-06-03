@@ -51,6 +51,7 @@ class Header extends HTMLElement {
                     <a href='/parcours'>Parcours_des_données</a>
                     <a href='#about'>TIPE</a>
                     <a href='ListeEcoleRequete'>Liste_Ecoles_Requete</a>
+                    <a href='recherche'>Requetes_SQL</a>
                     <a href='#contact'>Contact</a>
                 </nav>
             </div>
