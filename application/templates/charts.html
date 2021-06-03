@@ -15,7 +15,7 @@
     <link href="static/css/style.css" rel="stylesheet">
 
 </head>
-<body onload = "charts({{chart1}}, 0)">
+<body onload = "charts({{chart1}}, {{chart2}})">
     <header-component></header-component>
     {% block content %}
         {% for x in tabl %}
@@ -29,8 +29,14 @@
         <br><br><br>
     </div>
 
+    <canvas id="chart1" width="400" height="400"></canvas>
+
+    <br><br><br>
+    <hr class="separator">
+    <br><br><br>
+
     <div>
-        <canvas id="chart1" width="400" height="400"></canvas>
+        <canvas id="chart2" width="400" height="400"></canvas>
     </div>
 
     
@@ -40,7 +46,7 @@
     <br><br><br>
     <footer-component id = "contact"></footer-component>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- On ajoute des lib js hébergées par google-->
-    <script src="static/js/javascript.js"></script><!-- On importe notre fichier js-->
+    <script src="static/js/javascript.js"></script> <!-- On importe notre fichier js-->
     <script src="static/js/charts.js"></script>
 </body>
 </html>

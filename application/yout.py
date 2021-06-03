@@ -248,8 +248,11 @@ def requestt():
 
 @app.route("/charts")
 def charts():
+
+    # Nombre de candidats par filière
     c = get_db().cursor()
     tab = c.execute("SELECT (voie_classe.voie) FROM Candidat INNER JOIN voie_classe WHERE Candidat.classe = voie_classe.classe").fetchall()
+    
     chartInfo1 = {}
     chartInfo1["label"] = []
     index = {}
@@ -262,10 +265,35 @@ def charts():
     for x in tab:
         chartInfo1["data"][index[x[0]]] += 1
 
+    # proffesions des pères
     c = get_db().cursor()
-    c.execute()
+    tab = c.execute("SELECT (csp.cod_csp) FROM Candidat INNER JOIN csp WHERE Candidat.csp_pere = csp.cod_csp").fetchall()
 
-    return render_template("charts.html", chart1 = chartInfo1, tab=chartInfo1)
+    chartInfo2 = {}
+    chartInfo2["label"] = ["agriculteurs", "artisans et commerçants", "cadres", "enseignement et santé", "fonction publique", "autres", "ouvriers", "retraités", "sans travail", "non renseigné"]
+    index = {}
+    for i in range(10):
+        index[i] = chartInfo2["label"][i]
+    chartInfo2["data"] = [0 for i in range(len(chartInfo2["label"]))]
+
+    for x in tab:
+        chartInfo2["data"][x[0] % 10] += 1
+    
+    c = get_db().cursor()
+    tab = c.execute("SELECT (csp.cod_csp) FROM Candidat INNER JOIN csp WHERE Candidat.csp_mere = csp.cod_csp").fetchall()
+
+    for x in tab:
+        chartInfo2["data"][x[0] % 10] += 1
+
+    sum = 0
+    for x in chartInfo2["data"]:
+        sum += x
+    
+    for i in range(10):
+        chartInfo2["data"][i] = chartInfo2["data"][i]/sum
+
+
+    return render_template("charts.html", chart1 = chartInfo1, chart2 = chartInfo2, tab=tab)
 
 
 
