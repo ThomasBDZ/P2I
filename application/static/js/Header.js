@@ -50,7 +50,7 @@ class Header extends HTMLElement {
                     <a href='charts'>Statistiques</a>
                     <a href='/parcours'>Parcours_des_données</a>
                     <a href='#about'>TIPE</a>
-                    <a href='ListeEcoles'>Ecoles</a>
+                    <a href='ListeEcoleRequete'>Liste_Ecoles_Requete</a>
                     <a href='#contact'>Contact</a>
                 </nav>
             </div>

@@ -53,6 +53,11 @@ def parcours():
     return render_template('/tables/parcours.html', title="mon titre", tabl= t)
 
 
+@app.route("/ListeEcoleRequete")
+def ListeEcolesRequete():
+    c = get_db().cursor()
+    c.execute("select Nom_ecole from ListeEcoles order by Nom_ecole ")
+    return render_template("/tables/ListeEcoleRequete.html", results= c.fetchall())
 
 @app.route("/ListeEtablissements")
 def listeEtablissements():

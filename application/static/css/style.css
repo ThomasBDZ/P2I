@@ -28,6 +28,11 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    text-align: center;
+    padding-top: 5%;
+}
+
 .separator {
     height: 3px;
     width: 5%;
@@ -102,6 +107,21 @@ h1 {
 }
 
 #Listeecole {
+    text-align: center;
+    padding-top: 5%;
+}
+
+#Elèves {
+    text-align: center;
+    padding-top: 5%;
+}
+
+#Elèves_Titre {
+    text-align: center;
+    padding-top: 5%;
+}
+
+.LO {
     text-align: center;
     padding-top: 5%;
 }

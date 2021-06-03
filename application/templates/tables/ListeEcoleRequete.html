@@ -17,49 +17,21 @@
 </head>
 <section class="container-fluid about">
     <div class="container">
-      <h2 id="about"> Accès aux tables</h2>
+      <h2 id="about"> Accès aux Ecoles</h2>
       <hr class="separator">
       <div class="row">
         
-
             
           <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
               <h2></h2>
-              {% for x in tabl %}
-          
-              {% if loop.index %3 == 0 %}
+              {% for x in results %}
               <p>
                 <a href="/{{x}}"> {{x}}</a>
               </p>
-              {% endif %}
               {% endfor %}   
             
           </article>
-          <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-              <h2></h2>
-
-              {% for x in tabl %}
           
-              {% if loop.index %3 == 1 %}
-              <p>
-                <a href="/{{x}}"> {{x}}</a>
-              </p>
-              {% endif %}
-              {% endfor %} 
-          </article>
-            <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-              <h2></h2>
-
-              {% for x in tabl %}
-          
-              {% if loop.index %3 == 2 %}
-                <p>
-                  <a href="/{{x}}"> {{x}}</a>
-                </p>
-                {% endif %}
-
-              {% endfor %} 
-          </article>              
       </div>
     </div>
     
