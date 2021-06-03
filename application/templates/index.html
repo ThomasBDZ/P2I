@@ -10,10 +10,12 @@
     <script src="static/js/Footer.js" type="text/javascript" defer></script>
     <!-- Font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet"> 
+    
     <!--Import css-->
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/style.css" rel="stylesheet">
+    <link href="static/css/font-awesome/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -68,34 +70,39 @@
           </div>
         </div>
     </section>
+
     <!--end Ecoles-->
   <!--Contacts-->
   <section class="container-fluid mail">
     <div class="container">
       <h2 id="Elèves_Titre">Elèves</h2>
       <hr class="separator">
-      <div class="row LO">
-      <h2 id="Elèves">  <b> Michael Enescu :</b> Michael.Enescu@Telecomnancy.eu
+      <h2 class="Elèves"> 
+         <b> Michael Enescu : </b><a href ="mailto:Michael.Enescu@telecomnancy.eu">Michael.Enescu@telecomnancy.eu</a>
       </h2>
       <div class="row"></div>
-      <h2 id="Elèves"> <b> Emilien Petiteau:</b> Emilien.Petiteau@telecomnancy.eu
+      <h2 class="Elèves">
+         <b> Emilien Petiteau : </b><a href ="mailto:Emilien.Petiteau@telecomnancy.eu">Emilien.Petiteau@telecomnancy.eu</a>
       </h2>
       <div class="row"></div>
-      <h2 id="Elèves"> <b> Thomas Baladuz: </b>  Thomas.Baladuz@Telecomnancy.eu
-      </h2>
+      <h2 class="Elèves"> 
+        <b> Thomas Balduz: </b><a href ="mailto:Thomas.Balduz@telecomnancy.eu">Thomas.Balduz@telecomnancy.eu</a>
+      </h2>  
       </div>
        <h2 id="Elèves_Titre">Encadrants</h2>
       <hr class="separator">
-      <div class="row">
-      <h2 id="Elèves">  <b> Sebastien Da Silva:</b> sebastien.dasilva@telecomnancy.eu
+      <div class="row prof">
+      <h2 class="Elèves">  
+        <b> Sebastien Da Silva : </b> <a href ="mailto:sebastien.dasilva@telecomnancy.eu">sebastien.dasilva@telecomnancy.eu</a>
       </h2>
-      <h2 id="Elèves">  <b> Gerald Oster :</b> gerald.oster@loria.fr
+      <h2 class="Elèves">  
+        <b> Gerald Oster : </b> <a href ="mailto:gerald.oster@telecomnancy.eu">gerald.oster@telecomnancy.eu</a>
       </h2>
     </div>
   </div></section>
   <!--end Contacts-->
     <!--Footer / contact-->
-    <footer-component  id = "contact"></footer-component>
+    <footer-component></footer-component>
     <!--end Footer / contact-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- On ajoute des lib js hébergées par google-->
     <script src="static/js/javascript.js"></script><!-- On importe notre fichier js-->
