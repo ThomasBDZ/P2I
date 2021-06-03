@@ -15,7 +15,7 @@
     <link href="static/css/style.css" rel="stylesheet">
 
 </head>
-<body onload="charts(0, 0)">
+<body onload="charts({{chart1}}, 0)">
     <header-component></header-component>
     {% block content %}
         {% for x in tabl %}
@@ -42,6 +42,6 @@
     <footer-component id = "contact"></footer-component>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- On ajoute des lib js hébergées par google-->
     <script src="static/js/javascript.js"></script><!-- On importe notre fichier js-->
-    <script src="static/js/charts/chart1.js"></script>
+    <script src="static/js/charts.js"></script>
 </body>
 </html>

@@ -246,6 +246,15 @@ def requestt():
     else:
         return render_template("recherche.html")
 
+@app.route("/charts")
+def charts():
+    chartInfo1 = {}
+    chartInfo1["label"] = ["MP", "PC", "PSI", "PT", "TSI"]
+    chartInfo1["data"] = [1, 2, 3, 4, 5]
+    return render_template("charts.html", chart1 = chartInfo1)
+
+
+
 if __name__ == "__main__":
 	app.run(debug=True)
 
