@@ -1,11 +1,11 @@
 function charts(chartInfo1, chartInfo2) {
-    const ctx = document.getElementById('chart1').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
+    const ctx1 = document.getElementById('chart1').getContext('2d');
+    var myChart = new Chart(ctx1, {
+        type: 'pie',
         data: {
             labels: chartInfo1["label"],
             datasets: [{
-                label: '# of Votes',
+                label: 'Nombre de candidats par filière',
                 data: chartInfo1["data"],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -27,7 +27,6 @@ function charts(chartInfo1, chartInfo2) {
             }]
         },
         options: {
-            align: 'center',
             responsive: false,
             maintainAspectRatio: false,
         }

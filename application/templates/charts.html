@@ -15,14 +15,13 @@
     <link href="static/css/style.css" rel="stylesheet">
 
 </head>
-<body onload="charts({{chart1}}, 0)">
+<body onload = "charts({{chart1}}, 0)">
     <header-component></header-component>
     {% block content %}
         {% for x in tabl %}
          <p><a href="/{{x}}"> {{x}}</a></p>
         {% endfor %}    
     {% endblock %}
-
 
     <div class="container">
         <h1 id = "about">Statistiques des concours</h1>

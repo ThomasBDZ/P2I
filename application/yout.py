@@ -248,10 +248,24 @@ def requestt():
 
 @app.route("/charts")
 def charts():
+    c = get_db().cursor()
+    tab = c.execute("SELECT (voie_classe.voie) FROM Candidat INNER JOIN voie_classe WHERE Candidat.classe = voie_classe.classe").fetchall()
     chartInfo1 = {}
-    chartInfo1["label"] = ["MP", "PC", "PSI", "PT", "TSI"]
-    chartInfo1["data"] = [1, 2, 3, 4, 5]
-    return render_template("charts.html", chart1 = chartInfo1)
+    chartInfo1["label"] = []
+    index = {}
+    for x in tab:
+        if (x[0] not in chartInfo1["label"]):
+            chartInfo1["label"].append(x[0])
+            index[x[0]] = len(chartInfo1["label"]) - 1
+    chartInfo1["data"] = [0 for i in range(len(chartInfo1["label"]))]
+
+    for x in tab:
+        chartInfo1["data"][index[x[0]]] += 1
+
+    c = get_db().cursor()
+    c.execute()
+
+    return render_template("charts.html", chart1 = chartInfo1, tab=chartInfo1)
 
 
 
