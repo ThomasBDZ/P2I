@@ -259,10 +259,89 @@ def requestt():
 
 @app.route("/charts")
 def charts():
+
+    ################ Nombre de candidats par filière ################
+    c = get_db().cursor()
+    tab = c.execute("SELECT (voie_classe.voie) FROM Candidat INNER JOIN voie_classe WHERE Candidat.classe = voie_classe.classe").fetchall()
+    
     chartInfo1 = {}
-    chartInfo1["label"] = ["MP", "PC", "PSI", "PT", "TSI"]
-    chartInfo1["data"] = [1, 2, 3, 4, 5]
-    return render_template("charts.html", chart1 = chartInfo1)
+    chartInfo1["label"] = []
+    index = {}
+    for x in tab:
+        if (x[0] not in chartInfo1["label"]):
+            chartInfo1["label"].append(x[0])
+            index[x[0]] = len(chartInfo1["label"]) - 1
+    chartInfo1["data"] = [0 for i in range(len(chartInfo1["label"]))]
+
+    for x in tab:
+        chartInfo1["data"][index[x[0]]] += 1
+
+    ################ profesions des parents ################
+    c = get_db().cursor()
+    tab = c.execute("SELECT (csp.cod_csp) FROM Candidat INNER JOIN csp WHERE Candidat.csp_pere = csp.cod_csp").fetchall()
+
+    chartInfo2 = {}
+    chartInfo2["label"] = ["agriculteurs", "artisans et commerçants", "cadres", "enseignement et santé", "fonction publique", "autres", "ouvriers", "retraités", "sans travail", "non renseigné"]
+    index = {}
+    for i in range(10):
+        index[i] = chartInfo2["label"][i]
+    chartInfo2["data"] = [0 for i in range(len(chartInfo2["label"]))]
+    # pères
+    for x in tab:
+        chartInfo2["data"][x[0] % 10] += 1
+    
+    c = get_db().cursor()
+    tab = c.execute("SELECT (csp.cod_csp) FROM Candidat INNER JOIN csp WHERE Candidat.csp_mere = csp.cod_csp").fetchall()
+    # mères
+    for x in tab:
+        chartInfo2["data"][x[0] % 10] += 1
+
+    # conversion en pourcentages
+    sum = 0
+    for x in chartInfo2["data"]:
+        sum += x
+    
+    for i in range(10):
+        chartInfo2["data"][i] = round(chartInfo2["data"][i]/sum * 100, 1)
+
+    ################ nombre d'admissibles par pays ################
+
+    c = get_db().cursor()
+    tab = c.execute('SELECT pays.libele_pays FROM Candidat JOIN admissions ON Candidat.Can_cod = admissions.Can_cod JOIN pays ON pays.code_pays = Candidat.code_pays_nationalite WHERE admissions.admissible != "None";').fetchall()
+    chartInfo3 = {}
+    chartInfo3["label"] = []
+    index = {}
+    for x in tab:
+        if (x[0] not in chartInfo3["label"]):
+            chartInfo3["label"].append(x[0])
+            index[x[0]] = len(chartInfo3["label"]) - 1
+    chartInfo3["data"] = [0 for i in range(len(chartInfo3["label"]))]
+
+    for x in tab:
+        chartInfo3["data"][index[x[0]]] += 1
+
+    ################ nombre d'admis par pays ################
+
+    c = get_db().cursor()
+    tab = c.execute('SELECT pays.libele_pays FROM Candidat JOIN admissions ON Candidat.Can_cod = admissions.Can_cod JOIN pays ON pays.code_pays = Candidat.code_pays_nationalite WHERE admissions.admis != "None";').fetchall()
+    
+    chartInfo4 = {}
+    chartInfo4["label"] = []
+    index = {}
+    for x in tab:
+        if (x[0] not in chartInfo4["label"]):
+            chartInfo4["label"].append(x[0])
+            index[x[0]] = len(chartInfo4["label"]) - 1
+    chartInfo4["data"] = [0 for i in range(len(chartInfo4["label"]))]
+
+    for x in tab:
+        chartInfo4["data"][index[x[0]]] += 1
+    
+    
+
+    return render_template("charts.html", chart1 = chartInfo1, chart2 = chartInfo2, chart3 = chartInfo3, chart4 = chartInfo4)
+
+
 
 
 
