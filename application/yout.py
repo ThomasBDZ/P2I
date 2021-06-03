@@ -257,6 +257,16 @@ def requestt():
     else:
         return render_template("/recherche.html")
 
+@app.route("/rechercheCandidat", methods=["POST", "GET"])
+def reche_candidat():
+    if request.method == "POST":
+        c = get_db().cursor()
+        requ= request.form["Req"]
+        c.execute(requ)
+        return render_template("/tables/resultat_recherche.html", results= c.fetchall())
+    else:
+        return render_template("/recherche.html")
+
 @app.route("/charts")
 def charts():
     chartInfo1 = {}

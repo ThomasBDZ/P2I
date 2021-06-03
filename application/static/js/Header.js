@@ -42,6 +42,19 @@ class Header extends HTMLElement {
         .container-fluid {
             padding: 0;
         }
+
+        .menu input[type=text] {
+            float: right;
+            padding: 6px;
+            border: none;
+            margin-top: 24px;
+            margin-right: 14px;
+            font-size: 17px;
+            height: 30px;
+            line-height: 50px;
+          }
+          
+
         </style>
         <header class="container-fluid header" id="myHeader">
             <div class="container">
@@ -53,6 +66,7 @@ class Header extends HTMLElement {
                     <a href='ListeEcoleRequete'>Liste Ecoles Requete</a>
                     <a href='recherche'>Requetes_SQL</a>
                     <a href='#contact'>Contact</a>
+                    <input type="text" placeholder="Recherche par Identifiant.." size=12>
                 </nav>
             </div>
         </header>
