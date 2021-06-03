@@ -242,9 +242,9 @@ def requestt():
         c = get_db().cursor()
         requ= request.form["Req"]
         c.execute(requ)
-        return render_template("resultat_recherche.html", results= c.fetchall())
+        return render_template("/tables/resultat_recherche.html", results= c.fetchall())
     else:
-        return render_template("recherche.html")
+        return render_template("/recherche.html")
 
 @app.route("/charts")
 def charts():
