@@ -71,12 +71,12 @@ h2 {
 }
 
 .inner-banner h1 {
-    color: #035B8C;
-    /* text-shadow: 1px 1px 10px #000000; */
+    color: #95c1d8;
+    text-shadow: 1px 1px 10px #000000;
 }
 
 .inner-banner .btn-custom {
-    background-color: #88BACF;
+    background-color: #699fb6;
     color: #ffffff;
 }
 
