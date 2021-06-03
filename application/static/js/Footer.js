@@ -35,13 +35,10 @@ footerTemplate.innerHTML = `
     .social-row li a {
       margin: 0 15px;
     }
+
   </style>
   <footer>
-    <ul>
-      <li><a href="about.html">About</a></li>
-      <li><a href="work.html">Work</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+    <a class = "note" href = "https://flask.palletsprojects.com/en/2.0.x/">powered by Flask</a>
     <ul class="social-row">
       <li><a href="https://github.com/my-github-profile"><i class="fab fa-github"></i></a></li>
       <li><a href="https://twitter.com/my-twitter-profile"><i class="fab fa-twitter"></i></a></li>
