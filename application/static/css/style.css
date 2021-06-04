@@ -31,6 +31,7 @@ h1 {
 h2 {
     text-align: center;
     padding-top: 5%;
+    color : #023059
 }
 
 .separator {
@@ -64,19 +65,19 @@ h2 {
 
 .inner-banner {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 0;
     width: 100%;
     text-align: center;
 }
 
 .inner-banner h1 {
-    color: #035B8C;
-    /* text-shadow: 1px 1px 10px #000000; */
+    color: #95c1d8;
+    text-shadow: 1px 1px 10px #000000;
 }
 
 .inner-banner .btn-custom {
-    background-color: #88BACF;
+    background-color: #699fb6;
     color: #ffffff;
 }
 
@@ -111,9 +112,22 @@ h2 {
     padding-top: 5%;
 }
 
-#Elèves {
+
+/* CONTACT */
+
+.mail .Elèves {
+    width: 100%;
     text-align: center;
     padding-top: 5%;
+}
+
+.mail .Elèves a{
+    text-decoration: none;
+    color:#023059;
+}
+
+.mail .Elèves a:hover{
+    color: #547280;
 }
 
 #Elèves_Titre {
@@ -121,9 +135,8 @@ h2 {
     padding-top: 5%;
 }
 
-.LO {
-    text-align: center;
-    padding-top: 5%;
+.prof {
+    padding-bottom: 5%;
 }
 
 .ecole .item-folio {
@@ -133,6 +146,8 @@ h2 {
 .ecole .item-folio img {
     width: 100%;
     height: 100%;
+    padding-top : 3%;
+    padding-bottom : 3%;
 }
 
 

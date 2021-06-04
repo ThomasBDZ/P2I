@@ -1,6 +1,7 @@
 const footerTemplate = document.createElement('template');
 footerTemplate.innerHTML = `
   <style>
+  
     footer {
       height: 60px;
       padding: 0 10px;
@@ -9,7 +10,7 @@ footerTemplate.innerHTML = `
       flex-shrink: 0;
       justify-content: space-between;
       align-items: center;
-      background-color: #dfdfe2;
+      background-color: #eeeeee;
     }
     
     ul li {
@@ -38,9 +39,10 @@ footerTemplate.innerHTML = `
 
   </style>
   <footer>
-    <a class = "note" href = "https://flask.palletsprojects.com/en/2.0.x/">powered by Flask</a>
+    <a class = "note" href = "https://flask.palletsprojects.com/en/2.0.x/">Powered by Flask</a>
     <ul class="social-row">
-      <li><a href="https://github.com/my-github-profile"><i class="fab fa-github"></i></a></li>
+      <li><a href="https://github.com/my-github-profile"><i class="fab fa-github"></i>
+      </a></li>
       <li><a href="https://twitter.com/my-twitter-profile"><i class="fab fa-twitter"></i></a></li>
       <li><a href="https://www.linkedin.com/in/my-linkedin-profile"><i class="fab fa-linkedin"></i></a></li>
     </ul>
