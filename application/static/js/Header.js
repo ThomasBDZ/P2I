@@ -12,7 +12,6 @@ class Header extends HTMLElement {
             line-height: 70px;
         }
         
-        
 
         .logo img{
             
@@ -64,11 +63,10 @@ class Header extends HTMLElement {
                 <nav class="menu">
                     <a href='charts'>Statistiques</a>
                     <a href='/parcours'>Parcours des données</a>
-                    <a href='#about'>TIPE</a>
                     <a href='ListeEcoleRequete'>Liste Ecoles Requete</a>
                     <a href='recherche'>Requetes_SQL</a>
                     <a href='#contact'>Contact</a>
-                    <input type="text" placeholder="Recherche par Identifiant.." size=12>
+                    <input id="searchbar" onkeyup="search()" type="text" placeholder="Recherche par Identifiant.." size=12>
                 </nav>
             </div>
         </header>
@@ -79,4 +77,3 @@ class Header extends HTMLElement {
 
 customElements.define('header-component', Header);
   
-
