@@ -3,7 +3,6 @@ footerTemplate.innerHTML = `
   <style>
   
     footer {
-      height: 60px;
       padding: 0 10px;
       list-style: none;
       display: flex;
@@ -11,6 +10,8 @@ footerTemplate.innerHTML = `
       justify-content: space-between;
       align-items: center;
       background-color: #eeeeee;
+      position: relative; 
+      height: 60px
     }
     
     ul li {
