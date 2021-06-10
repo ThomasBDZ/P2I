@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concours Mines-Telecom</title>
+    <!--Import header-->
+    <script src="static/js/Header.js" type="text/javascript" defer></script>
+    <script src="static/js/Footer.js" type="text/javascript" defer></script>
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet"> 
+    <!--Import css-->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+
+    <!-- header-->
+    <header-component></header-component>
+    <!--end header-->
+
+<section class="container-fluid about">
+    <div class="container">
+      <h2 id="about"> Accès aux tables</h2>
+      <hr class="separator">
+      <div class="row">
+        
+
+            
+          <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
+              <h2></h2>
+              {% for x in tabl %}
+          
+              {% if loop.index %3 == 0 %}
+              <p>
+                <a href="/{{x}}"> {{x}}</a>
+              </p>
+              {% endif %}
+              {% endfor %}   
+            
+          </article>
+          <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
+              <h2></h2>
+
+              {% for x in tabl %}
+          
+              {% if loop.index %3 == 1 %}
+              <p>
+                <a href="/{{x}}"> {{x}}</a>
+              </p>
+              {% endif %}
+              {% endfor %} 
+          </article>
+            <article class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
+              <h2></h2>
+
+              {% for x in tabl %}
+          
+              {% if loop.index %3 == 2 %}
+                <p>
+                  <a href="/{{x}}"> {{x}}</a>
+                </p>
+                {% endif %}
+
+              {% endfor %} 
+          </article>              
+      </div>
+    </div>
+    
+</section>
+
+
+    <!--Footer / contact-->
+<footer-component  id = "contact"></footer-component>
+    <!--end Footer / contact-->
+
+</body>

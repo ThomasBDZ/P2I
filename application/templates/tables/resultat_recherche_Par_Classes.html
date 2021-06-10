@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Recherche{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+  <thead>
+    <tr class="table-secondary">
+      {% for h in results2 %}
+         <th scope="col">{{ h[1] }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in results %}
+    <tr>
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td id="idd" scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
