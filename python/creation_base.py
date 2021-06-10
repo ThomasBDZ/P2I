@@ -30,13 +30,9 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS Candidat
   csp_pere integer,
   arrondissement_naissance integer,
   qualite text,
-  FOREIGN KEY(Can_cod) REFERENCES CMT_Oraux(Numerodinscription),
   FOREIGN KEY (Can_cod) REFERENCES Resultat_ecrit (Numerodinscription),
-  FOREIGN KEY (Can_cod) REFERENCES Classes_CMT_spe_XXX (scei),
+  FOREIGN KEY (Can_cod) REFERENCES Resultats_Oraux (scei),
   FOREIGN KEY (Can_cod) REFERENCES inscription (Code_Candidat),
-  FOREIGN KEY (Can_cod) REFERENCES CMT_Oraux_Spe (Numerodinscription),
-  FOREIGN KEY (Can_cod) REFERENCES Oraux_CCS (Numerodinscription),
-  FOREIGN KEY (Can_cod) REFERENCES Oraux_CCMP (Numerodinscription),
   FOREIGN KEY (code_pays_naiss) REFERENCES pays (code_pays)
   
 )''')
@@ -61,52 +57,35 @@ FOREIGN KEY(Can_cod) REFERENCES Candidat(Can_cod)
 
 )''')
 
-cursor.execute('''CREATE TABLE IF NOT EXISTS CMT_Oraux
+
+
+cursor.execute('''CREATE TABLE IF NOT EXISTS Resultats_Oraux
   (
-Numerodinscription integer PRIMARY KEY,
-Centre text,
-Jury text,
-Phys_SI double,
-Maths double,
-Entretien double,
-Anglais double
+scei integer PRIMARY KEY,
+etat integer,
+moyenne_generale double,
+rang_classe integer,
 
-)''')
+mathematiques double,
+physique double,
+francais double,
+anglais double,
 
-cursor.execute('''CREATE TABLE IF NOT EXISTS CMT_Oraux_Spe
-  (
-Numerodinscription integer PRIMARY KEY,
-QCM_info_phy double,
-Maths double,
-Entretien_MT double,
-QCM_Anglais double
-
-)''')
-
-cursor.execute('''CREATE TABLE IF NOT EXISTS Oraux_CCS
-  (
-Numerodinscription integer PRIMARY KEY,
 mathematiques_1 double,
 mathematiques_2 double,
 phy_chi_1 double,
 phy_chi_2 double,
 phy_TP double,
 Langue double,
-S2I double
+S2I double,
 
+QCM_info_phy double,
+Maths double,
+Entretien_MT double,
+QCM_Anglais double,
+bonification integer
 )''')
-
-cursor.execute('''CREATE TABLE IF NOT EXISTS Oraux_CCMP
-  (
-Numerodinscription integer PRIMARY KEY,
-mathematiques double,
-physique double,
-francais double,
-anglais double
-
-)''')
-
-cursor.execute('''CREATE TABLE IF NOT EXISTS Classes_CMT_spe_XXX
+cursor.execute('''CREATE TABLE IF NOT EXISTS Resultats_Oraux_Generaux_csv
   (
 scei integer PRIMARY KEY,
 etat integer,
@@ -228,15 +207,10 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS Resultat_ecrit
   Francais double,
   Informatique_SI double,
   Langue double,
-  Informatique_pour_tous double
+  Informatique_pour_tous double,
+  bonification integer
 )''')
 
-cursor.execute('''CREATE TABLE IF NOT EXISTS bonification
-  (
-  puissance text PRIMARY KEY,
-  bonification integer,
-  FOREIGN KEY (puissance) REFERENCES Candidat (puissance)
-)''')
 
 cursor.execute('''CREATE TABLE IF NOT EXISTS ListeEcoles
   (
