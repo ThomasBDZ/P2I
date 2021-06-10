@@ -53,9 +53,7 @@ class Header extends HTMLElement {
                 <nav class="menu">
                     <a href='charts'>Statistiques</a>
                     <a href='/parcours'>Parcours des données</a>
-                    <a href='recherche'>Requetes SQL</a>
-                    <a href='rechercheID'>Recherche Par ID</a>
-                    <a href='rechercheParNom'>Recherche Par Nom</a>
+                    <a href='recherches'>Recherches</a>
                 </nav>
             </div>
         </header>
