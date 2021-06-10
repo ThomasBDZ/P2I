@@ -148,7 +148,7 @@ with app.app_context():
     req = "INSERT INTO Resultats_Oraux (scei, mathematiques_1, mathematiques_2, phy_chi_1, phy_chi_2, phy_TP, Langue, S2I, QCM_info_phy, Maths, Entretien_MT, QCM_Anglais, bonification) VALUES "
     i = len(tab)
     for row in tab:
-        req += f"(\"{row[0]}\", \"{row[28]}\", \"{row[29]}\", \"{row[30]}\", \"{row[31]}\", \"{row[32]}\", \"{row[33]}\", \"{row[34]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[40]}\")"
+        req += f"(\"{row[0]}\", \"{row[28]}\", \"{row[29]}\", \"{row[30]}\", \"{row[31]}\", \"{row[32]}\", \"{row[33]}\", \"{row[34]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[37]}\")"
         i -= 1
         if i > 0: req += ", " 
     req += ";"
@@ -165,7 +165,7 @@ with app.app_context():
     tab = df.to_numpy()
     i = len(tab)
     for row in tab:
-        req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[40]}\") "    
+        req += f"(\"{row[0]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[36]}\") "    
         i -= 1
         if i > 0: req += ", "
     req += ";"

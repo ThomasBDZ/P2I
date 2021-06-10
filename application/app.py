@@ -260,6 +260,29 @@ def requestt():
         return render_template("/recherche.html")
 
 
+@app.route("/rechercheID", methods=["POST", "GET"])
+def requesttID():
+    if request.method == "POST":
+        c = get_db().cursor()
+        requ= request.form["Req"]
+        rec = "SELECT * FROM Candidat WHERE Candidat.Can_cod = " + requ
+        c.execute(rec)
+        return render_template("/tables/resultat_recherche_ID.html", results= c.fetchall())
+    else:
+        return render_template("/rechercheID.html")
+
+@app.route("/rechercheParNom", methods=["POST", "GET"])
+def rechercheParNom():
+    if request.method == "POST":
+        c = get_db().cursor()
+        requ= request.form["Req"]
+        rec = "SELECT * FROM Candidat WHERE Candidat.nom = " + requ
+        c.execute(rec)
+        return render_template("/tables/resultat_recherche_Par_Nom.html", results= c.fetchall())
+    else:
+        return render_template("/rechercheParNom.html")
+
+
 @app.route("/charts")
 def charts():
 

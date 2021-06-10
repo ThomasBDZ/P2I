@@ -109,6 +109,22 @@ def admissions():
     c.execute("select * from admissions")
     return render_template("/tables/admissions.html", results= c.fetchall(), results2= h.fetchall())
 
+@app.route("/Resultats_Oraux")
+def Resultats_Oraux():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Resultats_Oraux)")
+    c.execute("select * from Resultats_Oraux")
+    return render_template("/tables/Resultats_Oraux.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/Resultats_Oraux_Generaux_csv")
+def Resultats_Oraux_Generaux_csv():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Resultats_Oraux_Generaux_csv)")
+    c.execute("select * from Resultats_Oraux_Generaux_csv")
+    return render_template("/tables/Resultats_Oraux_Generaux_csv.html", results= c.fetchall(), results2= h.fetchall())
+
 @app.route("/CMT_Oraux")
 def CMT_Oraux():
     c = get_db().cursor()
@@ -259,6 +275,27 @@ def requestt():
     else:
         return render_template("/recherche.html")
 
+@app.route("/rechercheID", methods=["POST", "GET"])
+def requesttID():
+    if request.method == "POST":
+        c = get_db().cursor()
+        requ= request.form["Req"]
+        rec = "SELECT * FROM Candidat WHERE Candidat.Can_cod = " + requ
+        c.execute(rec)
+        return render_template("/tables/resultat_recherche_ID.html", results= c.fetchall())
+    else:
+        return render_template("/rechercheID.html")
+
+@app.route("/rechercheParNom", methods=["POST", "GET"])
+def rechercheParNom():
+    if request.method == "POST":
+        c = get_db().cursor()
+        requ= request.form["Req"]
+        rec = "SELECT * FROM Candidat WHERE Candidat.nom = " + requ
+        c.execute(rec)
+        return render_template("/tables/resultat_recherche_Par_Nom.html", results= c.fetchall())
+    else:
+        return render_template("/rechercheParNom.html")
 
 @app.route("/charts")
 def charts():

@@ -44,16 +44,6 @@ class Header extends HTMLElement {
             padding: 0;
         }
 
-        .menu input[type=text] {
-            float: right;
-            padding: 6px;
-            border: none;
-            margin-top: 24px;
-            margin-right: 14px;
-            font-size: 17px;
-            height: 30px;
-            line-height: 50px;
-          }
           
 
         </style>
@@ -63,8 +53,9 @@ class Header extends HTMLElement {
                 <nav class="menu">
                     <a href='charts'>Statistiques</a>
                     <a href='/parcours'>Parcours des données</a>
-                    <a href='recherche'>Requetes_SQL</a>
-                    <input id="searchbar" onkeyup="search()" type="text" placeholder="Identifiant" size=12>
+                    <a href='recherche'>Requetes SQL</a>
+                    <a href='rechercheID'>Recherche Par ID</a>
+                    <a href='rechercheParNom'>Recherche Par Nom</a>
                 </nav>
             </div>
         </header>
