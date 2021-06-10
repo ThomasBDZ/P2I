@@ -46,41 +46,41 @@ for dirpath, dirnames, filenames in os.walk(folder_path):
             dico["{0}".format(FilePrefix)] = pd.read_csv(os.path.join(folder_path, basename(filename)), sep=";")
 
 
-def select_filiere(st): 
-    c=0
-    for i in st:
+def filiere(path): 
+    a=0
+    for i in path:
         if i =='_':
-            break
-        c +=1
-    j = c+1
-    for i in st[c+1:]:
-        if i == "_":
-            break
-        j +=1
-    return st[c+1:j]
-
-def select_filiere_oraux(st): 
-    c=0
-    for i in st:
-        if i =='_':
-            break
-        c +=1
-    j = c+1
-    for i in st[c+1:]:
-        if i == "_":
-            break
-        j +=1
-    a = j+1
-    for i in st[j+1:]:
-        if i == "_":
             break
         a +=1
-    b= a+1
-    for i in st[a+1:]:
+    j = a+1
+    for i in path[a+1:]:
+        if i == "_":
+            break
+        j +=1
+    return path[a+1:j]
+
+def filiere_oraux(path): 
+    a=0
+    for i in path:
+        if i =='_':
+            break
+        a +=1
+    j = a+1
+    for i in path[a+1:]:
+        if i == "_":
+            break
+        j +=1
+    c = j+1
+    for i in path[j+1:]:
+        if i == "_":
+            break
+        c +=1
+    b= c+1
+    for i in path[c+1:]:
         if i == "_":
             break
         b +=1
-    return st[a+1:b]
+    return path[c+1:b]
 
 
 
@@ -604,7 +604,7 @@ with app.app_context():
         for filename in filenames:
             FilePrefix, FileExtension = os.path.splitext(filename)
             if ("listeVoeux_" in FilePrefix):
-                df = dico["listeVoeux_"+select_filiere(FilePrefix)]
+                df = dico["listeVoeux_"+filiere(FilePrefix)]
                 tab = df.to_numpy()
                 if(i != j):
                     i+=1
@@ -677,7 +677,7 @@ with app.app_context():
         for filename in filenames:
             FilePrefix, FileExtension = os.path.splitext(filename)
             if ("ADMISSIBLE" in FilePrefix) and ("SPE" in FilePrefix) and ("ADMISSIBLE_ATS" not in FilePrefix): 
-                df = dico['ADMISSIBLE_'+select_filiere(FilePrefix)]
+                df = dico['ADMISSIBLE_'+filiere(FilePrefix)]
                 tab = df.to_numpy()
                 for row in tab:
                     if row[0] not in dic:
@@ -687,7 +687,7 @@ with app.app_context():
 
 
             if ("ADMIS_" in FilePrefix) and ("SPE" in FilePrefix) and ("ADMIS_ATS" not in FilePrefix):
-                df = dico['ADMIS_'+select_filiere(FilePrefix)]
+                df = dico['ADMIS_'+filiere(FilePrefix)]
                 tab = df.to_numpy()
                 for row in tab:
                     if row[0] not in dic:
