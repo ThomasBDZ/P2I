@@ -52,6 +52,14 @@ def parcours():
 
     return render_template('/tables/parcours.html', title="mon titre", tabl= t)
 
+@app.route("/recherches")
+def recherches():
+    c = get_db().cursor()
+    db = get_db()
+    t = tables(db)
+
+    return render_template('/tables/recherches.html', title="mon titre", tabl= t)
+
 
 @app.route("/ListeEcoleRequete")
 def ListeEcolesRequete():
@@ -254,7 +262,8 @@ def requestt():
     if request.method == "POST":
         c = get_db().cursor()
         requ= request.form["Req"]
-        c.execute(requ)
+        rec = "SELECT" + requ
+        c.execute(rec)
         return render_template("/tables/resultat_recherche.html", results= c.fetchall())
     else:
         return render_template("/recherche.html")
@@ -281,6 +290,17 @@ def rechercheParNom():
         return render_template("/tables/resultat_recherche_Par_Nom.html", results= c.fetchall())
     else:
         return render_template("/rechercheParNom.html")
+
+@app.route("/rechercheParClasses", methods=["POST", "GET"])
+def rechercheParClasses():
+    if request.method == "POST":
+        c = get_db().cursor()
+        requ= request.form["Req"]
+        rec = "SELECT * FROM Candidat WHERE Candidat.classe = " + requ
+        c.execute(rec)
+        return render_template("/tables/resultat_recherche_par_classe.html", results= c.fetchall())
+    else:
+        return render_template("/rechercheParClasses.html")
 
 
 @app.route("/charts")
