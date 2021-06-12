@@ -83,13 +83,7 @@ QCM_info_phy double,
 Maths double,
 Entretien_MT double,
 QCM_Anglais double,
-bonification integer,
-
-MathsATS, 
-PhysiqueATS, 
-Genie_electriqueATS, 
-Genie_mecaniqueATS, 
-LangueATS
+bonification integer
 )''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS Resultats_Oraux_Generaux_csv
   (
@@ -214,12 +208,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS Resultat_ecrit
   Informatique_SI double,
   Langue double,
   Informatique_pour_tous double,
-  bonification integer,
-  mathematiquesATS, 
-  physiqueATS, 
-  FrancaisATS, 
-  SI_ATS, 
-  AnglaisATS
+  bonification integer
 )''')
 
 

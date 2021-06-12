@@ -33,9 +33,60 @@ app = Flask(__name__)
 print("##### REMPLISSAGE COMMENCE #####")
 
 
+
+dico = {}
+for dirpath, dirnames, filenames in os.walk(folder_path):
+    for filename in filenames:
+        FilePrefix, FileExtension = os.path.splitext(filename)
+        if ((FilePrefix != "Inscription") and (FileExtension == ".xlsx") and ("_DD_MM_YYYY_ATS" not in FilePrefix) and ("CMT_Oraux_YYYY_" not in FilePrefix) and ("CMT_spe_XXXX" not in FilePrefix)):
+            dico["{0}".format(FilePrefix)] = pd.read_excel(os.path.join(folder_path, basename(filename)))
+        elif ((FileExtension == ".xlsx") and ((FilePrefix == "Inscription") or ("_DD_MM_YYYY_ATS" in FilePrefix) or ("CMT_spe_XXXX" in FilePrefix) or ("CMT_Oraux_YYYY_" in FilePrefix) )):
+            dico["{0}".format(FilePrefix)] = pd.read_excel(os.path.join(folder_path, basename(filename)), header = 1)
+        elif (FileExtension == ".csv"):
+            dico["{0}".format(FilePrefix)] = pd.read_csv(os.path.join(folder_path, basename(filename)), sep=";")
+
+
+def filiere(path): 
+    a=0
+    for i in path:
+        if i =='_':
+            break
+        a +=1
+    j = a+1
+    for i in path[a+1:]:
+        if i == "_":
+            break
+        j +=1
+    return path[a+1:j]
+
+def filiere_oraux(path): 
+    a=0
+    for i in path:
+        if i =='_':
+            break
+        a +=1
+    j = a+1
+    for i in path[a+1:]:
+        if i == "_":
+            break
+        j +=1
+    c = j+1
+    for i in path[j+1:]:
+        if i == "_":
+            break
+        c +=1
+    b= c+1
+    for i in path[c+1:]:
+        if i == "_":
+            break
+        b +=1
+    return path[c+1:b]
+
+
+
 print("Remplissage table : Candidat")   
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM Candidat;") 
@@ -51,27 +102,11 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")   
 
-print("Remplissage table : Candidat pour ATS")   
-with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "ResultatEcrit_DD_MM_YYYY_ATS.xlsx"), header=1)
-    tab = df.to_numpy()
-    c = get_db().cursor()
-
-    i = len(tab)
-    req = "INSERT INTO Candidat (Can_cod, classe) VALUES "
-    for row in tab:
-        req += f"(\"{row[0]}\", \"ATS\")"
-        i -= 1
-        if i > 0: req += ", "
-    req += ";"
-    c.execute(req)
-    c.execute("COMMIT;")
-print("Table remplie")   
 
 
 print("Remplissage table : ville")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM ville;") 
@@ -90,33 +125,36 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")   
 
+#######################################################################################################
+
 
 print("Remplissage table : Resultats_Oraux_Generaux_csv")
 with app.app_context():  
     c = get_db().cursor()
+    c.execute("DELETE FROM Resultats_Oraux_Generaux_csv;") 
     req = "INSERT INTO Resultats_Oraux_Generaux_csv (scei, etat, moyenne_generale, rang_classe) VALUES "
 
-    df = pd.read_csv(os.path.join(folder_path, "Classes_MP_CMT_spe_XXXX_SCEI.csv"), sep=";")
+    df = dico["Classes_MP_CMT_spe_XXXX_SCEI"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[2]}\", \"{row[5]}\", \"{row[6]}\"), "
     
-    df = pd.read_csv(os.path.join(folder_path, "Classes_PC_CMT_spe_XXXX_SCEI.csv"), sep=";")
+    df = dico["Classes_PC_CMT_spe_XXXX_SCEI"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[2]}\", \"{row[5]}\", \"{row[6]}\"), "
     
-    df = pd.read_csv(os.path.join(folder_path, "Classes_PSI_CMT_spe_XXXX_SCEI.csv"), sep=";")
+    df = dico["Classes_PSI_CMT_spe_XXXX_SCEI"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[2]}\", \"{row[5]}\", \"{row[6]}\"), "
     
-    df = pd.read_csv(os.path.join(folder_path, "Classes_PT_CMT_spe_XXXX_SCEI.csv"), sep=";")
+    df = dico["Classes_PT_CMT_spe_XXXX_SCEI"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[2]}\", \"{row[5]}\", \"{row[6]}\"), "
    
-    df = pd.read_csv(os.path.join(folder_path, "Classes_TSI_CMT_spe_XXXX_SCEI.csv"), sep=";")
+    df = dico["Classes_TSI_CMT_spe_XXXX_SCEI"]
     tab = df.to_numpy()
     i = len(tab)
     for row in tab:
@@ -131,19 +169,20 @@ print("Table remplie")
 print("Remplissage table :Resultats_Oraux avec : Oraux_CCMP")
 with app.app_context():  
     c = get_db().cursor()
+    c.execute("DELETE FROM Resultats_Oraux;") 
     req = "INSERT INTO Resultats_Oraux (scei, mathematiques, physique, francais, anglais, QCM_info_phy, Maths, Entretien_MT, QCM_Anglais, bonification) VALUES "
 
-    df = pd.read_excel(os.path.join(folder_path, "Classes_MP_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_MP_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[33]}\", \"{row[34]}\", \"{row[35]}\", \"{row[36]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[28]}\", \"{row[41]}\"), "
  
-    df = pd.read_excel(os.path.join(folder_path, "Classes_PC_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_PC_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[32]}\", \"{row[33]}\", \"{row[34]}\", \"{row[35]}\", \"{row[24]}\", \"{row[25]}\", \"{row[26]}\", \"{row[27]}\", \"{row[40]}\"), "
     
-    df = pd.read_excel(os.path.join(folder_path, "Classes_PSI_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_PSI_CMT_spe_XXXX"]
     tab = df.to_numpy()
     i = len(tab)
     for row in tab:
@@ -157,7 +196,7 @@ print("Table remplie")
 
 print("Remplissage table : Resultats_Oraux avec : Oraux_CCS")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Classes_TSI_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_TSI_CMT_spe_XXXX"]
     tab = df.to_numpy()
     c = get_db().cursor()
 
@@ -177,7 +216,7 @@ with app.app_context():
     c = get_db().cursor()
     req = "INSERT INTO Resultats_Oraux (scei, QCM_info_phy, Maths, Entretien_MT, QCM_Anglais, bonification) VALUES "
 
-    df = pd.read_excel(os.path.join(folder_path, "Classes_PT_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_PT_CMT_spe_XXXX"]
     tab = df.to_numpy()
     i = len(tab)
     for row in tab:
@@ -189,27 +228,14 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")
 
-print("Remplissage table : Resultats_Oraux avec ATS")
-with app.app_context():  
-    c = get_db().cursor()
-    req = "INSERT INTO Resultats_Oraux (scei, MathsATS, PhysiqueATS, Genie_electriqueATS, Genie_mecaniqueATS, LangueATS, bonification) VALUES "
 
-    df = pd.read_excel(os.path.join(folder_path, "ResultatOral_DD_MM_YYYY_ATS.xlsx"), header=1)
-    tab = df.to_numpy()
-    i = len(tab)
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[6]}\", \"{row[7]}\", \"{row[8]}\", \"{row[9]}\", \"{row[10]}\", \"{row[4]}\") "    
-        i -= 1
-        if i > 0: req += ", "
-    req += ";"
-    c.execute(req)
-    c.execute("COMMIT;")
-print("Table remplie")
 
+
+########################################################################################################
 
 print("Remplissage table : inscription")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM inscription;") 
@@ -231,7 +257,7 @@ print("Table remplie")
 
 print("Remplissage table : pays")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM pays;") 
@@ -255,7 +281,7 @@ print("Table remplie")
 
 print("Remplissage table : nation")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM nation;") 
@@ -279,7 +305,7 @@ print("Table remplie")
 
 print("Remplissage table : concours")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM concours;") 
@@ -302,7 +328,7 @@ print("Table remplie")
 
 print("Remplissage table : bac")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM bac;") 
@@ -323,7 +349,7 @@ print("Table remplie")
 
 print("Remplissage table : serie_bac")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM serie_bac;") 
@@ -345,7 +371,7 @@ print("Table remplie")
 
 print("Remplissage table : ListeEcoles")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "listeEcoles.xlsx"))
+    df = dico["listeEcoles"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM ListeEcoles;") 
@@ -367,7 +393,7 @@ print("Table remplie")
 
 print("Remplissage table : csp")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM csp;") 
@@ -396,27 +422,27 @@ with app.app_context():
     c.execute("DELETE FROM Oral_autres;")
     req = "INSERT INTO Oral_autres (Can_cod, rang, maths_harmonisees, maths_affichees, max_physique, max_anglais, total_oral, total, bonus_interclassement, total_interclassement, entretien_exaequo, anglais_exaequo) VALUES "
 
-    df = pd.read_excel(os.path.join(folder_path, "Classes_MP_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_MP_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[49]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[41]}\", \"{row[42]}\", \"{row[43]}\", \"{row[44]}\", \"{row[45]}\", \"{row[46]}\", \"{row[47]}\"), "
     
-    df = pd.read_excel(os.path.join(folder_path, "Classes_PC_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_PC_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[48]}\", \"{row[37]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[41]}\", \"{row[42]}\", \"{row[43]}\", \"{row[44]}\", \"{row[45]}\", \"{row[46]}\"), "
     
-    df = pd.read_excel(os.path.join(folder_path, "Classes_PSI_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_PSI_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[49]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[41]}\", \"{row[42]}\", \"{row[43]}\", \"{row[44]}\", \"{row[45]}\", \"{row[46]}\", \"{row[47]}\"), "
     
-    df = pd.read_excel(os.path.join(folder_path, "Classes_PT_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_PT_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
         req += f"(\"{row[0]}\", \"{row[44]}\", \"{row[33]}\", \"{row[34]}\", \"{row[35]}\", \"{row[36]}\", \"{row[37]}\", \"{row[38]}\", \"{row[39]}\", \"{row[40]}\", \"{row[41]}\", \"{row[42]}\"), "
    
-    df = pd.read_excel(os.path.join(folder_path, "Classes_TSI_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_TSI_CMT_spe_XXXX"]
     tab = df.to_numpy()
     i = len(tab)
     for row in tab:
@@ -435,26 +461,12 @@ with app.app_context():
     c = get_db().cursor()
     c.execute("DELETE FROM Resultat_ecrit;")
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous, bonification) VALUES "
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
     dic = {}
-    df = pd.read_excel(os.path.join(folder_path, "Classes_MP_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_MP_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
-        dic[row[0]] = [row[24], row[23], row[15], row[16], row[17], row[18], row[19], row[20], row[14], row[13], row[21], row[22]]
-    i = len(dic)
-    for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\", \"{dic[x][11]}\")"
-        i -= 1
-        if i > 0: req += ", " 
-    req  += ";"
-    c.execute(req)
-
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Langue, Informatique_pour_tous, bonification) VALUES "
-    dic = {}
-    df = pd.read_excel(os.path.join(folder_path, "Classes_PC_CMT_spe_XXXX.xlsx"), header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        dic[row[0]] = [row[23], row[22], row[14], row[15], row[16], row[17], row[18], row[19], row[13], row[20], row[21]]
+        dic[row[0]] = [row[24], row[23], row[15], row[16], row[17], row[18], row[19], row[20], row[14], row[13], row[21]]
     i = len(dic)
     for x in dic:
         req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
@@ -463,93 +475,71 @@ with app.app_context():
     req  += ";"
     c.execute(req)
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous, bonification) VALUES "
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Langue, Informatique_pour_tous) VALUES "
     dic = {}
-    df = pd.read_excel(os.path.join(folder_path, "Classes_PSI_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_PC_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
-        dic[row[0]] = [row[24], row[23], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[13], row[21], row[22]]
+        dic[row[0]] = [row[23], row[22], row[14], row[15], row[16], row[17], row[18], row[19], row[13], row[20]]
     i = len(dic)
     for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\", \"{dic[x][11]}\")"
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
         i -= 1
         if i > 0: req += ", " 
     req  += ";"
     c.execute(req)
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous, bonification) VALUES "
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
     dic = {}
-    df = pd.read_excel(os.path.join(folder_path, "Classes_PT_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_PSI_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
-        dic[row[0]] = [row[23], row[22], row[13], row[14], row[15], row[16], row[19], row[18], row[20], row[17], row[22]]
+        dic[row[0]] = [row[24], row[23], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[13], row[21]]
+    i = len(dic)
+    for x in dic:
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
+        i -= 1
+        if i > 0: req += ", " 
+    req  += ";"
+    c.execute(req)
+
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
+    dic = {}
+    df = dico["Classes_PT_CMT_spe_XXXX"]
+    tab = df.to_numpy()
+    for row in tab:
+        dic[row[0]] = [row[23], row[22], row[13], row[14], row[15], row[16], row[19], row[18], row[20], row[17]]
         i = len(dic)
     for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
         i -= 1
         if i > 0: req += ", " 
     req  += ";"
     c.execute(req)
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous, bonification) VALUES "
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
     dic = {}
-    df = pd.read_excel(os.path.join(folder_path, "Classes_TSI_CMT_spe_XXXX.xlsx"), header=1)
+    df = dico["Classes_TSI_CMT_spe_XXXX"]
     tab = df.to_numpy()
     for row in tab:
-        dic[row[0]] = [row[23], row[22], row[13], row[14], row[15], row[16], row[17], row[19], row[18], row[20], row[21]]
+        dic[row[0]] = [row[23], row[22], row[13], row[14], row[15], row[16], row[17], row[19], row[18], row[20]]
     i = len(dic)
     for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
         i -= 1
         if i > 0: req += ", " 
     req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
 
-    df = pd.read_excel(os.path.join(folder_path, "ResultatEcrit_DD_MM_YYYY_ATS.xlsx"), header=1)
+    df = dico["ResultatEcrit_DD_MM_YYYY_ATS"]
     tab = df.to_numpy()
     for row in tab:
         c.execute(f"UPDATE Resultat_ecrit SET moyenne = {row[3]} WHERE Numerodinscription = {row[0]}")
         c.execute("COMMIT;")
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, bonification, mathematiquesATS, physiqueATS, FrancaisATS, SI_ATS, AnglaisATS) VALUES "
-    dic = {}
-    df = pd.read_excel(os.path.join(folder_path, "ResultatEcrit_DD_MM_YYYY_ATS.xlsx"), header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        dic[row[0]] = [row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]]
-    i = len(dic)
-    for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\")"
-        i -= 1
-        if i > 0: req += ", " 
-    req  += ";"
-    c.execute(req)
-    c.execute("COMMIT;")
-
-print("Table remplie")   
-
-
-# print("Remplissage table : bonification")
-# with app.app_context():
-#     df = pd.read_excel(os.path.join(folder_path, "Classes_MP_CMT_spe_XXXX.xlsx"), header=1)
-#     tab = df.to_numpy()
-#     c = get_db().cursor()
-#     c.execute("DELETE FROM bonification;") 
-
-#     dic = {}
-#     for row in tab:
-#         dic[row[12]] = row[41]
-#     req = "INSERT INTO bonification (puissance, bonification) VALUES "
-#     i = len(dic)
-#     for x in dic:
-#         req += f"(\"{x}\", \"{dic[x]}\")"
-#         i -= 1
-#         if i > 0: req += ", " 
-#     req  += ";"
-#     c.execute(req)
-#     c.execute("COMMIT;")
-# print("Table remplie")
+    
+print("Table remplie")
 
 
 
@@ -559,7 +549,7 @@ print("Table remplie")
 
 print("Remplissage table : listeEtatRe")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "listeEtatsReponsesAppel.xlsx"), header=1)
+    df = dico["listeEtatsReponsesAppel"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM listeEtasRe;") 
@@ -578,7 +568,7 @@ print("Table remplie")
 
 print("Remplissage table : voie_classe")
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "Inscription.xlsx"), header=1)
+    df = dico["Inscription"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM voie_classe;") 
@@ -586,7 +576,6 @@ with app.app_context():
     dic = {}
     for row in tab:
         dic[row[21]] = row[37]
-        dic["ATS"] = "ATS"
     req = "INSERT INTO voie_classe (classe, voie) VALUES "
     i = len(dic)
     for x in dic:
@@ -605,47 +594,36 @@ with app.app_context():
     c.execute("DELETE FROM listeVoeux;") 
     req = "INSERT INTO listeVoeux (Can_cod, Voe_rang, voe_ordre, Eco_code) VALUES "
 
-    df = pd.read_excel(os.path.join(folder_path, "listeVoeux_ATS.xlsx"), header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
-    
-    df = pd.read_excel(os.path.join(folder_path, "listeVoeux_MP.xlsx"), header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
-    
-    df = pd.read_excel(os.path.join(folder_path, "listeVoeux_PC.xlsx"), header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
-    
-    df = pd.read_excel(os.path.join(folder_path, "listeVoeux_PSI.xlsx"), header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
-    
-    df = pd.read_excel(os.path.join(folder_path, "listeVoeux_PT.xlsx"), header=1)
-    tab = df.to_numpy()
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
-        
-    df = pd.read_excel(os.path.join(folder_path, "listeVoeux_TSI.xlsx"), header=1)
-    tab = df.to_numpy()
-    i = len(tab)
-    for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\")"
-        i -= 1
-        if i > 0: req += ", " 
-    req += ";"
+    i=1
+    j=0
+    for dirpath, dirnames, filenames in os.walk(folder_path):
+        for filename in filenames:
+            FilePrefix, FileExtension = os.path.splitext(filename)
+            if ("listeVoeux_" in FilePrefix):
+                j+=1 # COMPTE LE NOMBRE DE FICHIERS DE CE TYPE DANS LE REPERTOIRE
+        for filename in filenames:
+            FilePrefix, FileExtension = os.path.splitext(filename)
+            if ("listeVoeux_" in FilePrefix):
+                df = dico["listeVoeux_"+filiere(FilePrefix)]
+                tab = df.to_numpy()
+                if(i != j):
+                    i+=1
+                    for row in tab:
+                        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\"), "
+                else:
+                    k = len(tab)
+                    for row in tab:
+                        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\")"
+                        k -= 1
+                        if k > 0: req += ", "
+                    req += ";"
     c.execute(req)
     c.execute("COMMIT;")
 print("Table remplie")
 
-
 print("Remplissage table : ListeEtablissements")  
 with app.app_context():
-    df = pd.read_excel(os.path.join(folder_path, "listeEtablissements.xlsx"), header=1)
+    df = dico["listeEtablissements"]
     tab = df.to_numpy()
     c = get_db().cursor()
     c.execute("DELETE FROM ListeEtablissements;") 
@@ -663,35 +641,7 @@ print("Table remplie")
 
 
 
-############### Thomas ##################
-
-
-
-filepath_inscription = os.path.join(folder_path, "Inscription.xlsx")
-app = Flask(__name__)
-
-def select_filiere(st): #selectionne la filière dans le nom d'un fichier
-    c=0
-    for i in st:
-        if i =='_':
-            break
-        c +=1
-    j = c+1
-    for i in st[c+1:]:
-        if i == "_":
-            break
-        j +=1
-    return st[c+1:j]
-
-
-dico = {}
-for dirpath, dirnames, filenames in os.walk(folder_path):
-    for filename in filenames:
-        FilePrefix, FileExtension = os.path.splitext(filename)
-        if (FileExtension == ".xlsx"):
-            dico["{0}".format(FilePrefix)] = pd.read_excel(os.path.join(folder_path, basename(filename)))
-
-
+################ Thomas ##################
 
 with app.app_context():
 
@@ -699,7 +649,7 @@ with app.app_context():
     print("Remplissage table : Serie_bac")
 
     c = get_db().cursor()
-    df = pd.read_excel(filepath_inscription,header=1)
+    df = dico["Inscription"]
     rows_code_bac = []
     for index,rows in df.iterrows():
         rows_code_bac.append([rows['CODE_SERIE'],rows['SERIE']])
@@ -713,7 +663,7 @@ with app.app_context():
     print('Remplissage table : Admission')
 
     c.execute("DELETE FROM admissions;") 
-    df = pd.read_excel(filepath_inscription,header=1)
+    df = dico["Inscription"]
     
     tab = df.to_numpy()
     
@@ -727,7 +677,7 @@ with app.app_context():
         for filename in filenames:
             FilePrefix, FileExtension = os.path.splitext(filename)
             if ("ADMISSIBLE" in FilePrefix) and ("SPE" in FilePrefix) and ("ADMISSIBLE_ATS" not in FilePrefix): 
-                df = dico['ADMISSIBLE_'+select_filiere(FilePrefix)]
+                df = dico['ADMISSIBLE_'+filiere(FilePrefix)]
                 tab = df.to_numpy()
                 for row in tab:
                     if row[0] not in dic:
@@ -737,14 +687,13 @@ with app.app_context():
 
 
             if ("ADMIS_" in FilePrefix) and ("SPE" in FilePrefix) and ("ADMIS_ATS" not in FilePrefix):
-                df = dico['ADMIS_'+select_filiere(FilePrefix)]
+                df = dico['ADMIS_'+filiere(FilePrefix)]
                 tab = df.to_numpy()
                 for row in tab:
                     if row[0] not in dic:
                         print(f"ERREUR : Le candidat {row[0]} n'est pas inscrit")
                     else:
                         dic[row[0]][1]=row[12]
-     # 1 pb : Can_cod 44232 introuvable dans Inscription mais présent dans ADMIS_PC
     
 
     code_tab = c.execute("SELECT Code_Candidat FROM inscription")
@@ -761,6 +710,7 @@ with app.app_context():
     print('Table remplie')
 
 print("##### REMPLISSAGE TERMINE #####")
+
 
 
 
