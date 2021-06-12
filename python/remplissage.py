@@ -102,7 +102,22 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")   
 
+print("Remplissage table : Candidat pour ATS")   
+with app.app_context():
+    df = dico["ResultatEcrit_DD_MM_YYYY_ATS"]
+    tab = df.to_numpy()
+    c = get_db().cursor()
 
+    i = len(tab)
+    req = "INSERT INTO Candidat (Can_cod, classe) VALUES "
+    for row in tab:
+        req += f"(\"{row[0]}\", \"ATS\")"
+        i -= 1
+        if i > 0: req += ", "
+    req += ";"
+    c.execute(req)
+    c.execute("COMMIT;")
+print("Table remplie")   
 
 print("Remplissage table : ville")
 with app.app_context():
@@ -228,7 +243,22 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")
 
+print("Remplissage table : Resultats_Oraux avec ATS")
+with app.app_context():  
+    c = get_db().cursor()
+    req = "INSERT INTO Resultats_Oraux (scei, MathsATS, PhysiqueATS, Genie_electriqueATS, Genie_mecaniqueATS, LangueATS, bonification) VALUES "
 
+    df = dico["ResultatOral_DD_MM_YYYY_ATS"]
+    tab = df.to_numpy()
+    i = len(tab)
+    for row in tab:
+        req += f"(\"{row[0]}\", \"{row[6]}\", \"{row[7]}\", \"{row[8]}\", \"{row[9]}\", \"{row[10]}\", \"{row[4]}\") "    
+        i -= 1
+        if i > 0: req += ", "
+    req += ";"
+    c.execute(req)
+    c.execute("COMMIT;")
+print("Table remplie")
 
 
 ########################################################################################################
@@ -576,6 +606,7 @@ with app.app_context():
     dic = {}
     for row in tab:
         dic[row[21]] = row[37]
+    dic["ATS"] = "ATS"
     req = "INSERT INTO voie_classe (classe, voie) VALUES "
     i = len(dic)
     for x in dic:
