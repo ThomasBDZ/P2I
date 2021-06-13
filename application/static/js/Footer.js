@@ -1,17 +1,22 @@
 const footerTemplate = document.createElement('template');
 footerTemplate.innerHTML = `
   <style>
-  
+
+    html, body {
+      display: table;
+      margin: 0;
+      height: 100%;
+      width: 100%
+    }
+
     footer {
       padding: 0 10px;
       list-style: none;
-      display: flex;
-      flex-shrink: 0;
       justify-content: space-between;
       align-items: center;
       background-color: #eeeeee;
-      position: relative; 
-      height: 60px
+      height: 60px;
+      display: flex;
     }
     
     ul li {

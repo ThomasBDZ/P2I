@@ -7,6 +7,8 @@
     src: "static/font/Roboto-Regular.ttf";
 }*/
 
+
+
 body, html {
     padding : 0;
 }
@@ -17,6 +19,7 @@ body{
 
 a,a:hover {
     text-decoration: none;
+    margin: 30px;
 }
 
 canvas {
@@ -31,6 +34,10 @@ h2 {
     text-align: center;
     padding-top: 5%;
     color : #023059
+}
+
+form {
+    margin: 30px;
 }
 
 .separator {
