@@ -18,6 +18,11 @@ footerTemplate.innerHTML = `
       height: 60px;
       display: flex;
     }
+    footer{
+      position: fixed;
+      bottom: 0;
+      width:100%;
+  }
     
     ul li {
       list-style: none;
