@@ -82,7 +82,7 @@ def listeEcole():
     c = get_db().cursor()
     h = get_db().cursor()
     h.execute("PRAGMA table_info(ListeEcoles)")
-    c.execute("select * from ListeEcoles")
+    c.execute("select * from ListeEcoles ORDER BY Nom_ecole")
     return render_template("/tables/ListeEcoles.html", results= c.fetchall(), results2= h.fetchall())
 
 @app.route("/listeEtasRe")

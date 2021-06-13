@@ -3,6 +3,55 @@
 
 {% block content %}
 
+<!-- Ecoles -->
+    <section class="container-fluid ecole">
+        <div class="container">
+          <h2 id="Listeecole">Liste des écoles</h2>
+          <hr class="separator">
+          <div class="row">
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#Agrosup' class="logo"><img src="static/img/agrosup.jpg" alt="agrosup"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#Centrale' class="logo"><img src="static/img/centrale.png" alt="centrale"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#IMT' class="logo"><img src="static/img/imt.jpg" alt="imt"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#INP' class="logo"><img src="static/img/inp.png" alt="inp"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#INSA' class="logo"><img src="static/img/insa.jpg" alt="insa"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#ENS' class="logo"><img src="static/img/ens.jpg" alt="ens"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#CESI' class="logo"><img src="static/img/cesi.jpg" alt="isma"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#SIGMA' class="logo"><img src="static/img/SIGMA.png" alt="sigma"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#IPSA' class="logo"><img src="static/img/IPSA.png" alt="sigma"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#ISAT' class="logo"><img src="static/img/isat.png" alt="sigma"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#Polytech' class="logo"><img src="static/img/polytech.svg" alt="sigma"/></a>
+            </article>
+            <article class="col-md-2 col-lg-2 col-xs-2 col-sm-2 item-folio">
+              <a href = '#TELECOM' class="logo"><img src="static/img/telecom.png" alt="sigma"/></a>
+            </article>
+          </div>
+        </div>
+    </section>
+
+    <!--end Ecoles-->
+
+
 <table class="table table-striped">
   <thead>
     <tr class="table-secondary">
@@ -13,7 +62,8 @@
   </thead>
   <tbody>
     {% for r in results %}
-    <tr>
+    {% if r[1].startswith('AgroSup')%}
+    <tr id="Agrosup">
       {% for x in r %}
         {% if (x != "nan") %}
           <td scope="row">{{ x }}</td>
@@ -22,7 +72,132 @@
         {% endif %}
       {% endfor %}
     </tr>
+    {% endif %}
+    {% if r[1].startswith('CENTRALE')%}
+    <tr id="Centrale">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('CESI')%}
+    <tr id="CESI">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('ENS')%}
+    <tr id="ENS">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('IMT')%}
+    <tr id="IMT">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('INP')%}
+    <tr id="INP">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('INSA')%}
+    <tr id="INSA">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('IPSA')%}
+    <tr id="IPSA">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('ISAT')%}
+    <tr id="ISAT">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('Polytech')%}
+    <tr id="Polytech">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('SIGMA')%}
+    <tr id="SIGMA">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    {% if r[1].startswith('TELECOM')%}
+    <tr id="TELECOM">
+      {% for x in r %}
+        {% if (x != "nan") %}
+          <td scope="row">{{ x }}</td>
+        {% else %}
+          <td scope="row"></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    {% endif %}
+    
     {% endfor %}
   </tbody>
 </table>
+
+
 {% endblock %}
