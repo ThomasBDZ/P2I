@@ -10,6 +10,9 @@ class Header extends HTMLElement {
             background-color: #88BACF;
             height: 70px;
             line-height: 70px;
+            position: fixed;
+            top: 0;
+            width:100%;
         }
         
 
