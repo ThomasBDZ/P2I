@@ -326,6 +326,824 @@ def rechercheParClasses():
         return render_template("/rechercheParClasses.html")
 
 
+@app.route("/résultat_ecrit")
+def moygene():
+    c = get_db().cursor()
+    c.execute("select mathematiques_1 from Resultat_ecrit")
+    results= c.fetchall()
+    moy = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy = moy + i
+                a+=1
+    moy = moy /a
+    h = get_db().cursor()
+    h.execute("select mathematiques_2 from Resultat_ecrit")
+    results= h.fetchall()
+    moy2 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy2 = moy2 + i
+                a+=1
+    moy2 = moy2 / a
+    cc = get_db().cursor()
+    cc.execute("select physique_1 from Resultat_ecrit")
+    results= cc.fetchall()
+    moy3 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy3 = moy3 + i
+                a+=1
+    moy3 = moy3 / a
+    ccc = get_db().cursor()
+    ccc.execute("select physique_2 from Resultat_ecrit")
+    results= ccc.fetchall()
+    moy4 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy4 = moy4 + i
+                a+=1
+    moy4 = moy4 / a
+    cccc = get_db().cursor()
+    cccc.execute("select chimie from Resultat_ecrit")
+    results= cccc.fetchall()
+    moy5 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy5 = moy5 + i
+                a+=1
+    moy5 = moy5 / a
+    ccccc = get_db().cursor()
+    ccccc.execute("select Francais from Resultat_ecrit")
+    results= ccccc.fetchall()
+    moy6 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy6 = moy6 + i
+                a+=1
+    moy6 = moy6 / a
+    cccccc = get_db().cursor()
+    cccccc.execute("select Informatique_SI from Resultat_ecrit")
+    results= cccccc.fetchall()
+    moy7 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy7 = moy7 + i
+                a+=1
+    moy7 = moy7 / a
+    ccccccc = get_db().cursor()
+    ccccccc.execute("select Langue from Resultat_ecrit")
+    results= ccccccc.fetchall()
+    moy8 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy8 = moy8 + i
+                a+=1
+    moy8 = moy8 / a
+    cccccccc = get_db().cursor()
+    cccccccc.execute("select Informatique_pour_tous from Resultat_ecrit")
+    results= cccccccc.fetchall()
+    moy9 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None :
+                moy9 = moy9 + i
+                a+=1
+    moy9 = moy9 / a
+    return render_template("Resultat_ecrit.html",moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
+
+
+
+@app.route("/Resultats_Oraux")
+def Resultats_Oraux():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Resultats_Oraux)")
+    c.execute("select * from Resultats_Oraux")
+    return render_template("/tables/Resultats_Oraux.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/Resultats_Oraux_Generaux_csv")
+def Resultats_Oraux_Generaux_csv():
+    c = get_db().cursor()
+    h = get_db().cursor()
+    h.execute("PRAGMA table_info(Resultats_Oraux_Generaux_csv)")
+    c.execute("select * from Resultats_Oraux_Generaux_csv")
+    return render_template("/tables/Resultats_Oraux_Generaux_csv.html", results= c.fetchall(), results2= h.fetchall())
+
+@app.route("/liste_ecoles")
+def liste_ecoles():
+    c = get_db().cursor()
+    c.execute("select nom_etabEtab from ListeEtablissements")
+    return render_template("/liste_ecoles.html", results= c.fetchall())
+
+@app.route("/résultat_oral")
+def moygeneo():
+    c = get_db().cursor()
+    c.execute("select mathematiques from Resultats_Oraux")
+    results= c.fetchall()
+    moy = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy = moy + i
+                a+=1
+    moy = moy /a
+    h = get_db().cursor()
+    h.execute("select physique from Resultats_Oraux")
+    results= h.fetchall()
+    moy2 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy2 = moy2 + i
+                a+=1
+    moy2 = moy2 / a
+    cc = get_db().cursor()
+    cc.execute("select francais from Resultats_Oraux")
+    results= cc.fetchall()
+    moy3 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy3 = moy3 + i
+                a+=1
+    moy3 = moy3 / a
+    ccc = get_db().cursor()
+    ccc.execute("select anglais from Resultats_Oraux")
+    results= ccc.fetchall()
+    moy4 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy4 = moy4 + i
+                a+=1
+    moy4 = moy4 / a
+    cccc = get_db().cursor()
+    cccc.execute("select mathematiques_1 from Resultats_Oraux")
+    results= cccc.fetchall()
+    moy5 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy5 = moy5 + i
+                a+=1
+    moy5 = moy5 / a
+    ccccc = get_db().cursor()
+    ccccc.execute("select mathematiques_2 from Resultats_Oraux")
+    results= ccccc.fetchall()
+    moy6 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy6 = moy6 + i
+                a+=1
+    moy6 = moy6 / a
+    cccccc = get_db().cursor()
+    cccccc.execute("select phy_chi_1 from Resultats_Oraux")
+    results= cccccc.fetchall()
+    moy7 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy7 = moy7 + i
+                a+=1
+    moy7 = moy7 / a
+    ccccccc = get_db().cursor()
+    ccccccc.execute("select phy_chi_2 from Resultats_Oraux")
+    results= ccccccc.fetchall()
+    moy8 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy8 = moy8 + i
+                a+=1
+    moy8 = moy8 / a
+    cccccccc = get_db().cursor()
+    cccccccc.execute("select phy_TP from Resultats_Oraux")
+    results= cccccccc.fetchall()
+    moy9 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy9 = moy9 + i
+                a+=1
+    moy9 = moy9 / a
+    c6 = get_db().cursor()
+    c6.execute("select Langue from Resultats_Oraux")
+    results= c6.fetchall()
+    moyc6 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc6 = moyc6 + i
+                a+=1
+    moyc6 = moyc6 / a
+    c5 = get_db().cursor()
+    c5.execute("select S2I from Resultats_Oraux")
+    results= c5.fetchall()
+    moyc5 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc5 = moyc5 + i
+                a+=1
+    moyc5 = moyc5 / a
+    c4 = get_db().cursor()
+    c4.execute("select QCM_info_phy from Resultats_Oraux")
+    results= c4.fetchall()
+    moyc4 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc4 = moyc4 + i
+                a+=1
+    moyc4 = moyc4 / a
+    c3 = get_db().cursor()
+    c3.execute("select Maths from Resultats_Oraux")
+    results= c3.fetchall()
+    moyc3 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc3 = moyc3 + i
+                a+=1
+    moyc3 = moyc3 / a
+    c2 = get_db().cursor()
+    c2.execute("select Entretien_MT from Resultats_Oraux")
+    results= c2.fetchall()
+    moyc2 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc2 = moyc2 + i
+                a+=1
+    moyc2 = moyc2 / a
+    c1 = get_db().cursor()
+    c1.execute("select QCM_Anglais from Resultats_Oraux")
+    results= c1.fetchall()
+    moyc1 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc1 = moyc1 + i
+                a+=1
+    moyc1 = moyc1 / a
+    return render_template("resultat_oral.html",moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9,moyc1=moyc1, moyc2=moyc2, moyc3=moyc3, moyc4=moyc4, moyc5=moyc5, moyc6=moyc6)
+
+
+@app.route("/liste_ecoles/<eco>")
+def lilip(eco):
+    c = get_db().cursor()
+    return render_template("eco.html", eco=eco)
+
+@app.route("/liste_ecoles/<eco>/résultat_ecrit")
+def moy(eco):
+    c = get_db().cursor()
+    c.execute("select mathematiques_1 from Resultat_ecrit")
+    results= c.fetchall()
+    moy = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy = moy + i
+                a+=1
+                t=type(i)
+    moy = moy /a
+    h = get_db().cursor()
+    h.execute("select mathematiques_2 from Resultat_ecrit")
+    results= h.fetchall()
+    moy2 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy2 = moy2 + i
+                a+=1
+    moy2 = moy2 / a
+    cc = get_db().cursor()
+    cc.execute("select physique_1 from Resultat_ecrit")
+    results= cc.fetchall()
+    moy3 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy3 = moy3 + i
+                a+=1
+    moy3 = moy3 / a
+    ccc = get_db().cursor()
+    ccc.execute("select physique_2 from Resultat_ecrit")
+    results= ccc.fetchall()
+    moy4 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy4 = moy4 + i
+                a+=1
+    moy4 = moy4 / a
+    cccc = get_db().cursor()
+    cccc.execute("select chimie from Resultat_ecrit")
+    results= cccc.fetchall()
+    moy5 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy5 = moy5 + i
+                a+=1
+    moy5 = moy5 / a
+    ccccc = get_db().cursor()
+    ccccc.execute("select Francais from Resultat_ecrit")
+    results= ccccc.fetchall()
+    moy6 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy6 = moy6 + i
+                a+=1
+    moy6 = moy6 / a
+    cccccc = get_db().cursor()
+    cccccc.execute("select Informatique_SI from Resultat_ecrit")
+    results= cccccc.fetchall()
+    moy7 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy7 = moy7 + i
+                a+=1
+    moy7 = moy7 / a
+    ccccccc = get_db().cursor()
+    ccccccc.execute("select Langue from Resultat_ecrit")
+    results= ccccccc.fetchall()
+    moy8 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy8 = moy8 + i
+                a+=1
+    moy8 = moy8 / a
+    cccccccc = get_db().cursor()
+    cccccccc.execute("select Informatique_pour_tous from Resultat_ecrit")
+    results= cccccccc.fetchall()
+    moy9 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None :
+                moy9 = moy9 + i
+                a+=1
+    moy9 = moy9 / a
+    return render_template("Resultat_ecrit.html", t=t, eco=eco,moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
+
+@app.route("/résultats_ecrit")
+def moyge():
+    c = get_db().cursor()
+    c.execute("select mathematiques_1 from Resultat_ecrit")
+    results= c.fetchall()
+    moy = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy = moy + i
+                a+=1
+    moy = moy /a
+    h = get_db().cursor()
+    h.execute("select mathematiques_2 from Resultat_ecrit")
+    results= h.fetchall()
+    moy2 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy2 = moy2 + i
+                a+=1
+    moy2 = moy2 / a
+    cc = get_db().cursor()
+    cc.execute("select physique_1 from Resultat_ecrit")
+    results= cc.fetchall()
+    moy3 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy3 = moy3 + i
+                a+=1
+    moy3 = moy3 / a
+    ccc = get_db().cursor()
+    ccc.execute("select physique_2 from Resultat_ecrit")
+    results= ccc.fetchall()
+    moy4 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy4 = moy4 + i
+                a+=1
+    moy4 = moy4 / a
+    cccc = get_db().cursor()
+    cccc.execute("select chimie from Resultat_ecrit")
+    results= cccc.fetchall()
+    moy5 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy5 = moy5 + i
+                a+=1
+    moy5 = moy5 / a
+    ccccc = get_db().cursor()
+    ccccc.execute("select Francais from Resultat_ecrit")
+    results= ccccc.fetchall()
+    moy6 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy6 = moy6 + i
+                a+=1
+    moy6 = moy6 / a
+    cccccc = get_db().cursor()
+    cccccc.execute("select Informatique_SI from Resultat_ecrit")
+    results= cccccc.fetchall()
+    moy7 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy7 = moy7 + i
+                a+=1
+    moy7 = moy7 / a
+    ccccccc = get_db().cursor()
+    ccccccc.execute("select Langue from Resultat_ecrit")
+    results= ccccccc.fetchall()
+    moy8 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy8 = moy8 + i
+                a+=1
+    moy8 = moy8 / a
+    cccccccc = get_db().cursor()
+    cccccccc.execute("select Informatique_pour_tous from Resultat_ecrit")
+    results= cccccccc.fetchall()
+    moy9 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None :
+                moy9 = moy9 + i
+                a+=1
+    moy9 = moy9 / a
+    return render_template("Resultat_ecrit.html", moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
+
+
+@app.route("/liste_ecoles/<eco>/résultat_ecrit")
+def moygecoe(eco):
+    c = get_db().cursor()
+    c.execute("select Resultat_ecrit.mathematiques_1 from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
+    results= c.fetchall()
+    moy = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy = moy + i
+                a+=1
+    moy = moy /a
+    h = get_db().cursor()
+    h.execute("select Resultat_ecrit.mathematiques_2 from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
+    results= h.fetchall()
+    moy2 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy2 = moy2 + i
+                a+=1
+    moy2 = moy2 / a
+    cc = get_db().cursor()
+    cc.execute("select Resultat_ecrit.physique_1 from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
+    results= cc.fetchall()
+    moy3 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy3 = moy3 + i
+                a+=1
+    moy3 = moy3 / a
+    ccc = get_db().cursor()
+    ccc.execute("select Resultat_ecrit.physique_2 from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
+    results= ccc.fetchall()
+    moy4 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy4 = moy4 + i
+                a+=1
+    moy4 = moy4 / a
+    cccc = get_db().cursor()
+    cccc.execute("select Resultat_ecrit.chimie from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
+    results= cccc.fetchall()
+    moy5 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy5 = moy5 + i
+                a+=1
+    moy5 = moy5 / a
+    ccccc = get_db().cursor() 
+    ccccc.execute("select Resultat_ecrit.Francais from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
+    results= ccccc.fetchall()
+    moy6 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy6 = moy6 + i
+                a+=1
+    moy6 = moy6 / a
+    cccccc = get_db().cursor()
+    cccccc.execute("select Resultat_ecrit.Informatique_SI from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
+    results= cccccc.fetchall()
+    moy7 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy7 = moy7 + i
+                a+=1
+    moy7 = moy7 / a
+    ccccccc = get_db().cursor()
+    ccccccc.execute("select Resultat_ecrit.Langue from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
+    results= ccccccc.fetchall()
+    moy8 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None:
+                moy8 = moy8 + i
+                a+=1
+    moy8 = moy8 / a
+    cccccccc = get_db().cursor()
+    cccccccc.execute("select Resultat_ecrit.Informatique_pour_tous from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
+    results= cccccccc.fetchall()
+    moy9 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if i != None :
+                moy9 = moy9 + i
+                a+=1
+    moy9 = moy9 / a
+    return render_template("Resultat_ecrit.html", t=t, eco=eco,moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
+
+@app.route("/liste_ecoles/<eco>/Candidats acceptés")
+def moy2(eco):
+    c = get_db().cursor()
+    return render_template("eco.html", eco=eco,results= c.fetchall())
+
+@app.route("/liste_ecoles/<eco>/résultat_Oraux")
+def moy3(eco):
+    c = get_db().cursor()
+    c.execute("select Resultats_Oraux.mathematiques from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= c.fetchall()
+    moy = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy = moy + i
+                a+=1
+    if a!=0:
+        moy = moy /a
+    else: moy = 0
+    h = get_db().cursor()
+    h.execute("select Resultats_Oraux.physique from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= h.fetchall()
+    moy2 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy2 = moy2 + i
+                a+=1
+    if a!=0:
+        moy2 = moy2 /a
+    else: moy = 0
+    cc = get_db().cursor()
+    cc.execute("select Resultats_Oraux.francais from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= cc.fetchall()
+    moy3 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy3 = moy3 + i
+                a+=1
+    if a!=0:
+        moy3 = moy3 /a
+    else: moy = 0
+    ccc = get_db().cursor()
+    ccc.execute("select Resultats_Oraux.anglais from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= ccc.fetchall()
+    moy4 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy4 = moy4 + i
+                a+=1
+    if a!=0:
+        moy4 = moy4 /a
+    else: moy = 0
+    cccc = get_db().cursor()
+    cccc.execute("select Resultats_Oraux.mathematiques_1 from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= cccc.fetchall()
+    moy5 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy5 = moy5 + i
+                a+=1
+    if a!=0:
+        moy5 = moy5 /a
+    else: moy = 0
+    ccccc = get_db().cursor()
+    ccccc.execute("select Resultats_Oraux.mathematiques_2 from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= ccccc.fetchall()
+    moy6 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy6 = moy6 + i
+                a+=1
+    if a!=0:
+        moy6 = moy6 /a
+    else: moy = 0
+    cccccc = get_db().cursor()
+    cccccc.execute("select Resultats_Oraux.phy_chi_1 from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= cccccc.fetchall()
+    moy7 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy7 = moy7 + i
+                a+=1
+    if a!=0:
+        moy7 = moy7 /a
+    else: moy = 0
+    ccccccc = get_db().cursor()
+    ccccccc.execute("select Resultats_Oraux.phy_chi_2 from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= ccccccc.fetchall()
+    moy8 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy8 = moy8 + i
+                a+=1
+    if a!=0:
+        moy8 = moy8 /a
+    else: moy = 0
+    cccccccc = get_db().cursor()
+    cccccccc.execute("select Resultats_Oraux.phy_TP from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= cccccccc.fetchall()
+    moy9 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moy9 = moy9 + i
+                a+=1
+    if a!=0:
+        moy9 = moy9 /a
+    else: moy = 0
+    c6 = get_db().cursor()
+    c6.execute("select Resultats_Oraux.Langue from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= c6.fetchall()
+    moyc6 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc6 = moyc6 + i
+                a+=1
+    if a!=0:
+        moyc6 = moyc6 /a
+    else: moy = 0
+    c5 = get_db().cursor()
+    c5.execute("select Resultats_Oraux.S2I from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= c5.fetchall()
+    moyc5 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc5 = moyc5 + i
+                a+=1
+    if a!=0:
+        moyc5 = moyc5 /a
+    else: moy = 0
+    c4 = get_db().cursor()
+    c4.execute("select Resultats_Oraux.QCM_info_phy from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= c4.fetchall()
+    moyc4 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc4 = moyc4 + i
+                a+=1
+    if a!=0:
+        moyc4 = moyc4 /a
+    else: moy = 0
+    c3 = get_db().cursor()
+    c3.execute("select Resultats_Oraux.Maths from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= c3.fetchall()
+    moyc3 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc3 = moyc3 + i
+                a+=1
+    if a!=0:
+        moyc3 = moyc3 /a
+    else: moy = 0
+    c2 = get_db().cursor()
+    c2.execute("select Resultats_Oraux.Entretien_MT from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= c2.fetchall()
+    moyc2 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc2 = moyc2 + i
+                a+=1
+    if a!=0:
+        moyc2 = moyc2 /a
+    else: moy = 0
+    c1 = get_db().cursor()
+    c1.execute("select Resultats_Oraux.QCM_Anglais from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
+    results= c1.fetchall()
+    moyc1 = 0
+    a=0
+    for sub in results:
+        for i in sub:
+            if type(i)==float:
+                moyc1 = moyc1 + i
+                a+=1
+    if a!=0:
+        moyc1 = moyc1 /a
+    else: moy = 0
+    return render_template("resultat_oral.html",moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9,moyc1=moyc1, moyc2=moyc2, moyc3=moyc3, moyc4=moyc4, moyc5=moyc5, moyc6=moyc6)
+
+
 @app.route("/charts")
 def charts():
 

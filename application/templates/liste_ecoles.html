@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}ecoles{% endblock %}
+
+{% block content %}
+<br><br><br>
+    {% for r in results %}
+    <br>
+      {% for x in r %}
+        {% if (x != "nan") %}
+        <br>
+        <a href='/liste_ecoles/{{x}}'>{{ x }}</a>
+        <br>
+        {% else %}
+        <br>
+        {% endif %}
+      {% endfor %}
+  <br>
+  {% endfor %}
+{% endblock %}
