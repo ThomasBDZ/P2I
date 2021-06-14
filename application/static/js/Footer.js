@@ -15,14 +15,13 @@ footerTemplate.innerHTML = `
       justify-content: space-between;
       align-items: center;
       background-color: #eeeeee;
-      height: 60px;
+      height: 40px;
       display: flex;
-    }
-    footer{
       position: fixed;
       bottom: 0;
       width:100%;
-  }
+    }
+    
     
     ul li {
       list-style: none;
