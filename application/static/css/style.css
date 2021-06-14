@@ -40,6 +40,10 @@ form {
     margin: 30px;
 }
 
+.row {
+    width: 100%;
+}
+
 .separator {
     height: 3px;
     width: 5%;
