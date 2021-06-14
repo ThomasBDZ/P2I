@@ -257,22 +257,6 @@ def liste_voeux():
     c.execute("select * from listeVoeux")
     return render_template("/tables/liste_voeux.html", results= c.fetchall(), results2= h.fetchall())
 
-@app.route("/Resultats_Oraux")
-def Resultats_Oraux():
-    c = get_db().cursor()
-    h = get_db().cursor()
-    h.execute("PRAGMA table_info(Resultats_Oraux)")
-    c.execute("select * from Resultats_Oraux")
-    return render_template("/tables/Resultats_Oraux.html", results= c.fetchall(), results2= h.fetchall())
-
-@app.route("/Resultats_Oraux_Generaux_csv")
-def Resultats_Oraux_Generaux_csv():
-    c = get_db().cursor()
-    h = get_db().cursor()
-    h.execute("PRAGMA table_info(Resultats_Oraux_Generaux_csv)")
-    c.execute("select * from Resultats_Oraux_Generaux_csv")
-    return render_template("/tables/Resultats_Oraux_Generaux_csv.html", results= c.fetchall(), results2= h.fetchall())
-
 
 @app.route("/recherche", methods=["POST", "GET"])
 def requestt():
