@@ -20,24 +20,203 @@
   <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.min.js"></script>
 	
   <script src="https://cdn.jsdelivr.net/npm/mappa-mundi@0.0.4"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
 </head>
 <body>
 
 
     <!-- header-->
-  <header-component></header-component>
+    <header-component></header-component>
     <!--end header-->
-  <br><br><br>
-  <section class="exemple">
-    <div id="canvasContainer" style="position: relative; height: 100%;">
-      <script src="static/js/map.js"></script>
-    </div>
-  </section>
-
+    <br><br><br>
+    <div id="global">
+    <div id="gauche">
+    <script>
+      var str = '{{ data}}';
+      let longueur = str.length;
+      let myMap;
+          let canvas;
+          const mappa = new Mappa('Leaflet');
+          let data = [];
+          let pays=[];
+          let Nb=[];
+          let rang=[];
+        let rangvs=[];
         
+        function numMedian(a) {
+            a = a.slice(0).sort(function(x, y) {
+                return x - y;
+            });
+            var b = (a.length + 1) / 2;
+            return (a.length % 2) ? a[b - 1] : (a[b - 1.5] + a[b - 0.5]) / 2;
+        }
+          let ecole = str.substring(5, longueur-5)
+          console.log(ecole)
+          const options = {
+            lat: 0,
+            lng: 0,
+            zoom: 4,
+            style: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png' //choix du type de la carte du monde (ici elle est classique)
+          }
+          
+          function setup(){
+            canvas = createCanvas(window.innerWidth,window.innerHeight - 73);
+            myMap = mappa.tileMap(options); 
+            myMap.overlay(canvas) 
+          
+            // Chargement des données
+            Integres = loadTable('static/excel/Admis.csv', 'csv', 'header');
+            IntegresListe = loadTable('static/excel/ListeDesIntegres.csv', 'csv', 'header');
+          
+            // Refait les cercles seulement quand la map change et pas à chaque frame
+            myMap.onChange(drawIntegres);
+          
+            fill(70, 203,31); 
+            stroke(100);
+          }
+          
+          function draw(){
+          }
+          // Draw the Integres
+          function drawIntegres() {
+            // Clear the canvas
+            clear();
+            let max = 0;
+            let min = Infinity;
+            for (let i = 0; i < Integres.getRowCount(); i++) {
+              const latitude = Number(Integres.getString(i, 'latitude'));
+              const longitude = Number(Integres.getString(i, 'longitude'));
+              let count = Number(Integres.getString(i, ecole ));
+              data.push({
+                  latitude,
+                  longitude,
+                  count
+                });
+              if (count != 0){
+                const p = String(Integres.getString(i,'LIBELLE_PAYS'));
+                const c = count;
+                pays.push(
+                  p
+                );
+                Nb.push(
+                  c
+                );
+              }
+                if (count > max) {
+                  max = count;
+                }
+                if (count < min) {
+                  min = count;
+                }
+            }
+              let minD = sqrt(min);
+              let maxD = sqrt(max);
+            
+            for (let country of data) {
+              country.diameter = map(sqrt(country.count), minD, maxD, 0, 6);
+            }
+            for (let country of data) {
+              const pix = myMap.latLngToPixel(country.latitude, country.longitude);
+              fill(frameCount % 255, 0, 200, 1);
+              const zoom = myMap.zoom();
+              const scl = pow(2, zoom);
+              ellipse(pix.x, pix.y, country.diameter * scl);
+            }
+            let median = 0;
+                  let maxi = 0;
+                  let mini = Infinity;
+                  for (let i = 0; i < IntegresListe.getRowCount(); i++) {
+                    if (IntegresListe.getString(i,'Ecole intégrée') == ecole) {
+                        const Rang = Number(IntegresListe.getString(i,"rang_classe" ));
+                        
+                    if (Rang > maxi) {
+                    maxi = Rang;
+                    }
+                    if (Rang < mini) {
+                    mini = Rang;
+                    }
+                    rang.push({
+                        Rang,
+                        maxi,
+                        mini
+                    });
+                }
+                }
+                rangvs = rang.slice(rang.length-27, rang.length);
+                let med = 0;
+                med = numMedian(rangvs);
+                rang.push({
+                    med
+                });
+                
+          }
+        
+          </script>
+        </div>
+        <div>
+            </div>
+            
+        
+        <!-- <div id="droite">
+          
+          <canvas id="Mapchart" width="400" height="400"></canvas>
+          <script>
+            console.log(pays ,Nb);
+             const ctx1 = document.getElementById('Mapchart').getContext('2d');
+            var myChart = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels,
+                    datasets: [{
+                data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Nombre de candidats par pays',
+                    font: {
+                        size: 25
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+          </script>
+        </div> -->
+      </div>
       
     <!--Footer / contact-->
 <footer-component  id = "contact"></footer-component>
     <!--end Footer / contact-->
+    <!-- <script src="static/js/map.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- On ajoute des lib js hébergées par google-->
+    <script src="static/js/javascript.js"></script> <!-- On importe notre fichier js-->
 
 </body>
