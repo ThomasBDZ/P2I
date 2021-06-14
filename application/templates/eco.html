@@ -1,7 +1,23 @@
-{% extends "base.html" %}
-{% block title %}reultats écoles{% endblock %}
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Site web</title>
+    <script src="../static/js/Header.js" type="text/javascript" defer></script>
+    <script src="../static/js/Footer.js" type="text/javascript" defer></script>
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet"> 
+    <!--Import css-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/gif" href="../static/favicon.gif" />
 
-{% block content %}
+</head>
+<body>
+    <div class="wrapper">
+        <header-component></header-component>
+        {% block content %}
 <br><br>
         <br>
         <a href='/liste_ecoles/{{eco}}/résultat_ecrit'>Résultats Ecrits</a>
@@ -13,3 +29,9 @@
     <a href='/liste_ecoles/{{eco}}/Candidats acceptés'>Candidats acceptés</a>
     <br>
 {% endblock %}
+    </div>
+    <footer-component id = "contact"></footer-component>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- On ajoute des lib js hébergées par google-->
+    <script src="../static/js/javascript.js"></script><!-- On importe notre fichier js-->
+</body>
+</html>
