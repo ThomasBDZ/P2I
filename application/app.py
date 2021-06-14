@@ -312,6 +312,7 @@ def rechercheParClasses():
 
 @app.route("/résultat_ecrit")
 def moygene():
+    ecrit = ['mathematiques_1', 'mathematiques_2', 'physique_1', 'physique_2']
     c = get_db().cursor()
     c.execute("select mathematiques_1 from Resultat_ecrit")
     results= c.fetchall()
@@ -612,109 +613,6 @@ def lilip(eco):
     c = get_db().cursor()
     return render_template("eco.html", eco=eco)
 
-@app.route("/liste_ecoles/<eco>/résultat_ecrit")
-def moy(eco):
-    c = get_db().cursor()
-    c.execute("select mathematiques_1 from Resultat_ecrit")
-    results= c.fetchall()
-    moy = 0
-    a=0
-    for sub in results:
-        for i in sub:
-            if i != None:
-                moy = moy + i
-                a+=1
-                t=type(i)
-    moy = moy /a
-    h = get_db().cursor()
-    h.execute("select mathematiques_2 from Resultat_ecrit")
-    results= h.fetchall()
-    moy2 = 0
-    a=0
-    for sub in results:
-        for i in sub:
-            if i != None:
-                moy2 = moy2 + i
-                a+=1
-    moy2 = moy2 / a
-    cc = get_db().cursor()
-    cc.execute("select physique_1 from Resultat_ecrit")
-    results= cc.fetchall()
-    moy3 = 0
-    a=0
-    for sub in results:
-        for i in sub:
-            if i != None:
-                moy3 = moy3 + i
-                a+=1
-    moy3 = moy3 / a
-    ccc = get_db().cursor()
-    ccc.execute("select physique_2 from Resultat_ecrit")
-    results= ccc.fetchall()
-    moy4 = 0
-    a=0
-    for sub in results:
-        for i in sub:
-            if i != None:
-                moy4 = moy4 + i
-                a+=1
-    moy4 = moy4 / a
-    cccc = get_db().cursor()
-    cccc.execute("select chimie from Resultat_ecrit")
-    results= cccc.fetchall()
-    moy5 = 0
-    a=0
-    for sub in results:
-        for i in sub:
-            if i != None:
-                moy5 = moy5 + i
-                a+=1
-    moy5 = moy5 / a
-    ccccc = get_db().cursor()
-    ccccc.execute("select Francais from Resultat_ecrit")
-    results= ccccc.fetchall()
-    moy6 = 0
-    a=0
-    for sub in results:
-        for i in sub:
-            if i != None:
-                moy6 = moy6 + i
-                a+=1
-    moy6 = moy6 / a
-    cccccc = get_db().cursor()
-    cccccc.execute("select Informatique_SI from Resultat_ecrit")
-    results= cccccc.fetchall()
-    moy7 = 0
-    a=0
-    for sub in results:
-        for i in sub:
-            if i != None:
-                moy7 = moy7 + i
-                a+=1
-    moy7 = moy7 / a
-    ccccccc = get_db().cursor()
-    ccccccc.execute("select Langue from Resultat_ecrit")
-    results= ccccccc.fetchall()
-    moy8 = 0
-    a=0
-    for sub in results:
-        for i in sub:
-            if i != None:
-                moy8 = moy8 + i
-                a+=1
-    moy8 = moy8 / a
-    cccccccc = get_db().cursor()
-    cccccccc.execute("select Informatique_pour_tous from Resultat_ecrit")
-    results= cccccccc.fetchall()
-    moy9 = 0
-    a=0
-    for sub in results:
-        for i in sub:
-            if i != None :
-                moy9 = moy9 + i
-                a+=1
-    moy9 = moy9 / a
-    return render_template("Resultat_ecrit.html", t=t, eco=eco,moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
 
 @app.route("/résultats_ecrit")
 def moyge():
@@ -921,7 +819,7 @@ def moygecoe(eco):
                 moy9 = moy9 + i
                 a+=1
     moy9 = moy9 / a
-    return render_template("Resultat_ecrit.html", t=t, eco=eco,moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
+    return render_template("Resultat_ecrit.html", eco=eco,moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
 
 @app.route("/liste_ecoles/<eco>/Candidats acceptés")
 def moy2(eco):
