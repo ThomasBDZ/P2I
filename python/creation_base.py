@@ -62,9 +62,6 @@ FOREIGN KEY(Can_cod) REFERENCES Candidat(Can_cod)
 cursor.execute('''CREATE TABLE IF NOT EXISTS Resultats_Oraux
   (
 scei integer PRIMARY KEY,
-etat integer,
-moyenne_generale double,
-rang_classe integer,
 
 mathematiques double,
 physique double,
@@ -204,7 +201,6 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS Resultat_ecrit
   Numerodinscription integer PRIMARY KEY,
   rang_admissible integer,
   total double,
-  moyenne double,
   mathematiques_1 double,
   mathematiques_2 double,
   physique_1 double,

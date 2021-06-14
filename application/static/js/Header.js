@@ -53,7 +53,7 @@ class Header extends HTMLElement {
         </style>
         <header class="container-fluid header" id="myHeader">
             <div class="container">
-                <a href='/' class="logo"><img src="static/img/logo_tn.png" alt="logo"/></a>
+                <a href='/' class="logo"><img src="../static/img/logo_tn.png" alt="logo"/></a>
                 <nav class="menu">
                     <a href='charts'>Statistiques</a>
                     <a href='/parcours'>Parcours des données</a>
