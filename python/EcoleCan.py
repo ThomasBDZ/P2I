@@ -33,8 +33,6 @@ for dirpath, dirnames, filenames in os.walk(folder_path):
             df_voeux = pd.read_excel(os.path.join(folder_path, basename(filename)))
             ListeVoeux = ListeVoeux.append(df_voeux, ignore_index = False)
 
-ListeVoeux.to_excel("ListeV.xlsx", index=False)
-
 Classe.rename(columns={'login':'CODE_CANDIDAT'}, inplace = True)
 
 ListeVoeux.rename(columns={'Can _cod':'CODE_CANDIDAT'}, inplace = True)
@@ -72,42 +70,49 @@ for i in inner_join_df_3["CODE_CANDIDAT"].unique():
             inner_join_df_3.loc[candidati["CODE_CANDIDAT"].index,"Ecole intégrée"] = j
             DicoEcolePlace[j] +=1
             break
-    # if (Le candidat n'a aucune école :):
-    #     Prenom = inner_join_df_3.loc[candidati["CODE_CANDIDAT"].index,"PRENOM"]
-    #     Nom = inner_join_df_3.loc[candidati["CODE_CANDIDAT"].index,"NOM"]
-    #     print(Prenom+" "+Nom+" n'intégre aucune école.\n")
 
+ListeIntegre = pd.DataFrame(columns = inner_join_df_3.columns)
 
-inner_join_df_3.to_excel("Integration.xlsx", index=False)
+k=1
+for i in inner_join_df_3["CODE_CANDIDAT"].unique():
+    candidati = inner_join_df_3[inner_join_df_3["CODE_CANDIDAT"] == i]
+    ListeIntegre.loc[k] = (candidati.loc[candidati.index[0]])
+    k+=1
+
+ListeIntegre.to_excel("ListeDesIntegres.xlsx", index=False)
+
 
 #################################################################################################################
-#inner_join_df_3 = pd.read_excel("Innerjoin.xlsx")
+## ICI ON CREE LA TABLE QUI NOUS PERMET DE FAIRE LA CARTE GEOGRAPHIQUE DES INTEGRES ##
+#################################################################################################################
 
 dico_pays = {}
-dico_pays["Gabon"] = "ga"
-dico_pays["Maroc"] = "ma"
-dico_pays["Tunisie"] = "tn"
-dico_pays["Japon"] = "jp"
-dico_pays["Côte D'Ivoire"] = "ci"
-dico_pays["Espagne"] = "es"
-dico_pays["Luxembourg"] = "lu"
-dico_pays["Canada"] = "ca"
-dico_pays["Mauritanie"] = "mr"
-dico_pays["Monaco"] = "mc"
-dico_pays["Pakistan"] = "pk"
-dico_pays["Grande-Bretagne"] = "gb"
-dico_pays["Allemagne"] = "de"
-dico_pays["Andorre"] = "ad"
-dico_pays["Liban"] = "lb"
-dico_pays["Sénégal"] = "sn"
-dico_pays["Etats-Unis"] = "us"
-dico_pays["Belgique"] = "be"
-dico_pays["Italie"] = "it"
+dico_pays["Gabon"] = "ga","-1.0000","11.7500"
+dico_pays["Maroc"] = "ma","32.0000","-5.0000"
+dico_pays["Tunisie"] = "tn","34.0000","9.0000"
+dico_pays["Japon"] = "jp","36.0000","138.0000"
+dico_pays["Côte D'Ivoire"] = "ci", "8.0000","-5.0000"
+dico_pays["Espagne"] = "es","40.0000","-4.0000"
+dico_pays["Luxembourg"] = "lu", "49.7500","6.1667"
+dico_pays["Canada"] = "ca","60.0000","-95.0000"
+dico_pays["Mauritanie"] = "mr","20.0000","-12.0000"
+dico_pays["Monaco"] = "mc", "43.7333","7.4000"
+dico_pays["Pakistan"] = "pk", "30.0000","70.0000"
+dico_pays["Grande-Bretagne"] = "gb","54.0000","-2.0000"
+dico_pays["Allemagne"] = "de", "51.0000","9.0000"
+dico_pays["Andorre"] = "ad","42.5000","1.5000"
+dico_pays["Liban"] = "lb","33.8333","35.8333"
+dico_pays["Sénégal"] = "sn","14.0000","-14.0000"
+dico_pays["Etats-Unis"] = "us","38.0000","-97.0000"
+dico_pays["Belgique"] = "be","50.8333","4.0000"
+dico_pays["Italie"] = "it","42.8333","12.8333"
 
 
 Listepays = []
-ListeEcole = ['LIBELLE_PAYS', 'country_id']
+ListeEcole = ['LIBELLE_PAYS', 'country_id','latitude','longitude']
 Codepays = []
+latitude =[]
+longitude = []
 
 for i in inner_join_df_3["LIBELLE_PAYS"].unique():
     Listepays.append(i)
@@ -116,14 +121,21 @@ for i in inner_join_df_3["Ecole intégrée"].unique():
     ListeEcole.append(i)
 
 for row in Listepays:
-    Codepays.append(dico_pays[row])
+    Codepays.append(dico_pays[row][0])
+    latitude.append(dico_pays[row][1])
+    longitude.append(dico_pays[row][2])
+
 
 
 final = pd.DataFrame({
      'LIBELLE_PAYS':
      Listepays,
      'country_id':
-     Codepays
+     Codepays,
+     'latitude':
+     latitude,
+     'longitude':
+     longitude
  }, index=Listepays, columns=ListeEcole)
 final = final.fillna(0) # Remplie le tableau avec des 0
 
@@ -134,7 +146,7 @@ for i in inner_join_df_3["CODE_CANDIDAT"].unique():
     for a in A.unique():
         for j in candidati["Ecole intégrée"].unique():
             final.loc[a,j] +=1
-            break
 
+            break
 
 final.to_csv("Admis_geo.csv", index=False)
