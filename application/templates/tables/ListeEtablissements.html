@@ -16,7 +16,7 @@
     <tr>
       {% for x in r %}
         {% if (x != "nan") %}
-          <td scope="row">{{ x }}</td>
+          <td scope="row"><a href='/liste_ecoles/{{x}}'>{{ x }}</a></td>
         {% else %}
           <td scope="row"></td>
         {% endif %}
