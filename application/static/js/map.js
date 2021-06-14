@@ -14,7 +14,7 @@ var str = '{{ data}}';
           }
           
           function setup(){
-            canvas = createCanvas(800,640);
+            canvas = createCanvas(window.innerWidth,window.innerHeight - 73);
             myMap = mappa.tileMap(options); 
             myMap.overlay(canvas) 
           
