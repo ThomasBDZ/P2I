@@ -5,6 +5,7 @@
     <title>Site web</title>
     <script src="/static/js/Header.js" type="text/javascript" defer></script>
     <script src="/static/js/Footer.js" type="text/javascript" defer></script>
+    <script src="/static/js/charts.js"></script>
     <!-- Font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet"> 
@@ -14,59 +15,61 @@
     <link rel="icon" type="image/gif" href="/static/favicon.gif" />
 
 </head>
-<body>
+<body onload = "radarChart({{moy}})">
     <div class="wrapper">
         <header-component></header-component>
         {% block content %}
+        <div class="row">
         <div class="margin">
 <br><br><br>
         <br>
-        Moyenne mathematiques : {{ moy }}
+        Moyenne mathematiques : {{ moy["data"][0] }}
         <br>
         <br>
-        Moyenne physique : {{ moy2 }}
+        Moyenne physique : {{ moy["data"][1] }}
         <br>
         <br>
-        Moyenne francais : {{ moy3 }}
+        Moyenne francais : {{ moy["data"][2] }}
         <br>
         <br>
-        Moyenne anglais : {{ moy4 }}
+        Moyenne anglais : {{ moy["data"][3] }}
         <br>
         <br>
-        Moyenne mathematiques_1 : {{ moy5 }}
+        Moyenne mathematiques_1 : {{ moy["data"][4] }}
         <br>
         <br>
-        Moyenne mathematiques_2 : {{ moy6 }}
+        Moyenne mathematiques_2 : {{ moy["data"][5] }}
         <br>
         <br>
-        Moyenne phy_chi_1 : {{ moy7 }}
+        Moyenne phy_chi_1 : {{ moy["data"][6] }}
         <br>
         <br>
-        Moyenne phy_chi_2 : {{ moy8 }}
+        Moyenne phy_chi_2 : {{ moy["data"][7] }}
         <br>
         <br>
-        Moyenne phy_TP : {{ moy9 }}
+        Moyenne phy_TP : {{ moy["data"][8] }}
         <br>
         <br>
-        Moyenne Langue : {{ moyc6 }}
+        Moyenne Langue : {{ moy["data"][14] }}
         <br>
         <br>
-        Moyenne S2I : {{ moyc5 }}
+        Moyenne S2I : {{ moy["data"][13] }}
         <br>
         <br>
-        Moyenne QCM_info_phy : {{ moyc4 }}
+        Moyenne QCM_info_phy : {{ moy["data"][12] }}
         <br>
         <br>
-        Moyenne Maths : {{ moyc3 }}
+        Moyenne Maths : {{ moy["data"][11] }}
         <br>
         <br>
-        Moyenne Entretien_MT : {{ moyc2 }}
+        Moyenne Entretien_MT : {{ moy["data"][10] }}
         <br>
         <br>
-        Moyenne QCM_Anglais : {{ moyc1 }}
+        Moyenne QCM_Anglais : {{ moy["data"][9] }}
         <br>
         </div>
-
+        <canvas id = "radar" width="400" height="400"></canvas>
+        </div>
   <br>
 {% endblock %}
     </div>

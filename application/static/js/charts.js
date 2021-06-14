@@ -195,3 +195,37 @@ function charts(chartInfo1, chartInfo2, chartInfo3, chartInfo4) {
 
 }
 
+function radarChart(moy) {
+
+    const ctx = document.getElementById('radar').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: moy["labels"],
+            datasets: [{
+                data: moy["data"],
+                backgroundColor: 
+                    'rgba(255, 99, 132, 0.2)',
+                borderColor: 
+                    'rgba(255, 99, 132, 1)',
+                borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Moyennes par matière',
+                    font: {
+                        size: 25
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}

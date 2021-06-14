@@ -5,6 +5,8 @@
     <title>Site web</title>
     <script src="/static/js/Header.js" type="text/javascript" defer></script>
     <script src="/static/js/Footer.js" type="text/javascript" defer></script>
+    <script src="/static/js/charts.js"></script>
+
     <!-- Font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet"> 
@@ -14,38 +16,40 @@
     <link rel="icon" type="image/gif" href="../static/favicon.gif" />
 
 </head>
-<body>
+<body onload = "radarChart({{moy}})">
 <header-component></header-component>
         {% block content %}
-    <div class="margin">
-        
+    <div class="row">
+        <div class="margin">
         <br><br><br><br>
-        Moyenne mathématiques_1 : {{ moy }}
+        Moyenne mathématiques_1 : {{ moy["data"][0] }}
         <br>
         <br>
-        Moyenne mathematiques_2 : {{ moy2 }}
+        Moyenne mathematiques_2 : {{ moy["data"][1] }}
         <br>
         <br>
-        Moyenne physique_1 : {{ moy3 }}
+        Moyenne physique_1 : {{ moy["data"][2] }}
         <br>
         <br>
-        Moyenne physique_2 : {{ moy4 }}
+        Moyenne physique_2 : {{ moy["data"][3] }}
         <br>
         <br>
-        Moyenne chimie : {{ moy5 }}
+        Moyenne chimie : {{ moy["data"][4] }}
         <br>
         <br>
-        Moyenne Francais : {{ moy6 }}
+        Moyenne Francais : {{ moy["data"][5] }}
         <br>
         <br>
-        Moyenne Informatique_SI : {{ moy7 }}
+        Moyenne Informatique_SI : {{ moy["data"][6] }}
         <br>
         <br>
-        Moyenne Langue : {{ moy8 }}
+        Moyenne Langue : {{ moy["data"][7] }}
         <br>
         <br>
-        Moyenne Informatique_pour_tous : {{ moy9 }}
+        Moyenne Informatique_pour_tous : {{ moy["data"][8] }}
         <br>
+</div>
+<canvas id = "radar" width="400" height="400"></canvas>
 </div>
 {% endblock %}
     </div>
