@@ -174,8 +174,8 @@ p {
 label {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    text-align: right;
+    justify-content: flex-start;
+    text-align: left;
     width: 400px;
     line-height: 30px;
     margin-bottom: 10px;
@@ -184,6 +184,7 @@ label {
   input {
     height: 30px;
     flex: 0 0 200px;
-    margin-left: 10px;
+    margin-left: 0px;
+    margin-bottom: 10px;
   }
 
