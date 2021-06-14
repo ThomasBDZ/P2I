@@ -730,7 +730,9 @@ def moygecoe(eco):
             if i != None:
                 moy = moy + i
                 a+=1
-    moy = moy /a
+    if a!=0:
+        moy = moy /a
+    else: moy = 0
     h = get_db().cursor()
     h.execute("select Resultat_ecrit.mathematiques_2 from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= h.fetchall()
@@ -741,7 +743,9 @@ def moygecoe(eco):
             if i != None:
                 moy2 = moy2 + i
                 a+=1
-    moy2 = moy2 / a
+    if a!=0:
+        moy2 = moy2 /a
+    else: moy2 = 0
     cc = get_db().cursor()
     cc.execute("select Resultat_ecrit.physique_1 from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= cc.fetchall()
@@ -752,7 +756,9 @@ def moygecoe(eco):
             if i != None:
                 moy3 = moy3 + i
                 a+=1
-    moy3 = moy3 / a
+    if a!=0:
+        moy3 = moy3 /a
+    else: moy3 = 0
     ccc = get_db().cursor()
     ccc.execute("select Resultat_ecrit.physique_2 from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= ccc.fetchall()
@@ -763,7 +769,9 @@ def moygecoe(eco):
             if i != None:
                 moy4 = moy4 + i
                 a+=1
-    moy4 = moy4 / a
+    if a!=0:
+        moy4 = moy4 /a
+    else: moy4 = 0
     cccc = get_db().cursor()
     cccc.execute("select Resultat_ecrit.chimie from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= cccc.fetchall()
@@ -774,7 +782,9 @@ def moygecoe(eco):
             if i != None:
                 moy5 = moy5 + i
                 a+=1
-    moy5 = moy5 / a
+    if a!=0:
+        moy5 = moy5 /a
+    else: moy5 = 0
     ccccc = get_db().cursor() 
     ccccc.execute("select Resultat_ecrit.Francais from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= ccccc.fetchall()
@@ -785,7 +795,9 @@ def moygecoe(eco):
             if i != None:
                 moy6 = moy6 + i
                 a+=1
-    moy6 = moy6 / a
+    if a!=0:
+        moy6 = moy6 /a
+    else: moy6 = 0
     cccccc = get_db().cursor()
     cccccc.execute("select Resultat_ecrit.Informatique_SI from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= cccccc.fetchall()
@@ -796,7 +808,9 @@ def moygecoe(eco):
             if i != None:
                 moy7 = moy7 + i
                 a+=1
-    moy7 = moy7 / a
+    if a!=0:
+        moy7 = moy7 /a
+    else: moy7 = 0
     ccccccc = get_db().cursor()
     ccccccc.execute("select Resultat_ecrit.Langue from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= ccccccc.fetchall()
@@ -807,7 +821,9 @@ def moygecoe(eco):
             if i != None:
                 moy8 = moy8 + i
                 a+=1
-    moy8 = moy8 / a
+    if a!=0:
+        moy8 = moy8 /a
+    else: moy8 = 0
     cccccccc = get_db().cursor()
     cccccccc.execute("select Resultat_ecrit.Informatique_pour_tous from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= cccccccc.fetchall()
@@ -818,7 +834,9 @@ def moygecoe(eco):
             if i != None :
                 moy9 = moy9 + i
                 a+=1
-    moy9 = moy9 / a
+    if a!=0:
+        moy9 = moy9 /a
+    else: moy9 = 0
     return render_template("Resultat_ecrit.html", eco=eco,moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
 
 @app.route("/liste_ecoles/<eco>/Candidats acceptés")
