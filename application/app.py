@@ -285,6 +285,12 @@ def requestt():
     else:
         return render_template("/recherche.html")
 
+@app.route("/rechercheParEcoles", methods=["POST", "GET"])
+def requestMap():
+    if request.method == "POST":
+        return render_template("/tables/resultat_recherche_Ecole.html",data=json.dumps(request.form["say"]) )
+    else:
+        return render_template("/rechercheEcole.html")
 
 @app.route("/rechercheID", methods=["POST", "GET"])
 def requesttID():

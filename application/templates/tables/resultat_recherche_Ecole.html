@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concours Mines-Telecom</title>
+    <!--Import header-->
+    <script src="static/js/Header.js" type="text/javascript" defer></script>
+    <script src="static/js/Footer.js" type="text/javascript" defer></script>
+    <!-- Font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet"> 
+    <!--Import css-->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.min.js"></script>
+	
+  <script src="https://cdn.jsdelivr.net/npm/mappa-mundi@0.0.4"></script>
+</head>
+<body>
+
+
+    <!-- header-->
+    <header-component></header-component>
+    <!--end header-->
+    <script type="text/javascript">
+      var str = '{{ data}}';
+      let longueur = str.length;
+      let myMap;
+          let canvas;
+          const mappa = new Mappa('Leaflet');
+          let data = [];
+          let ecole = str.substring(5, longueur-5)
+          console.log(ecole)
+          const options = {
+            lat: 0,
+            lng: 0,
+            zoom: 4,
+            style: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png' //choix du type de la carte du monde (ici elle est classique)
+          }
+          
+          function setup(){
+            canvas = createCanvas(640,640);
+            myMap = mappa.tileMap(options); 
+            myMap.overlay(canvas) 
+          
+            // Chargement des données
+            Integres = loadTable('static/excel/Admis.csv', 'csv', 'header');
+          
+            // Refait les cercles seulement quand la map change et pas à chaque frame
+            myMap.onChange(drawIntegres);
+          
+            fill(70, 203,31); 
+            stroke(100);
+          }
+          
+          function draw(){
+          }
+          // Draw the Integres
+          function drawIntegres() {
+            // Clear the canvas
+            clear();
+            let max = 0;
+            let min = Infinity;
+            for (let i = 0; i < Integres.getRowCount(); i++) {
+              const latitude = Number(Integres.getString(i, 'latitude'));
+              const longitude = Number(Integres.getString(i, 'longitude'));
+              let count = Number(Integres.getString(i, ecole ));
+              data.push({
+                  latitude,
+                  longitude,
+                  count
+                });
+          
+                if (count > max) {
+                  max = count;
+                }
+                if (count < min) {
+                  min = count;
+                }
+            }
+              console.log(data)
+              let minD = sqrt(min);
+              let maxD = sqrt(max);
+          
+            for (let country of data) {
+              country.diameter = map(sqrt(country.count), minD, maxD, 0, 6);
+            }
+            for (let country of data) {
+              const pix = myMap.latLngToPixel(country.latitude, country.longitude);
+              fill(frameCount % 255, 0, 200, 1);
+              const zoom = myMap.zoom();
+              const scl = pow(2, zoom);
+              ellipse(pix.x, pix.y, country.diameter * scl);
+            }
+          }
+          </script>
+        
+      
+    <!--Footer / contact-->
+<footer-component  id = "contact"></footer-component>
+    <!--end Footer / contact-->
+
+</body>
