@@ -541,7 +541,7 @@ with app.app_context():
         dic[row[0]] = [row[23], row[22], row[13], row[14], row[15], row[16], row[19], row[18], row[20], row[17]]
         i = len(dic)
     for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
         i -= 1
         if i > 0: req += ", " 
     req  += ";"
@@ -555,7 +555,7 @@ with app.app_context():
         dic[row[0]] = [row[23], row[22], row[13], row[14], row[15], row[16], row[17], row[19], row[18], row[20]]
     i = len(dic)
     for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
         i -= 1
         if i > 0: req += ", " 
     req  += ";"
