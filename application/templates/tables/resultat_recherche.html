@@ -15,7 +15,7 @@
     {% for r in results %}
     <tr>
       {% for x in r %}
-        {% if (x != "nan") and (x != "None") %}
+        {% if (x != "nan") and (x != None) %}
           <td id="idd" scope="row">{{ x }}</td>
         {% else %}
           <td scope="row"></td>
