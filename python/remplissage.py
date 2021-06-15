@@ -491,7 +491,7 @@ with app.app_context():
     c = get_db().cursor()
     c.execute("DELETE FROM Resultat_ecrit;")
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
     dic = {}
     df = dico["Classes_MP_CMT_spe_XXXX"]
     tab = df.to_numpy()
@@ -499,13 +499,13 @@ with app.app_context():
         dic[row[0]] = [row[24], row[23], row[15], row[16], row[17], row[18], row[19], row[20], row[14], row[13], row[21]]
     i = len(dic)
     for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
         i -= 1
         if i > 0: req += ", " 
     req  += ";"
     c.execute(req)
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Langue, Informatique_pour_tous) VALUES "
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Langue, Informatique_pour_tous) VALUES "
     dic = {}
     df = dico["Classes_PC_CMT_spe_XXXX"]
     tab = df.to_numpy()
@@ -513,13 +513,13 @@ with app.app_context():
         dic[row[0]] = [row[23], row[22], row[14], row[15], row[16], row[17], row[18], row[19], row[13], row[20]]
     i = len(dic)
     for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\")"
         i -= 1
         if i > 0: req += ", " 
     req  += ";"
     c.execute(req)
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, chimie, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
     dic = {}
     df = dico["Classes_PSI_CMT_spe_XXXX"]
     tab = df.to_numpy()
@@ -527,13 +527,13 @@ with app.app_context():
         dic[row[0]] = [row[24], row[23], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[13], row[21]]
     i = len(dic)
     for x in dic:
-        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", NULL, \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
+        req += f"(\"{x}\", \"{dic[x][0]}\", \"{dic[x][1]}\", \"{dic[x][2]}\", \"{dic[x][3]}\", \"{dic[x][4]}\", \"{dic[x][5]}\", \"{dic[x][6]}\", \"{dic[x][7]}\", \"{dic[x][8]}\", \"{dic[x][9]}\", \"{dic[x][10]}\")"
         i -= 1
         if i > 0: req += ", " 
     req  += ";"
     c.execute(req)
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
     dic = {}
     df = dico["Classes_PT_CMT_spe_XXXX"]
     tab = df.to_numpy()
@@ -547,7 +547,7 @@ with app.app_context():
     req  += ";"
     c.execute(req)
 
-    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, moyenne, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
+    req = "INSERT INTO Resultat_ecrit (Numerodinscription, rang_admissible, total, mathematiques_1, mathematiques_2, physique_1, physique_2, Francais, Informatique_SI, Langue, Informatique_pour_tous) VALUES "
     dic = {}
     df = dico["Classes_TSI_CMT_spe_XXXX"]
     tab = df.to_numpy()
@@ -561,12 +561,6 @@ with app.app_context():
     req  += ";"
     c.execute(req)
     c.execute("COMMIT;")
-
-    df = dico["ResultatEcrit_DD_MM_YYYY_ATS"]
-    tab = df.to_numpy()
-    for row in tab:
-        c.execute(f"UPDATE Resultat_ecrit SET moyenne = {row[3]} WHERE Numerodinscription = {row[0]}")
-        c.execute("COMMIT;")
 
     
 print("Table remplie")
