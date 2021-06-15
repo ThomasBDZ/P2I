@@ -316,14 +316,14 @@ def moygene():
     c = get_db().cursor()
     c.execute("select mathematiques_1 from Resultat_ecrit")
     results= c.fetchall()
-    moy = 0
+    moy1 = 0
     a=0
     for sub in results:
         for i in sub:
             if i != None:
-                moy = moy + i
+                moy1 = moy1 + i
                 a+=1
-    moy = moy /a
+    moy1 = moy1 /a
     h = get_db().cursor()
     h.execute("select mathematiques_2 from Resultat_ecrit")
     results= h.fetchall()
@@ -412,7 +412,10 @@ def moygene():
                 moy9 = moy9 + i
                 a+=1
     moy9 = moy9 / a
-    return render_template("Resultat_ecrit.html",moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
+    moy = {}
+    moy["labels"] = ["mathematiques 1", "mathematiques 2", "phhysique 1", "physique 2", "chimie", "français", "option info ou SI", "llangue", "IPT"]
+    moy["data"] = [moy1, moy2, moy3, moy4, moy5, moy6, moy7, moy8, moy9]
+    return render_template("Resultat_ecrit.html",moy=moy)
 
 
 
@@ -443,14 +446,14 @@ def moygeneo():
     c = get_db().cursor()
     c.execute("select mathematiques from Resultats_Oraux")
     results= c.fetchall()
-    moy = 0
+    moy1 = 0
     a=0
     for sub in results:
         for i in sub:
             if type(i)==float:
-                moy = moy + i
+                moy1 = moy1 + i
                 a+=1
-    moy = moy /a
+    moy1 = moy1 /a
     h = get_db().cursor()
     h.execute("select physique from Resultats_Oraux")
     results= h.fetchall()
@@ -605,7 +608,10 @@ def moygeneo():
                 moyc1 = moyc1 + i
                 a+=1
     moyc1 = moyc1 / a
-    return render_template("resultat_oral.html",moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9,moyc1=moyc1, moyc2=moyc2, moyc3=moyc3, moyc4=moyc4, moyc5=moyc5, moyc6=moyc6)
+    moy = {}
+    moy["data"] = [moy1, moy2, moy3, moy4, moy5, moy6, moy7, moy8, moy9, moyc1, moyc2, moyc3, moyc4, moyc5, moyc6]
+    moy["labels"] = ["maths", "physique", "français", "anglais", "mathematiques 1", "mathematiques 2", "phhysique chimie 1", "physique chimie 2", "TP de physique", "langue", "S2I", "QCM info physique", "Maths", "Entretien", "QCM Anglais"]
+    return render_template("resultat_oral.html",moy=moy)
 
 
 @app.route("/liste_ecoles/<eco>")
@@ -619,14 +625,14 @@ def moyge():
     c = get_db().cursor()
     c.execute("select mathematiques_1 from Resultat_ecrit")
     results= c.fetchall()
-    moy = 0
+    moy1 = 0
     a=0
     for sub in results:
         for i in sub:
             if i != None:
-                moy = moy + i
+                moy1 = moy1 + i
                 a+=1
-    moy = moy /a
+    moy1 = moy1 /a
     h = get_db().cursor()
     h.execute("select mathematiques_2 from Resultat_ecrit")
     results= h.fetchall()
@@ -715,7 +721,10 @@ def moyge():
                 moy9 = moy9 + i
                 a+=1
     moy9 = moy9 / a
-    return render_template("Resultat_ecrit.html", moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
+    moy = {}
+    moy["labels"] = ["mathematiques 1", "mathematiques 2", "phhysique 1", "physique 2", "chimie", "français", "option info ou SI", "llangue", "IPT"]
+    moy["data"] = [moy1, moy2, moy3, moy4, moy5, moy6, moy7, moy8, moy9]
+    return render_template("Resultat_ecrit.html", moy=moy)
 
 
 @app.route("/liste_ecoles/<eco>/résultat_ecrit")
@@ -723,16 +732,16 @@ def moygecoe(eco):
     c = get_db().cursor()
     c.execute("select Resultat_ecrit.mathematiques_1 from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= c.fetchall()
-    moy = 0
+    moy1 = 0
     a=0
     for sub in results:
         for i in sub:
             if i != None:
-                moy = moy + i
+                moy1 = moy1 + i
                 a+=1
     if a!=0:
-        moy = moy /a
-    else: moy = 0
+        moy1 = moy1 /a
+    else: moy1 = 0
     h = get_db().cursor()
     h.execute("select Resultat_ecrit.mathematiques_2 from Resultat_ecrit join Candidat on Resultat_ecrit.Numerodinscription=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco + "'")
     results= h.fetchall()
@@ -837,7 +846,10 @@ def moygecoe(eco):
     if a!=0:
         moy9 = moy9 /a
     else: moy9 = 0
-    return render_template("Resultat_ecrit.html", eco=eco,moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9)
+    moy = {}
+    moy["labels"] = ["mathematiques 1", "mathematiques 2", "phhysique 1", "physique 2", "chimie", "français", "option info ou SI", "llangue", "IPT"]
+    moy["data"] = [moy1, moy2, moy3, moy4, moy5, moy6, moy7, moy8, moy9]
+    return render_template("Resultat_ecrit.html", eco=eco,moy=moy)
 
 @app.route("/liste_ecoles/<eco>/Candidats acceptés")
 def moy2(eco):
@@ -849,16 +861,16 @@ def moy3(eco):
     c = get_db().cursor()
     c.execute("select Resultats_Oraux.mathematiques from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= c.fetchall()
-    moy = 0
+    moy1 = 0
     a=0
     for sub in results:
         for i in sub:
             if type(i)==float:
-                moy = moy + i
+                moy1 = moy1 + i
                 a+=1
     if a!=0:
-        moy = moy /a
-    else: moy = 0
+        moy1 = moy1 /a
+    else: moy1 = 0
     h = get_db().cursor()
     h.execute("select Resultats_Oraux.physique from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= h.fetchall()
@@ -871,7 +883,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moy2 = moy2 /a
-    else: moy = 0
+    else: moy2 = 0
     cc = get_db().cursor()
     cc.execute("select Resultats_Oraux.francais from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= cc.fetchall()
@@ -884,7 +896,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moy3 = moy3 /a
-    else: moy = 0
+    else: moy3 = 0
     ccc = get_db().cursor()
     ccc.execute("select Resultats_Oraux.anglais from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= ccc.fetchall()
@@ -897,7 +909,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moy4 = moy4 /a
-    else: moy = 0
+    else: moy4 = 0
     cccc = get_db().cursor()
     cccc.execute("select Resultats_Oraux.mathematiques_1 from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= cccc.fetchall()
@@ -910,7 +922,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moy5 = moy5 /a
-    else: moy = 0
+    else: moy5 = 0
     ccccc = get_db().cursor()
     ccccc.execute("select Resultats_Oraux.mathematiques_2 from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= ccccc.fetchall()
@@ -923,7 +935,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moy6 = moy6 /a
-    else: moy = 0
+    else: moy6 = 0
     cccccc = get_db().cursor()
     cccccc.execute("select Resultats_Oraux.phy_chi_1 from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= cccccc.fetchall()
@@ -936,7 +948,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moy7 = moy7 /a
-    else: moy = 0
+    else: moy7 = 0
     ccccccc = get_db().cursor()
     ccccccc.execute("select Resultats_Oraux.phy_chi_2 from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= ccccccc.fetchall()
@@ -949,7 +961,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moy8 = moy8 /a
-    else: moy = 0
+    else: moy8 = 0
     cccccccc = get_db().cursor()
     cccccccc.execute("select Resultats_Oraux.phy_TP from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= cccccccc.fetchall()
@@ -962,7 +974,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moy9 = moy9 /a
-    else: moy = 0
+    else: moy9 = 0
     c6 = get_db().cursor()
     c6.execute("select Resultats_Oraux.Langue from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= c6.fetchall()
@@ -975,7 +987,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moyc6 = moyc6 /a
-    else: moy = 0
+    else: moyc6 = 0
     c5 = get_db().cursor()
     c5.execute("select Resultats_Oraux.S2I from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= c5.fetchall()
@@ -988,7 +1000,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moyc5 = moyc5 /a
-    else: moy = 0
+    else: moyc5 = 0
     c4 = get_db().cursor()
     c4.execute("select Resultats_Oraux.QCM_info_phy from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= c4.fetchall()
@@ -1001,7 +1013,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moyc4 = moyc4 /a
-    else: moy = 0
+    else: moyc4 = 0
     c3 = get_db().cursor()
     c3.execute("select Resultats_Oraux.Maths from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= c3.fetchall()
@@ -1014,7 +1026,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moyc3 = moyc3 /a
-    else: moy = 0
+    else: moyc3 = 0
     c2 = get_db().cursor()
     c2.execute("select Resultats_Oraux.Entretien_MT from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= c2.fetchall()
@@ -1027,7 +1039,7 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moyc2 = moyc2 /a
-    else: moy = 0
+    else: moyc2 = 0
     c1 = get_db().cursor()
     c1.execute("select Resultats_Oraux.QCM_Anglais from Resultats_Oraux join Candidat on Resultats_Oraux.scei=Candidat.Can_cod join ListeEtablissements on Candidat.code_etablissement= ListeEtablissements.Rne where ListeEtablissements.nom_etabEtab = '" + eco +"'")
     results= c1.fetchall()
@@ -1040,8 +1052,11 @@ def moy3(eco):
                 a+=1
     if a!=0:
         moyc1 = moyc1 /a
-    else: moy = 0
-    return render_template("resultat_oral.html",moy=moy, moy2=moy2,moy3=moy3, moy4=moy4, moy5=moy5, moy6=moy6, moy7=moy7, moy8=moy8, moy9=moy9,moyc1=moyc1, moyc2=moyc2, moyc3=moyc3, moyc4=moyc4, moyc5=moyc5, moyc6=moyc6)
+    else: moyc1 = 0
+    moy = {}
+    moy["data"] = [moy1, moy2, moy3, moy4, moy5, moy6, moy7, moy8, moy9, moyc1, moyc2, moyc3, moyc4, moyc5, moyc6]
+    moy["labels"] = ["mathematiques 1", "mathematiques 2", "phhysique 1", "physique 2", "chimie", "français", "option info ou SI", "llangue", "IPT"]
+    return render_template("resultat_oral.html",moy=moy)
 
 
 @app.route("/charts")
