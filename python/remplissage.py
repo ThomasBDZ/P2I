@@ -84,7 +84,7 @@ def filiere_oraux(path):
 
 
 
-print("Remplissage de la table : Candidat")   
+print("Remplissage table : Candidat")   
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -102,7 +102,7 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")   
 
-print("Remplissage de la table : Candidat pour ATS")   
+print("Remplissage table : Candidat pour ATS")   
 with app.app_context():
     df = dico["ResultatEcrit_DD_MM_YYYY_ATS"]
     tab = df.to_numpy()
@@ -119,7 +119,7 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")   
 
-print("Remplissage de la table : ville")
+print("Remplissage table : ville")
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -143,7 +143,7 @@ print("Table remplie")
 #######################################################################################################
 
 
-print("Remplissage de la table : Resultats_Oraux_Generaux_csv")
+print("Remplissage table : Resultats_Oraux_Generaux_csv")
 with app.app_context():  
     c = get_db().cursor()
     c.execute("DELETE FROM Resultats_Oraux_Generaux_csv;") 
@@ -181,7 +181,7 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")   
 
-print("Remplissage de la table :Resultats_Oraux avec : Oraux_CCMP")
+print("Remplissage table :Resultats_Oraux avec : Oraux_CCMP")
 with app.app_context():  
     c = get_db().cursor()
     c.execute("DELETE FROM Resultats_Oraux;") 
@@ -209,7 +209,7 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")
 
-print("Remplissage de la table : Resultats_Oraux avec : Oraux_CCS")
+print("Remplissage table : Resultats_Oraux avec : Oraux_CCS")
 with app.app_context():
     df = dico["Classes_TSI_CMT_spe_XXXX"]
     tab = df.to_numpy()
@@ -226,7 +226,7 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")   
 
-print("Remplissage de la table : Resultats_Oraux")
+print("Remplissage table : Resultats_Oraux")
 with app.app_context():  
     c = get_db().cursor()
     req = "INSERT INTO Resultats_Oraux (scei, QCM_info_phy, Maths, Entretien_MT, QCM_Anglais, bonification) VALUES "
@@ -243,7 +243,7 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")
 
-print("Remplissage de la table : Resultats_Oraux avec ATS")
+print("Remplissage table : Resultats_Oraux avec ATS")
 with app.app_context():  
     c = get_db().cursor()
     req = "INSERT INTO Resultats_Oraux (scei, MathsATS, PhysiqueATS, Genie_electriqueATS, Genie_mecaniqueATS, LangueATS, bonification) VALUES "
@@ -263,7 +263,7 @@ print("Table remplie")
 
 ########################################################################################################
 
-print("Remplissage de la table : inscription")
+print("Remplissage table : inscription")
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -285,7 +285,7 @@ print("Table remplie")
 
 
 
-print("Remplissage de la table : pays")
+print("Remplissage table : pays")
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -309,7 +309,7 @@ print("Table remplie")
 
 
 
-print("Remplissage de la table : nation")
+print("Remplissage table : nation")
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -333,7 +333,7 @@ print("Table remplie")
 
 
 
-print("Remplissage de la table : concours")
+print("Remplissage table : concours")
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -356,7 +356,7 @@ print("Table remplie")
 
 
 
-print("Remplissage de la table : bac")
+print("Remplissage table : bac")
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -377,7 +377,7 @@ print("Table remplie")
 
 
 
-print("Remplissage de la table : serie_bac")
+print("Remplissage table : serie_bac")
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -399,7 +399,7 @@ with app.app_context():
 print("Table remplie")   
 
 
-print("Remplissage de la table : ListeEcoles")
+print("Remplissage table : ListeEcoles")
 with app.app_context():
     df = dico["listeEcoles"]
     tab = df.to_numpy()
@@ -421,7 +421,7 @@ with app.app_context():
 print("Table remplie")   
 
 
-print("Remplissage de la table : csp")
+print("Remplissage table : csp")
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -446,7 +446,7 @@ print("Table remplie")
 
 
 
-print("Remplissage de la table : Oral_Autres")
+print("Remplissage table : Oral_Autres")
 with app.app_context():  
     c = get_db().cursor()
     c.execute("DELETE FROM Oral_autres;")
@@ -486,7 +486,7 @@ print("Table remplie")
 
 
 
-print("Remplissage de la table : Resultat_Ecrit")
+print("Remplissage table : Resultat_Ecrit")
 with app.app_context():  
     c = get_db().cursor()
     c.execute("DELETE FROM Resultat_ecrit;")
@@ -562,13 +562,17 @@ with app.app_context():
     c.execute(req)
     c.execute("COMMIT;")
 
+
     
 print("Table remplie")
 
 
 
+################# Michael ############################
 
-print("Remplissage de la table : listeEtatRe")
+
+
+print("Remplissage table : listeEtatRe")
 with app.app_context():
     df = dico["listeEtatsReponsesAppel"]
     tab = df.to_numpy()
@@ -587,7 +591,7 @@ with app.app_context():
 print("Table remplie")   
 
 
-print("Remplissage de la table : voie_classe")
+print("Remplissage table : voie_classe")
 with app.app_context():
     df = dico["Inscription"]
     tab = df.to_numpy()
@@ -610,7 +614,7 @@ with app.app_context():
 print("Table remplie")
 
 
-print("Remplissage de la table : listeVoeux")  
+print("Remplissage table : listeVoeux")  
 with app.app_context():
     c = get_db().cursor()
     c.execute("DELETE FROM listeVoeux;") 
@@ -643,7 +647,7 @@ with app.app_context():
     c.execute("COMMIT;")
 print("Table remplie")
 
-print("Remplissage de la table : ListeEtablissements")  
+print("Remplissage table : ListeEtablissements")  
 with app.app_context():
     df = dico["listeEtablissements"]
     tab = df.to_numpy()
@@ -653,7 +657,7 @@ with app.app_context():
     i = len(tab)
     req = "INSERT INTO ListeEtablissements (Rne, type_etab, nom_etabEtab, Code_postal_etab, Pays_etablissement) VALUES "
     for row in tab:
-        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\")"
+        req += f"(\"{row[0]}\", \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[5]}\")"
         i -= 1
         if i > 0: req += ", "
     req += ";"
@@ -663,11 +667,12 @@ print("Table remplie")
 
 
 
+################ Thomas ##################
 
 with app.app_context():
 
     # TABLE SERIE BAC
-    print("Remplissage de la de la table : Serie_bac")
+    print("Remplissage table : Serie_bac")
 
     c = get_db().cursor()
     df = dico["Inscription"]
